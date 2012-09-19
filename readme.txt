@@ -1,3 +1,4 @@
+=== Easy ===
 Plugin name: Easy
 Contributors: 2046
 Plugin URI: http://wordpress.org/extend/easy
@@ -6,6 +7,7 @@ Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, co
 Requires at least: 3.4.1
 Tested up to: 3.4.1
 Stable tag: 0.1
+
 
 Easy, but complex GUI website builder.
 
