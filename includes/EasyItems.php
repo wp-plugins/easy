@@ -23,12 +23,20 @@ $args_types=array(
 	//'_builtin' => false, // only not built in
 	//'capability_type' => 'post' // and only types of post
 ); 
+
+//~ get all post types
 $post_types = get_post_types($args_types,'objects'); 
-// remove attachment post type from the array if you do not want it, But we do :)
-//unset($post_types['attachment']);
 $post_types_allowed = array();
+$i = 0;
 foreach($post_types as $post_t){
-	$post_types_allowed = array_merge ($post_types_allowed, array($post_t->name => $post_t->labels->singular_name));
+	$choices = array(
+				'ui_type' => 'check_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+				'choices' => array($post_t->name => $post_t->labels->singular_name),
+				'esc' => 'stip_tags',
+				'value' => ''
+			);
+	$post_types_allowed[$i] = $choices;
+	$i++;
 }
 
 // object title choices
@@ -55,7 +63,24 @@ $content_choices = array(
 	'content'=>'content',
 	'excerpt'=>'excerpt'
 );
-	
+
+//~ 
+//~ show categories as
+//~
+$show_post_categories = array(
+	'0' => 'links',
+	'1' => 'list'
+);
+
+//~ 
+//~ get images
+//~ 
+
+$intermediate_image_sizes = get_intermediate_image_sizes();
+$list_of_image_sizes = array();
+foreach($intermediate_image_sizes as $key){
+	$list_of_image_sizes[$key] = $key;
+}
 // ------------------------------------------------------------------- // 
 //                         Build the VIEW array
 // ------------------------------------------------------------------- // 
@@ -67,10 +92,10 @@ $EasyItems = array(
 		'position' => 2,
 		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
 		'item_title' => __('Permissions','p_2046s_easy_widget'),
-		'item_note' => __('Who will be able to see the widget result.','p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
 			array(
+				'ui_note' => __('Who will be able to see the widget result.','p_2046s_easy_widget'),
 				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea. 6 hidden
 				'choices' => $levels,
 				'value' => '',
@@ -84,16 +109,8 @@ $EasyItems = array(
 		'position' => 1,
 		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
 		'item_title' => __('Post type','p_2046s_easy_widget'),
-		'item_note' =>  __('Select post type','p_2046s_easy_widget'),
 		// gui
-		'gui' => array(
-			array(
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
-				'choices' => $post_types_allowed,
-				'value' => $post_types_allowed['post'],
-				'esc' => 'stip_tags'
-			)
-		)
+		'gui' => $post_types_allowed
 	),
 	// scaffolding
 	'b2046_scafolding' => array(
@@ -101,10 +118,10 @@ $EasyItems = array(
 		'position' => 4,
 		'block' => 'general', // 0 = general, 1 = view, 2 = logic 
 		'item_title' => __('Scafolding','p_2046s_easy_widget'),
-		'item_note' => __('Setup the HTML-CSS structure.','p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
 			array(
+				'ui_note' => __('Select type','p_2046s_easy_widget'),
 				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
 				'choices' => $scafolding_types,
 				'value' => $scafolding_types[0],
@@ -118,10 +135,10 @@ $EasyItems = array(
 		'position' => 0,
 		'block' => 'general', // 0 = general, 1 = view, 2 = logic 
 		'item_title' => __('Widget title','p_2046s_easy_widget'),
-		'item_note' => __('Used for administrative purpose.', 'p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
 			array(
+				'ui_note' => __('Admin widget title', 'p_2046s_easy_widget'),
 				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
 				'choices' => '',
 				'value' => '',
@@ -136,10 +153,10 @@ $EasyItems = array(
 		'position' => 4,
 		'block' => 'general', // 0 = general, 1 = view, 2 = logic 
 		'item_title' => __('Widget description','p_2046s_easy_widget'),
-		'item_note' => __('Widget intention. Used for administrative purpose.', 'p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
 			array(
+				'ui_note' => __('Widget intention. Used for administrative purpose.', 'p_2046s_easy_widget'),
 				'ui_type' => 'textarea', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
 				'choices' => '',
 				'value' => '',
@@ -155,7 +172,6 @@ $EasyItems = array(
 		'position' => 1,
 		'block' => 'view', // 0 = general, 1 = view, 2 = logic 
 		'item_title' => __('Title','p_2046s_easy_widget'),
-		'item_note' => __('', 'p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
 			array(
@@ -164,12 +180,19 @@ $EasyItems = array(
 				'choices' => $object_title_choices,
 				'value' => $object_title_choices[0]
 			),
-			/*array(
+			array(
 				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
 				'esc' => 'stip_tags',
 				'choices' => $object_tiitle_extension_choices,
 				'value' => $object_tiitle_extension_choices['h1']
-			)*/
+			),
+			array(
+				'ui_note' => __('class', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => '',
+				'value' => ''
+			)
 		)
 	),
 	'b2046_post_content' => array(
@@ -177,7 +200,6 @@ $EasyItems = array(
 		'position' => 1,
 		'block' => 'view', // 0 = general, 1 = view, 2 = logic 
 		'item_title' => __('Content','p_2046s_easy_widget'),
-		'item_note' => __('', 'p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
 			array(
@@ -185,6 +207,13 @@ $EasyItems = array(
 				'esc' => 'stip_tags',
 				'choices' => $content_choices,
 				'value' => $content_choices['content']
+			),
+			array(
+				'ui_note' => __('class', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => '',
+				'value' => ''
 			)
 		)
 	),
@@ -193,14 +222,84 @@ $EasyItems = array(
 		'position' => 1,
 		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
 		'item_title' => __('Post number','p_2046s_easy_widget'),
-		'item_note' => __('Number of objects.', 'p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
 			array(
+				'ui_note' => __('Number of objects.', 'p_2046s_easy_widget'),
 				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
 				'esc' => 'stip_tags',
 				'choices' => '',
 				'value' => '1'
+			)
+		)
+	),
+	'b2046_post_categories' => array(
+		'id' => 0,
+		'position' => 1,
+		'block' => 'view', // 0 = general, 1 = view, 2 = logic 
+		'item_title' => __('Post categories','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => $show_post_categories,
+				'value' => 0
+			),
+			array(
+				'ui_note' => __('class', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => '',
+				'value' => ''
+			)
+		)
+	),
+	'b2046_post_image' => array(
+		'id' => 0,
+		'position' => 3,
+		'block' => 'view', // 0 = general, 1 = view, 2 = logic 
+		'item_title' => __('Image','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => __('Get featured image.','p_2046s_easy_widget'),
+				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => $list_of_image_sizes,
+				'value' => ''
+			),
+			array(
+				'ui_note' => __('class', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => '',
+				'value' => ''
+			)
+		)
+	),
+	'b2046_edit_link' => array(
+		'id' => 0,
+		'position' => 3,
+		'block' => 'view', // 0 = general, 1 = view, 2 = logic 
+		'item_title' => __('Edit link','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => array(
+					'0' => 'Link',
+					'1' => 'Link with ID'
+				),
+				'value' => 0
+			),
+			array(
+				'ui_note' => __('class', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => '',
+				'value' => ''
 			)
 		)
 	),

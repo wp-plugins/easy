@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/2046s-widget-loops/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.3
+ * Version: 0.4
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -195,7 +195,8 @@ $moo::$EasyQuery = array(
 			wp_reset_postdata();
 		}
 	}
-
+	//~ END OF WORDPRESS DEFAULT WIDGET GAME
+	//~ HERE STARTS THE HELL ;)
 
 	//~ 
 	//~ transforms the "instance" data in to the HTML for the front-end
@@ -206,12 +207,11 @@ $moo::$EasyQuery = array(
 	//~ add function result to the output string
 	function f2046_front_end_builder($instance, $post_ID){
 		$data_to_process = $this->f2046_matcher($instance, 'view');
-		//~ mydump($data_to_process);
 		$output = '';
 		$i = 0;
-		foreach($data_to_process as $key => $val){
-			$values = ($val['gui'][0]['value']);
-			$func = 'EasyView_'.$val['tmp_title'];
+		foreach($data_to_process as $key){
+			$values = $key['gui'][0]['value'];
+			$func = 'EasyView_'.$key['tmp_title'];
 			$output .= $func($post_ID, $values);
 			$i++;
 		 }
@@ -219,7 +219,7 @@ $moo::$EasyQuery = array(
 	}
 	
 	//~ 
-	//~ 
+	//~ Dynamicaly create function names which fas to be found "somewhere" and precess the data
 	//~ 
 	function f2046_output_control($default_query, $instance){
 		$output = array();
@@ -267,7 +267,7 @@ $moo::$EasyQuery = array(
 							//~ mydump($val[key($val)]['gui']['value']);
 							$tmp = $defaults[key($val)];
 							//~ mydump(key($val));
-							$tmp['gui'][$i]['value'] = $val[key($val)]['gui']['value'];
+							$tmp['gui'][0]['value'] = $val[key($val)]['gui']['value'];
 							$tmp['tmp_title'] = key($val);
 							$output[] =  $tmp;
 						}
@@ -341,7 +341,7 @@ $moo::$EasyQuery = array(
 		
 		// define empty output
 		$output = '';
-		// divide the input area by the view types
+		// divide the defaults by the view types
 		foreach($view as $key => $val){
 			if ($val['block'] == 'general'){
 				$global_view_items[$key] = $val;
@@ -397,208 +397,75 @@ $moo::$EasyQuery = array(
 		return $output;
 	}
 	
-	function f2046_inputbuilder($view, $instance, $type){
-		$output = '';
-		//~ decide how many time 
-		//~  in default t efirst array level are names
-		if($type == 'control_user_data' || $type == 'view_user_data'){
-			$loops = array($instance);
-			
-			if($type == 'control_user_data'){
-				$j_name = 'b2046_controls';
-			}else{
-				$j_name = 'b2046_bricks';
-			}
-		//~ the differenc is that user array is has first level as numbers so we can sort it out, 
-		//~ and multiple item instances can be used, unlike for generals, or controls
-		}else{
-			$loops = array(0 => $view);
-			$j_name = 'b2046_bricks';
-		}
-		
-		foreach($loops as $loop){
-			$i = 0;
-			//~ echo '------- '.$type.' <br>';
-			//~ mydump($loop);
-			foreach($loop as $item_name => $item)
-			{
-				foreach($item['gui'] as $gui)
-				{
-					//
-					// default -  read the unique name from the 
-					// user = read the neme from the temporary place
-					//
-					if($type == 'view_user_data'){
-						$splited = explode('][',$this->get_field_name($item['tmp_name']));
-						$gui['value'] = $instance[$i]['gui'][0]['value'];
-						$name = $splited[0].']['.$j_name.']['.$i.']['.$item["tmp_name"].']';
-						// change the value
-						//echo '>>>>>>>>>>>>>><br>';
-						//var_dump( );
-						$div_id = $item['tmp_name'];
-						//widget-builder_2046_main_loop-widget[7][b2046_bricks][1][b2046_post_title][gui][value]
-					}elseif($type == 'control_user_data'){
-						$splited = explode('][',$this->get_field_name($item['tmp_name']));
-						$gui['value'] = $instance[$i]['gui'][0]['value'];
-						$name = $splited[0].']['.$j_name.']['.$item["tmp_name"].']';
-						// change the value
-						//echo '>>>>>>>>>>>>>><br>';
-						//var_dump( );
-						$div_id = $item['tmp_name'];
-						
-					}
-					else{
-						$name = $this->get_field_name($item_name);
-						//~ get the value from the instance (defauts)
-						//~ check if the value exists already before we try to assign it
-						if(isset($instance[$item_name]['gui']['value'])){
-							$gui['value'] = $instance[$item_name]['gui']['value'];
-						}
-						$div_id = $item_name;
-					}
-					
-					// force the css id to input - which will force the widget name to its widget handle
-					$j_title = '';
-					if(isset($item['w_title'])){
-						$j_title = ' id="in-widget-title"'; 
-					}
-					//~ set class out of the item name
-					$li_class = '';
-					if($type == 'control_user_data'){
-						$li_class = $item['tmp_name'];
-					}else{
-						$li_class = $item_name;
-					}
-					
-					$output .= '<li class="'.$li_class.' ui-draggable">';
-						$output .='<strong>'.$item['item_title'].'</strong> <b class="rem">x</b><br />';
-						//~ 
-						//~ simple inputs
-						//~ 
-						//~ TODO let the objects make multi input element
-						if ($gui['ui_type'] == 'input'){
-							$output .= '<input '.$j_title.' type="text" name="'. $name .'[gui][value]" value="'. $gui['value'] .'"/>';
-						}
-
-						// textarea
-						if ($gui['ui_type'] == 'textarea'){
-						
-							$output .= '<textarea type="text" name="'. $name .'[gui][value]">'. $gui['value'] .'</textarea>';
-						}
-						//~ 
-						//~ select box
-						//~ 
-						// TODO let the objects make multi input element
-						if ($gui['ui_type'] == 'select_box'){
-								$output .= '<select name="'. $name .'[gui][value]">';
-							foreach($gui['choices'] as $key => $val){
-								if($key == $gui['value']){
-									$selected = ' selected="selected"';
-								}else{
-									$selected = '';
-								}
-								$output .= '<option'.$selected.' value="'.$key.'">'.$val.'</option>';
-							}
-							$output .= '</select>';
-						}
-
-					if(!empty($item['item_note'])){
-						$output .= '<em>'.$item['item_note'].'</em>';
-					}
-				$i++;
-				}
-				
-			}
-			
-		}
-		return $output;
-	}
-	
-	function f2046_widget_brick_collector($view, $instance,$what){
+	//~ 
+	//~ Get the user data, match them against the default values, combine them together
+	//~ --> finaly call the input builder to make HTML bricks(inputs)
+	//~ 
+	function f2046_widget_brick_collector($view, $instance, $what){
+		//~ view = default, Instance=  what we get, what - for what logival part(gen., view, contr.)
 		//
 		// go through the user bricks
 		// combine the user javascript made data(bricks) with default objects
 		// serve it to the input builder
 		//
-		
-		$i = 0;
 		$output = array();
-		//~ render control data
-		if ($what == 'control_user_data'){
-			if(isset($instance['b2046_controls'])){
-				foreach($instance['b2046_controls'] as $key => $val){
-					// this value will be pushed as the object positions
-					// that matches because the resulted array is naturaly sorted by numbers 0,1,2 etc. 
-					//~ echo '<br />--- key '.$i.'---<br />';
-					//~ mydump($key);
-					if(array_key_exists($key, $view)){
-						$clone_brick = $view[$key];
-						//echo '<br />--- clone ---<br />';
-						//mydump($clone_brick);
-						//mydump($clone_brick['gui'][0]['value']); //view[$key]
-						//~ echo '<br />--- '.$key.' ---<br />';
-
-						if(isset($instance['b2046_controls'][$key]['gui']['value'])){
-							$clone_brick['gui'][0]['value'] = $instance['b2046_controls'][$key]['gui']['value'];
-							 echo 'exists';
-						}else{
-							$clone_brick['gui'][0]['value'] = '';
-							 echo 'nope';
-						}
-						//echo '<br />--- val ---<br />';
-						//~ mydump($clone_brick); //view[$key]
-						//~ write the item name in to the temporary value
-						$clone_brick['tmp_name'] = $key;
-
-						//~ write the block position in to the temporary value
-						//~ $clone_brick['tmp_block'] = $instance['b2046_bricks'][$i][key($val)]['block'];
-						//mydump($clone_brick['gui'][0]['value']);
-						array_push($output,$clone_brick);
-						//widget-builder_2046_main_loop-widget[7][b2046_bricks][0][-----][gui][value]
-					}
-					$i++;
+		//~ CONTROLS
+		if ($what == 'control_user_data' && isset($instance['b2046_controls'])){
+			//~ mydump($instance['b2046_controls']);
+			//~ mydump($instance);
+			//~  DO SOMETHING FOR EVERY USED CONTROL BRICK
+			foreach($instance['b2046_controls'] as $key => $val){
+				// this value will be pushed as the object positions
+				// that matches because the resulted array is naturaly sorted by numbers 0,1,2 etc. 
+				 //~ echo '<br />--- key '.$i.'---<br />';
+				 $tmp_name = $key;
+				
+				//~ If the bricks with the unique ID exists in in defaults (just to make sure no "noncomplete" stuff can pass)
+				$clone_brick = $view[$key];
+				$values = $val['gui'];
+				//~ mydump($clone_brick['gui']);
+				$contr_i = 0;
+				foreach($values as $key => $val){
+					$clone_brick['gui'][$key]['value'] = $val['value'];
+					$contr_i++;
 				}
+				//~ write the item name in to the temporary value
+				$clone_brick['tmp_name'] = $tmp_name;//key($val);
+				//~ write the block position in to the temporary value
+				array_push($output,$clone_brick);
 			}
+			
 			$output = $this->f2046_inputbuilder( $view,$output,'control_user_data');
 			
-			//~ VIEWS 
+			//~ VIEWS BRICKS - THE SLOT
 		}else{
 		//~ combiine data for views (multiple)	
 			if(isset($instance['b2046_bricks'])){
+				//~ $i = 0;
+				
+				//~ For each brick (li)
 				foreach($instance['b2046_bricks'] as $key => $val){
+					//echo '-------kiss <br />';
+					$tmp_name = key($val);
 					// this value will be pushed as the object positions
 					// that matches because the resulted array is naturaly sorted by numbers 0,1,2 etc. 
-					//echo '<br />--- key '.$i.'---<br />';
-					//mydump($val);
+					//~ widget-builder_2046_main_loop-widget[20][b2046_post_title][gui][0][value]
 					if(array_key_exists(key($val), $view)){
-						//echo '-------kiss <br />';
-						//mydump(key($val));
+						//~ for each gui
 						$clone_brick = $view[key($val)];
-						//echo '<br />--- clone ---<br />';
-						//mydump($clone_brick);
-						//mydump($clone_brick['gui'][0]['value']); //view[$key]
-						//~ echo '<br />--- '.$key.' ---<br />';
-						//~ mydump($key);
-						//~ mydump($val);
-
-						if(isset($instance['b2046_bricks'][$i][key($val)]['gui']['value'])){
-							$clone_brick['gui'][0]['value'] = $instance['b2046_bricks'][$i][key($val)]['gui']['value'];
-							//~ echo 'exists';
-						}else{
-							$clone_brick['gui'][0]['value'] = '';
-							//~ echo 'nope';
+						
+						$values =$val[key($val)]['gui'];
+						$ii = 0;
+						foreach($values as $key => $val){
+							$clone_brick['gui'][$key]['value'] = $val['value'];
+							$ii++;
 						}
-						//echo '<br />--- val ---<br />';
-						//~ mydump($clone_brick); //view[$key]
 						//~ write the item name in to the temporary value
-						$clone_brick['tmp_name'] = key($val);
+						$clone_brick['tmp_name'] = $tmp_name;
 						//~ write the block position in to the temporary value
-						//~ $clone_brick['tmp_block'] = $instance['b2046_bricks'][$i][key($val)]['block'];
-
 						array_push($output,$clone_brick);
-						//widget-builder_2046_main_loop-widget[7][b2046_bricks][0][-----][gui][value]
 					}
-					$i++;
+					//~ $i++;
 				}
 			}
 			$output = $this->f2046_inputbuilder( $view,$output,'view_user_data');
@@ -607,77 +474,191 @@ $moo::$EasyQuery = array(
 		
 		return $output;
 	}
+	
+	//~ 
+	//~ Create bricks (inputs)
+	//~ 
+	function f2046_inputbuilder($view, $instance, $type){
+		$output = '';
+		//~ decide how many time 
+		//~  in default the first array level are names
+		//~ if($type == 'control_user_data' || $type == 'view_user_data'){
+		if($type == 'view_user_data'){
+			$bricks = array($instance);
+			$j_name = 'b2046_bricks';
+		//~ the differenc is that user_view array is has first level as numbers so we can sort it out by numbered possition, 
+		//~ and multiple item instances can be used, unlike for generals, or controls
+		}elseif($type == 'control_user_data'){
+			$bricks = array($instance);
+			$j_name = 'b2046_controls';
+		}else{
+			$bricks = array(0 => $view);
+			$j_name = 'b2046_bricks';
+		}
+		//~ for each brick
+		$each_brick_i = 0;
+		foreach($bricks as $loop){
+			$i = 0;
+			foreach($loop as $item_name => $item)
+			{
+				// force the css id to input - which will force the widget name to its widget handle
+				$j_title = '';
+				if(isset($item['w_title'])){
+					$j_title = ' id="in-widget-title"'; 
+				}
+				//~ set class out of the item name
+				$li_class = '';
+				//~ if($type == 'control_user_data'){
+					//~ $li_class = $item['tmp_name'];
+					//~ mydump($item_name);
+				//~ }else{
+					$li_class = $item_name;
+				//~ }
+				
+				$output .= '<li class="'.$li_class.' ui-draggable">';
+				$output .='<strong>'.$item['item_title'].'</strong> <b class="rem">x</b><br />';
+						
+				$each_gui_i = 0;
+				$gui_value = '';
+				foreach($item['gui'] as $gui => $val)
+				{
+					//
+					// default -  read the unique name from the 
+					// user = read the name from the temporary place
+					//
+					
+					if($type == 'view_user_data'){
+						//~ split the fieldname so we can reconstruct it later on
+						$splited = explode('][',$this->get_field_name($item['tmp_name']));
+						//~  get the value-s
+						$gui_value = $val['value'];//$instance[$i]['gui'][$each_gui_i]['value'];
+						if(isset($val['ui_note'])){
+							$ui_note = $val['ui_note'];
+						}
+						//~ mydump($item);
+						$name = $splited[0].']['.$j_name.']['.$each_brick_i.']['.$item["tmp_name"].']';
+						//~ get the temporary name
+						$div_id = $item['tmp_name'];
+					//widget-builder_2046_main_loop-widget[7][b2046_bricks][1][b2046_post_title][gui][value]
+					}
+					elseif($type == 'control_user_data'){
+						 //~ echo 'item <br>';
+						//~ mydump(key($gui));
+						//~ mydump($item["tmp_name"]);
+						//~ echo 'in inputbuilder after<br>';
+						$splited = explode('][',$this->get_field_name($item["tmp_name"]));
+						$gui_value = $val['value'];//$instance[$each_brick_i]['gui'][$each_gui_i]['value'];
+						if(isset($val['ui_note'])){
+							$ui_note = $val['ui_note'];
+						}
+						$name = $splited[0].']['.$j_name.']['.$item["tmp_name"].']';
+						// change the value
+						//~ echo '<br>>>>>>>>>>>>>>><br>';
+						//~ mydump($item["tmp_name"]);
+						//~ mydump($val['value']);
+						//~ mydump( $gui_value);
+						$div_id = $item_name;
+						
+					}
+					//~  most likely the global view
+					else{
+						$name = $this->get_field_name($item_name);
+						//~ get the value from the instance (defauts)
+						//~ check if the value exists already before we try to assign it
+						//~ mydump($val['value']);
+						$gui_value= $val['value'];
+						if(isset($val['ui_note'])){
+							$ui_note = $val['ui_note'];
+						}
+						//~ if(isset($instance[$item_name]['gui']['value'])){
+							//~ mydump($val['value']);
+							//~ $gui_value= $val['value'];//$instance[$item_name]['gui']['value'];
+						//~ }
+						$div_id = $item_name;
+					}
+					
+					
+					
+					
+					//~ 
+					//~ simple inputs
+					//~ 
+					//mydump($val);
+					if ($val['ui_type'] == 'input'){
+						if(isset($ui_note)){
+							$placeholder = 'placeholder="'.$ui_note.'"';
+						}else{
+							$placeholder = '';
+						}
+						$output .= '<input '.$j_title.' '.$placeholder.' type="text" name="'. $name .'[gui]['.$each_gui_i.'][value]" value="'. $gui_value .'"/>';
+					}
+
+					// textarea
+					elseif ($val['ui_type'] == 'textarea'){
+						if(isset($ui_note)){
+							$placeholder = 'placeholder="'.$ui_note.'"';
+						}else{
+							$placeholder = '';
+						}
+						$output .= '<textarea type="text" '.$placeholder.' name="'. $name .'[gui]['.$each_gui_i.'][value]">'. $gui_value .'</textarea>';
+					}
+					//~ 
+					//~ select box
+					//~ 
+					// TODO let the objects make multi input element
+					elseif ($val['ui_type'] == 'select_box'){
+						$output .= '<select name="'. $name .'[gui]['.$each_gui_i.'][value]">';
+						if(isset($ui_note)){
+							$output .='<option>-- '.$ui_note.' --</option>';
+						}
+						foreach($val['choices'] as $keyx => $valx){
+							if($keyx == $gui_value){
+								$selected = ' selected="selected"';
+							}else{
+								$selected = '';
+							}
+							$output .= '<option'.$selected.' value="'.$keyx.'">'.$valx.'</option>';
+						}
+						$output .= '</select>';
+					}
+					//~ 
+					//~ check box
+					//~ 
+					elseif ($val['ui_type'] == 'check_box'){
+						//~ $gui_i = 0;
+						foreach($val['choices'] as $keys => $vals){
+							if($keys == $gui_value){
+								$selected = ' checked="checked"';
+							}else{
+								$selected = '';
+							}
+							$output .= '<div class="ew2046_check_box"><input name="'. $name .'[gui]['.$each_gui_i.'][value]" type="checkbox"'.$selected.' value="'.$keys.'">'.$vals.'</option><br />';
+							if(isset($ui_note)){
+								$output .= '<em>'.$ui_note.'</em>';
+							}
+							$output .= '</div>';
+						}
+					}
+					//~ iterate for each gui
+					$each_gui_i++;
+				$i++;
+				unset($ui_note);
+				}
+			$each_brick_i++;
+			}
+			
+		}
+		return $output;
+	}
 
 } // END of Widget class
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//~ some extra functions
 
-// build image html
-function f_2046_Easy_build_image($post_, $image_with_link, $image_size) {
-	$post_thumbnail_id = get_post_thumbnail_id( $post_->ID );
-	$output = '';
-	// make the image link to the post/page
-	if ($image_with_link == 1){
-		$output .= '<a href="'. get_permalink($post_->ID) . '" title="'.get_the_title($post_->ID).'" class="page_link img_link">';
-	}
-	// make the image link to it's large version
-	if ($image_with_link == 2){
-		$image_large_src = wp_get_attachment_image_src( $post_thumbnail_id, 'large');
-		// set links to large image and image's title
-		$output .= '<a href="'. $image_large_src[0] . '" class="image_link img_link">';
-	}
-		// define thumbnail atributes
-		$default_attr = array(
-			'title'	=> trim(strip_tags( $post_->post_title )),
-		);
-		if($image_size == 1){
-			$output .= wp_get_attachment_image( $post_thumbnail_id, 'thumbnail'); //get_the_post_thumbnail('thumbnail', $default_attr);
-		}
-		if($image_size == 2){
-			$output .= wp_get_attachment_image( $post_thumbnail_id, 'medium'); //get_the_post_thumbnail('medium', $default_attr);
-		}
-		elseif($image_size == 3){
-			$output .= wp_get_attachment_image( $post_thumbnail_id, 'large'); //get_the_post_thumbnail('large', $default_attr);
-		}
-	
-	if ($image_with_link > 0){
-		$output .= '</a>';
-	}
-	
-	return $output;
-	
-}
 // add WP featured image support
 if ( function_exists( 'add_theme_support' ) ) { 
 	add_theme_support( 'post-thumbnails' ); 
-}
-// gallery function_exists
-function f_2046_Easy_gallery_builder($p_ID, $image_size, $link, $p_id){
-	$l_image_attributes = wp_get_attachment_image_src($p_ID , 'large');
-	$sizes = array('','thumbnail', 'medium','large');
-	foreach($sizes as $key=>$value){
-		if($key == $image_size){
-			$thmb_size = $value;
-		}
-	}
-	$default_img_attr = array(
-		'class'	=> "image $thmb_size lightbox",
-	);
-	// image without link
-	if($link == 0){
-		$output = wp_get_attachment_image( $p_ID, $thmb_size, false);
-	}
-	// image with link to post/page
-	elseif($link == 1){
-		$img_src = wp_get_attachment_image_src( $p_ID, $thmb_size );
-		$post_title = get_the_title($p_id);
-		$output = '<a href="'.get_page_link($p_id).'"  title="'.$post_title.'"><img src="'.$img_src[0] .'" alt="'.$post_title.'"/></a>';
-	}
-	// image with link to large sizes
-	else{
-		$output = '<a href="'.$l_image_attributes[0].'">'. wp_get_attachment_image( $p_ID, $thmb_size, false).'</a>';
-	}
-	return $output;
 }
 global $wp_scripts;
 
@@ -693,6 +674,6 @@ function f2046_Easy_insert_custom_css(){
 
 function mydump($a){
 	echo '<pre>';
-	var_dump($a);
+		var_dump($a);
 	echo '</pre>';
 };
