@@ -53,7 +53,7 @@ Why not?
 
 == Screenshots ==
  
- * soon
+1. Screenshot of the version 0.5
 
 == Change log ==
 
