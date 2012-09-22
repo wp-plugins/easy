@@ -21,9 +21,11 @@ The widget scaffolding structure is based on the <a href="http://twitter.github.
 = What is to be done = 
  * Core - DONE
  * Multi selector for each item - DONE
- * Finish the input builder
- * Create all view items for.. taxonomies, categories, author, meta values, etc.
- * Create items covering all native Wordpress WP_Query possibilities.
+ * Finish the input builder - IN PROGRESS
+ * Create all view items for.. taxonomies, categories, author, meta values, etc. - IN PROGRESS
+ * Create items covering all native Wordpress WP_Query possibilities. - IN PROGRESS
+ * Multiple controls of the same type
+ * Localization
  * Write nice Documentation
  * Create an well documented example extension in form of WP plugin.
  * Listen to you guys.
