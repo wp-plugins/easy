@@ -13,7 +13,7 @@
 .easy_2046_lw em{float:right;color:#666;}
 .lw_2046_left{margin-right:15px;}
 .lw_type_change_note{text-align:right;}
-.b2046_note{width:50% !important}
+
 .easy_2046_lw li{border:1px solid #ccc;padding:0.5em;border-radius:5px;margin-bottom:0.3em;display:table;
 background: #f9f9f9; /* Old browsers */
 background: -moz-linear-gradient(top,  #f9f9f9 0%, #e0e0e0 100%); /* FF3.6+ */
@@ -38,24 +38,28 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', end
 */
 .easy_2046_lw .view_holder, .easy_2046_lw .control_holder{float:left;clear:none;width:48%;background:#fff;border:1px solid #D3D3D3;margin:0 1em 0 0;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;}
 .easy_2046_lw .control_holder{margin:0;}
-.ui-draggable-dragging{position:absolute;z-index:200;float:none;min-width:200px;padding:0.5em;list-style:none;opacity: .5;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";filter: alpha(opacity=50);cursor:move}/*fix width while dragging*/
+.ui-draggable-dragging{position:absolute;z-index:200;float:none;width:200px;padding:0.5em;list-style:none;opacity: .5;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";filter: alpha(opacity=50);cursor:move}/*fix width while dragging*/
+.ui-draggable-dragging input, .ui-draggable-dragging select, .ui-draggable-dragging textarea{width:100%}
 .easy_2046_lw .general_bank{float:left;margin-bottom:1em;width:100%}
-.easy_2046_lw .general_bank li, .easy_2046_lw .control_bank li{width: 24.3%;float: left;}
-.easy_2046_lw .general_bank li.id_note{width:100%}
+.easy_2046_lw .general_bank li, .easy_2046_lw .control_bank li{width: 49%;float: left;}
 .easy_2046_lw ol{margin-left:0.6em;}
 .easy_2046_lw ol li{list-style:none;width:100%}
 .easy_2046_lw li:hover{cursor:move;}
+.easy_2046_lw .general_bank ul{margin:0;}
 .easy_2046_lw .general_bank li, .general_bank li:hover{border:0;background:url();cursor:default;}
 .easy_2046_lw .rem{float:right;clear:none;display:inline-block;background:#ccc;color:#fff;padding:0 0 2px 0;width:17px;height:15px;text-align:center;border-radius:10px;margin:-0.1em 0 0 0;cursor:pointer;}
 .easy_2046_lw .rem:hover{background:#333;color:#fff;}
 .easy_2046_lw #control_container, .easy_2046_lw #view_container{width:100%;padding-top:3em;margin:0;float:left;display:block;background:url(../images/here.png) no-repeat top center #f2f2f2;}
-.easy_2046_lw .control_h3{margin:-2em 0 0 308px;}/* fix for the alignment */
+.easy_2046_lw #control_container strong, .easy_2046_lw #view_container strong{color:#2F5392;}
+.easy_2046_lw .control_h3{margin:-2em 0 0 315px;}/* fix for the alignment */
 .general_bank .rem, .easy_2046_lw .view_bank .rem, .easy_2046_lw .control_bank .rem,
 .easy_2046_lw .view_bank input, .easy_2046_lw .view_bank select,.easy_2046_lw .control_bank input, .easy_2046_lw .control_bank select,
-.easy_2046_lw .control_bank em,.easy_2046_lw .view_bank em
+.easy_2046_lw .control_bank em,.easy_2046_lw .view_bank em, .easy_2046_lw .control_bank option,.easy_2046_lw .view_bank option,
+.easy_2046_lw .control_bank texarea,.easy_2046_lw .view_bank textarea
 {display:none;}/* do not let them delete thinks form the bank*/
-.easy_2046_lw .control_bank .ew2046_check_box{display:none;}
+.easy_2046_lw .control_bank .ew2046_check_box, .easy_2046_lw .view_bank .ew2046_check_box, .ui-draggable-dragging .rem{display:none;}
 .ew2046_check_box{margin-bottom:0.3em}
+.easy_2046_lw textarea { resize:vertical; }
 
 .easy_2046_lw .view_bank li, .easy_2046_lw .control_bank li{width:92%;margin-left:1em;}
 .easy_2046_lw .view_bank, .easy_2046_lw .control_bank{overflow:auto;height:200px;}

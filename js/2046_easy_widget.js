@@ -140,6 +140,9 @@ jQuery(document).ready(function($){
 				//$(clone).attr('class', 'me')
 				// add the clone to the final div
 				var clone_name = $(clone).attr('class');
+				//~ 
+				//~ TODO it alows more then one, fix it.. or let tem multiply the bricks or something.
+				//~ 
 				//~ var existing_li = $(this).find('li').attr('class');
 				//~ console.log(existing_li);
 				//~ console.log(clone_name);

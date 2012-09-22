@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/2046s-widget-loops/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.4
+ * Version: 0.5
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -53,17 +53,17 @@ add_action( 'widgets_init', 'builder_2046_main_loop_load_widget' );
  * 'builder_2046_main_loop_Widget' is the widget class used below.
  */
 function builder_2046_main_loop_load_widget() {
-	register_widget( 'builder_2046_main_loop' );
+	register_widget( 'Easy_2046_builder' );
 	// localization
 	load_plugin_textdomain( 'builder_2046', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/'); 
 }
 
 
 // make class instance
-$moo = new builder_2046_main_loop();
+$EasyClassClone = new Easy_2046_builder();
 // trespass data to the widget class val
-$moo::$EasyItems = $EasyItems;
-$moo::$EasyQuery = array(
+$EasyClassClone::$EasyItems = $EasyItems;
+$EasyClassClone::$EasyQuery = array(
 	'post_type' => 'post',
 	'posts_per_page' => 1,
 	'post_status' => 'publish'
@@ -76,7 +76,7 @@ $moo::$EasyQuery = array(
  * the settings, form, display, and update.  Nice!
  */
 // builder_2046_main_loop::$EasyItems = 'abc';
- class builder_2046_main_loop extends WP_Widget {
+ class Easy_2046_builder extends WP_Widget {
  	// set the routing variable
 	public static $EasyItems;
 	public static $EasyQuery;
@@ -94,7 +94,7 @@ $moo::$EasyQuery = array(
 	/**
 	 * Widget setup.
 	 */
-	function builder_2046_main_loop() {
+	function Easy_2046_builder() {
 		/* Widget settings. */
 		$widget_ops = array( 
 			'classname' => 'builder_2046_main_loop',
@@ -161,39 +161,84 @@ $moo::$EasyQuery = array(
 		$default_query = $this::$EasyQuery;
 		//~ if the user used some query controls
 		$user_query = $this->f2046_output_control($default_query,$instance);
+
 		//~ if the user query is empty, use d default instead
 		if(empty($user_query)){
 			$query_args = $default_query;
 		}
 		//~ merge the default query by the user query, (If the input arrays have the same string keys, then the later value for that key will overwrite the previous one.)
 		else{
+			//~ mydump($user_query);
 			$query_args = array_merge($default_query, $user_query);
 		}
-		//~ Get the query args 
-		
-
+	
 		// The Query
 		$the_query = new WP_Query( $query_args );
 		//~ General restrictions
 		//~ b2046_general_visibility
-		//~ $permissions = $instance['b2046_general_visibility']['gui']['value'];
-		//~ do something about the scafolding
-		$scafold = EasyView_b2046_scafolding($instance['b2046_scafolding']['gui']['value'], '');
-
+		$permissions = '';
+		if(isset($instance['b2046_controls']['b2046_general_visibility']['gui']['0']['value'])){
+			$permissions = $instance['b2046_controls']['b2046_general_visibility']['gui']['0']['value'];
+		}
+		//~ do something with the scafolding
+		$b2046_scafold_type = $instance['b2046_scafold_type']['gui']['0']['value'];
+		$b2046_scafold_row_class = $instance['b2046_scafold_row_class']['gui']['0']['value'];
+		$b2046_scafolding_column_class = $instance['b2046_scafolding_column_class']['gui']['0']['value'];
+		$output = '';
+		$class= '';
+		
+		
+		//~ $permissions = EasyControl_b2046_general_visibility($the_query->post->ID, '');
 		if(empty($permissions) || $permissions == 'all' || current_user_can( $permissions )){
+			
 			if($the_query->have_posts()) :
-				echo '<div id="post-'.get_the_ID().'" '; post_class($scafold[0]); echo '>';
+				//~ many per row
+				if($b2046_scafold_type == 2){
+					$output .= '<div class="'.$b2046_scafold_row_class.'">';
+					$class = $b2046_scafolding_column_class;
+				}
+				//~  default widget classes
+				elseif($b2046_scafold_type == 0){
+					$output .= $before_widget;
+				}
+				
+				$WPpostClass = get_post_class();
+				$class = implode(' ',$WPpostClass) .' '. $class;
+				
 				// The Loop
 				while ( $the_query->have_posts() ) : $the_query->the_post();
-					echo '<div class="'. $scafold[1] .'">';
-						echo $this->f2046_front_end_builder($instance, $the_query->post->ID);
-					echo '</div>';
+					//~ scafold check
+					if($b2046_scafold_type == 1){
+						$output .= '<div class="'.$b2046_scafold_row_class.'">';
+						$class .= $b2046_scafolding_column_class;
+					}
+					
+					$output .= '<div id="post-'.get_the_ID().'" class="'.$class.'"'; 
+					$output .= '>';
+					$output .= $this->f2046_front_end_builder($instance, $the_query->post->ID);
+					$output .= '</div>';
+					
+					//~ scafold - one per row - row
+					if($b2046_scafold_type == 1){
+						$output .= '</div>';
+					}
 				endwhile;
-				echo '</div>';
+				
+				//~ many per row || one per row
+				if($b2046_scafold_type == 2){
+					$output .= '</div>';
+				}
+				//~  default widget classes
+				elseif($b2046_scafold_type == 0){
+					$output .= $after_widget;
+				}
 			endif;
 			// Reset Post Data
 			wp_reset_postdata();
 		}
+		
+		//~ serve it out :)
+		echo $output;
 	}
 	//~ END OF WORDPRESS DEFAULT WIDGET GAME
 	//~ HERE STARTS THE HELL ;)
@@ -208,11 +253,17 @@ $moo::$EasyQuery = array(
 	function f2046_front_end_builder($instance, $post_ID){
 		$data_to_process = $this->f2046_matcher($instance, 'view');
 		$output = '';
-		$i = 0;
-		foreach($data_to_process as $key){
-			$values = $key['gui'][0]['value'];
-			$func = 'EasyView_'.$key['tmp_title'];
+		$values = array();
+		
+		foreach($data_to_process as $key => $val){
+			$i = 0;
+			
+			foreach($val['gui'] as $each){
+				$values[] = $each['value'];
+			}
+			$func = 'EasyView_'.$val['tmp_title'];
 			$output .= $func($post_ID, $values);
+			unset($values);
 			$i++;
 		 }
 		return	$output;
@@ -225,13 +276,39 @@ $moo::$EasyQuery = array(
 		$output = array();
 		$data_to_process = $this->f2046_matcher($instance, 'control');
 		$output = $data_to_process;
+		$tmp_result = $default_query;
+		//~ mydump($data_to_process);
+		//~ echo '--------- data<br>----------------<br>';
+		$values = array();
 		$i = 0;
 		foreach($data_to_process as $key => $val){
-			$values = ($val['gui'][0]['value']);
+			//~  
+			//~ check if the array value under given key is defined
+			//~ in the case of checkboxed values, some might be empty, and then it trigers errors, obviously.
+			//~ mydump($val);
+			//~ mydump(count($val['gui']));
+			//~ mydump($val['gui']);
+			if(is_array($val['gui']) && count($val['gui']) > 1){
+				$values = array();
+				foreach($val['gui'] as $k => $v){
+					$values[] = $val['gui'][$k]['value'];
+				}
+			}else{
+				if(isset($val['gui'][0]['value'])){
+					$values = ($val['gui'][0]['value']);
+				}
+			}
+			//~ create function
 			$func = 'EasyControl_'.$val['tmp_title'];
-			$output = $func($default_query, $values);
+			//~ process data by that function --- should be declared outside , like in EasyFunctions.php
+			$function_result = $func($default_query, $values);
+			//~ mydump($function_result);
+			//~ echo '-----/\----after function EasyControl_'.$val['tmp_title'].' <br>';
+			$tmp_result = array_merge($tmp_result, $function_result);
 			$i++;
 		 }
+	
+		$output = $tmp_result;
 		return $output;
 	}
 
@@ -258,18 +335,17 @@ $moo::$EasyQuery = array(
 			//~ mydump($instance);
 			if(isset($instance['b2046_bricks'])){
 				foreach($instance['b2046_bricks'] as $key => $val) {
-					//~ mydump(key($val));
 					 //~ do it for all possible settings
 					foreach($val as $each){
 						if(array_key_exists(key($val), $defaults) && $defaults[key($val)]['block'] == $wanted_type){ 
 							//echo '---wanted type';
 							//mydump($wanted_type);
-							//~ mydump($val[key($val)]['gui']['value']);
 							$tmp = $defaults[key($val)];
 							//~ mydump(key($val));
-							$tmp['gui'][0]['value'] = $val[key($val)]['gui']['value'];
+							$tmp['gui'] = $val[key($val)]['gui'];
 							$tmp['tmp_title'] = key($val);
 							$output[] =  $tmp;
+							
 						}
 					}
 					$i++;
@@ -304,7 +380,9 @@ $moo::$EasyQuery = array(
 							//~ mydump($defaults[$key]['gui'][0]['value']);
 							//~ mydump($val['gui']['value']);
 							$tmp = $defaults[$key];
-							$tmp['gui'][0]['value'] = $val['gui']['value'];
+							//~ mydump($val['gui']);
+							//~ $tmp['gui'][0]['value'] = $val['gui']['value'];
+							$tmp['gui'] = $val['gui'];
 							//~ mydump($tmp);
 							$tmp['tmp_title'] = $key;
 							$output[] =  $tmp;
@@ -327,8 +405,13 @@ $moo::$EasyQuery = array(
 		//mydump($view);
 		// resort the array by position
 		// RESORTING WILL BE NEEDE WHEN WE WILL BUILD THE ACTUAL SETUPS !
+		
 		foreach ($view as $key => $row) {
-			$positions[$key]  = $row['position']; 
+			if(isset($row['position'])){
+				$positions[$key]  = $row['position']; 
+			}else{
+				$positions[$key]  = $row['item_title']; 
+			}
 			// of course, replace 0 with whatever is the date field's index
 		}
 		array_multisort($positions, SORT_ASC, $view);
@@ -356,7 +439,8 @@ $moo::$EasyQuery = array(
 		}
 		// output the inputs to the widget
 		$output .= '<div class="general_bank"><h3>General</h3><ul>';
-			$output .= $this->f2046_inputbuilder($global_view_items, $instance, 'default');
+			//~ $output .= $this->f2046_inputbuilder($global_view_items, $instance, 'default');
+			$output .= $this->f2046_widget_brick_collector($global_view_items, $instance, 'general');
 		$output .= '</ul></div>
 		<h3>'.__('Views').'</h3>
 		<div class="view_holder">
@@ -438,7 +522,67 @@ $moo::$EasyQuery = array(
 			$output = $this->f2046_inputbuilder( $view,$output,'control_user_data');
 			
 			//~ VIEWS BRICKS - THE SLOT
-		}else{
+		}elseif($what == 'view_user_data' && isset($instance['b2046_bricks'])){
+				//~ $i = 0;
+				
+			//~ For each brick (li)
+			foreach($instance['b2046_bricks'] as $key => $val){
+				//echo '-------kiss <br />';
+				$tmp_name = key($val);
+				// this value will be pushed as the object positions
+				// that matches because the resulted array is naturaly sorted by numbers 0,1,2 etc. 
+				//~ widget-builder_2046_main_loop-widget[20][b2046_post_title][gui][0][value]
+				if(array_key_exists(key($val), $view)){
+					//~ for each gui
+					$clone_brick = $view[key($val)];
+					
+					$values =$val[key($val)]['gui'];
+					$ii = 0;
+					foreach($values as $key => $val){
+						$clone_brick['gui'][$key]['value'] = $val['value'];
+						$ii++;
+					}
+					//~ write the item name in to the temporary value
+					$clone_brick['tmp_name'] = $tmp_name;
+					//~ write the block position in to the temporary value
+					array_push($output,$clone_brick);
+				}
+				//~ $i++;
+			}
+			
+			$output = $this->f2046_inputbuilder( $view,$output,'view_user_data');
+		}elseif($what == 'general'){
+			//~ $i = 0;
+			//~ For each brick (li)
+			foreach($view as $key => $val){
+				// this value will be pushed as the object positions
+				// that matches because the resulted array is naturaly sorted by numbers 0,1,2 etc. 
+				 //~ echo '<br />--- key '.$i.'---<br />';
+				$tmp_name = $key;
+
+				//~ If the bricks with the unique ID exists in in defaults (just to make sure no "noncomplete" stuff can pass)
+				if(array_key_exists($key, $instance)){
+					$clone_brick = $val;
+					//~ for each gui
+					//~ $key is the brick name					
+					//~ push values
+					
+					$clone_brick['gui'][0]['value'] = $instance[$key]['gui'][0]['value'];
+					
+					//~ write the item name in to the temporary value
+					$clone_brick['tmp_name'] = $key;
+					//~ mydump($clone_brick);
+					//~ write the block position in to the temporary value
+					array_push($output,$clone_brick);
+				}else{
+					$output = $view;
+				}
+			}
+			
+			$output = $this->f2046_inputbuilder( $view,$output,'general');
+		}
+		//~ remove if note necassary !!!!
+		else{
 		//~ combiine data for views (multiple)	
 			if(isset($instance['b2046_bricks'])){
 				//~ $i = 0;
@@ -486,18 +630,25 @@ $moo::$EasyQuery = array(
 		if($type == 'view_user_data'){
 			$bricks = array($instance);
 			$j_name = 'b2046_bricks';
-		//~ the differenc is that user_view array is has first level as numbers so we can sort it out by numbered possition, 
-		//~ and multiple item instances can be used, unlike for generals, or controls
 		}elseif($type == 'control_user_data'){
 			$bricks = array($instance);
 			$j_name = 'b2046_controls';
-		}else{
+		}elseif($type == 'control_default' || $type == 'view_default'){
+			//~ the differenc is that user_view array is has first level as numbers so we can sort it out by numbered possition, 
+			//~ and multiple item instances can be used, unlike for generals, or controls
 			$bricks = array(0 => $view);
 			$j_name = 'b2046_bricks';
+		}
+		elseif($type == 'general'){
+			$bricks = array($instance);
+			$j_name = 'b2046_default';
 		}
 		//~ for each brick
 		$each_brick_i = 0;
 		foreach($bricks as $loop){
+			//~ if($type == 'default'){
+				//~ mydump($loop);
+				//~ }
 			$i = 0;
 			foreach($loop as $item_name => $item)
 			{
@@ -514,10 +665,11 @@ $moo::$EasyQuery = array(
 				//~ }else{
 					$li_class = $item_name;
 				//~ }
-				
-				$output .= '<li class="'.$li_class.' ui-draggable">';
-				$output .='<strong>'.$item['item_title'].'</strong> <b class="rem">x</b><br />';
-						
+				//~ mydump($item);
+				$output .= '<li class="li_'.$li_class.' ui-draggable">';
+				if(!empty($item['item_title'])){
+					$output .='<strong>'.$item['item_title'].'</strong> <b class="rem">x</b><br />';
+				}	
 				$each_gui_i = 0;
 				$gui_value = '';
 				foreach($item['gui'] as $gui => $val)
@@ -542,40 +694,42 @@ $moo::$EasyQuery = array(
 					//widget-builder_2046_main_loop-widget[7][b2046_bricks][1][b2046_post_title][gui][value]
 					}
 					elseif($type == 'control_user_data'){
-						 //~ echo 'item <br>';
-						//~ mydump(key($gui));
-						//~ mydump($item["tmp_name"]);
-						//~ echo 'in inputbuilder after<br>';
 						$splited = explode('][',$this->get_field_name($item["tmp_name"]));
-						$gui_value = $val['value'];//$instance[$each_brick_i]['gui'][$each_gui_i]['value'];
+						$gui_value = $val['value'];
 						if(isset($val['ui_note'])){
 							$ui_note = $val['ui_note'];
 						}
 						$name = $splited[0].']['.$j_name.']['.$item["tmp_name"].']';
-						// change the value
-						//~ echo '<br>>>>>>>>>>>>>>><br>';
-						//~ mydump($item["tmp_name"]);
-						//~ mydump($val['value']);
-						//~ mydump( $gui_value);
 						$div_id = $item_name;
 						
 					}
 					//~  most likely the global view
-					else{
+					elseif($type == 'control_default' || $type == 'view_default'){
 						$name = $this->get_field_name($item_name);
 						//~ get the value from the instance (defauts)
 						//~ check if the value exists already before we try to assign it
-						//~ mydump($val['value']);
 						$gui_value= $val['value'];
 						if(isset($val['ui_note'])){
 							$ui_note = $val['ui_note'];
 						}
-						//~ if(isset($instance[$item_name]['gui']['value'])){
-							//~ mydump($val['value']);
-							//~ $gui_value= $val['value'];//$instance[$item_name]['gui']['value'];
-						//~ }
+						$div_id = $item_name;
+					}elseif($type == 'general'){
+						$splited = explode('][',$this->get_field_name($item_name));
+						$gui_value = $val['value'];
+						if(isset($val['ui_note'])){
+							$ui_note = $val['ui_note'];
+						}
+						
+						if(isset($item["tmp_name"])){
+							$name = $splited[0].']['.$item["tmp_name"].']';
+						}else{
+							$name = $splited[0].']['.$item_name.']';
+						}
+						//~ mydump($gui);
+						//~ mydump($gui_value);
 						$div_id = $item_name;
 					}
+					
 					
 					
 					
@@ -622,7 +776,7 @@ $moo::$EasyQuery = array(
 						$output .= '</select>';
 					}
 					//~ 
-					//~ check box
+					//~ check box //// NOT TESTED ! TODO
 					//~ 
 					elseif ($val['ui_type'] == 'check_box'){
 						//~ $gui_i = 0;
@@ -632,12 +786,25 @@ $moo::$EasyQuery = array(
 							}else{
 								$selected = '';
 							}
-							$output .= '<div class="ew2046_check_box"><input name="'. $name .'[gui]['.$each_gui_i.'][value]" type="checkbox"'.$selected.' value="'.$keys.'">'.$vals.'</option><br />';
+							$output .= '<div class="ew2046_check_box"><input name="'. $name .'[gui]['.$each_gui_i.'][value]" type="checkbox"'.$selected.' value="'.$keys.'" />'.$vals.'<br />';
 							if(isset($ui_note)){
 								$output .= '<em>'.$ui_note.'</em>';
 							}
 							$output .= '</div>';
 						}
+					}
+					//~ 
+					//~ hidden
+					//~ 
+
+					if ($val['ui_type'] == 'hidden'){
+						if(isset($ui_note)){
+							$placeholder = 'placeholder="'.$ui_note.'"';
+						}else{
+							$placeholder = '';
+						}
+						$output .= '<input '.$j_title.' type="hidden" name="'. $name .'[gui]['.$each_gui_i.'][value]" value="'. $gui_value .'"/>';
+						$output .= '<em>'.$placeholder.'</em>';
 					}
 					//~ iterate for each gui
 					$each_gui_i++;
@@ -650,6 +817,24 @@ $moo::$EasyQuery = array(
 		}
 		return $output;
 	}
+	
+	
+	//~ id cleaner
+	
+	function f2046_id_cleaner_to_array($val){
+		if(!empty($val)){
+			$post_id_clean = ereg_replace(" ", "", $val);
+			$post_ids_array = explode(',', $post_id_clean);
+			return $post_ids_array;
+		}
+	}
+	function f2046_id_cleaner_to_string($val){
+		if(!empty($val)){
+			$post_id_string = ereg_replace(" ", "", $val);
+			return $post_ids_string;
+		}
+	}
+	
 
 } // END of Widget class
 
