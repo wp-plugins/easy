@@ -1,3 +1,4 @@
+=== Easy ===
 Plugin name: Easy
 Contributors: 2046
 Plugin URI: http://wordpress.org/extend/easy
@@ -31,6 +32,7 @@ The widget scaffolding structure is based on the <a href="http://twitter.github.
  * Listen to you guys.
 
 more on: <a href="http://2046.cz/freestuff/easy.html">Project homapage</a>
+
 == Installation ==
 
 As usual. If you don't know how, check out the <a href="http://codex.wordpress.org/Managing_Plugins">official how-to</a>.
@@ -51,7 +53,7 @@ Why not?
 
 == Upgrade Notice ==
 
-0.1 initial version, the first shout out. The Baby born.
+Remember, it is not in production state! Many things are changing on the way.
 
 == Screenshots ==
  
@@ -74,7 +76,3 @@ Why not?
  * the brain fu.. is behind me, from now on.. everything will be just fun to add :)
  * more in next release..
  
-= Thanks =
-
-Thanks to Scribu for his WP Navi that I have "integrated" as one of the navigation settings in to the widget. And thanks to Sribu again. When I tried to find an answer for
-all the uncommon problems it was his answer somewhere in the Interweb that helps me to find the solution. Thanks all of you, you are my source of knowledge.
