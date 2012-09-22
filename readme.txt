@@ -12,12 +12,14 @@ Easy, but complex GUI website builder.
 
 == Description ==
 
-This widgets doesn't not do much at this point. But give me a month, and you won't live without it.
+Though teh widget is still in progress, it's worth to be tested.
+
 This widget is a new much better version then its ancestor <a href="http://wordpress.org/extend/plugins/2046s-widget-loops/">2046's loop widget</a> which serves as a the testing platform, before the real thing comes.
 "Easy" will have all it's ancestors functions plus many more and ofcourse your own! 
-It is done in extensible way. So that anybody can plug in their own object with its own function and use the Drag&Drop power of this widget to his own needs. As for now there is no closer explanation how, but wait, it has been just born!
 
-The widget scaffolding structure is based on the <a href="http://twitter.github.com/">Bootstrap</a> logic. If you do not know Bootstrap, than don't miss the train!
+"Easy" is done in extensible way. So that anybody can plug in their own object with its own function and use the Drag&Drop power of this widget to his own needs. As for now there is no closer explanation how, but wait, it has been just born!
+
+The widget scafolding structure is based on the <a href="http://twitter.github.com/">Bootstrap</a> logic. If you do not know Bootstrap, then don't miss the train!
 
 = What is to be done = 
  * Core - DONE
@@ -25,7 +27,7 @@ The widget scaffolding structure is based on the <a href="http://twitter.github.
  * Finish the input builder - IN PROGRESS
  * Create all view items for.. taxonomies, categories, author, meta values, etc. - IN PROGRESS
  * Create items covering all native Wordpress WP_Query possibilities. - IN PROGRESS
- * Multiple controls of the same type
+ * Multiple controls of the same type - IN CONSIDERATION
  * Localization
  * Write nice Documentation
  * Create an well documented example extension in form of WP plugin.
