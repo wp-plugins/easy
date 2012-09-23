@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.4.1
-Stable tag: 0.5
+Stable tag: 0.5.1
 
 Easy, but complex GUI website builder.
 
@@ -63,6 +63,8 @@ Remember, it is not in production state! Many things are changing on the way.
 
 == Change log ==
 
+= 0.5.1 = 
+	NEW - the full size of the image was misisng in the list of available image sizes, Now the list is complete. btw.. it reads all the registred image sizes :)
 = 0.5 = 
 	NEW - Many new view blocks (shortcode, text, meta, comments number, comments)
 	NEW - All blocks have class input (if "necessary")
