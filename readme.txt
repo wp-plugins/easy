@@ -64,14 +64,15 @@ Remember, it is not in production state! Many things are changing on the way.
 == Change log ==
 
 = 0.5.1 = 
-	NEW - the full size of the image was misisng in the list of available image sizes, Now the list is complete. btw.. it reads all the registred image sizes :)
+ * NEW - the full size of the image was misisng in the list of available image sizes, Now the list is complete. btw.. it reads all the registred image sizes :)
+
 = 0.5 = 
-	NEW - Many new view blocks (shortcode, text, meta, comments number, comments)
-	NEW - All blocks have class input (if "necessary")
-	NEW - new control blocks (offset, category, post_status)
-	FIX - Control are not rewriting the query args, but adds new, as it supposed to
-	FIX - Values from checkboxes do not causes problem anymore
-	...
+ * NEW - Many new view blocks (shortcode, text, meta, comments number, comments)
+ * NEW - All blocks have class input (if "necessary")
+ * NEW - new control blocks (offset, category, post_status)
+ * FIX - Control are not rewriting the query args, but adds new, as it supposed to
+ * FIX - Values from checkboxes do not causes problem anymore
+ * ...
 	
 = 0.4 = 
  * NEW - all bricks can have multi input (select box, texarea, check box) -- hidden input, and radio in next release
