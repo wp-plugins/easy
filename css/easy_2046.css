@@ -10,7 +10,7 @@
 .green{background:green !important;}
 .hide{display:none;}
 .lw_2046_left, .lw_2046_right{width:300px;float:left;clear:none;margin:0 0 1em 0;}
-.easy_2046_lw em{float:right;color:#666;}
+.easy_2046_lw em{color:#666;}
 .lw_2046_left{margin-right:15px;}
 .lw_type_change_note{text-align:right;}
 
@@ -52,19 +52,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', end
 .easy_2046_lw #control_container, .easy_2046_lw #view_container{width:100%;padding-top:3em;margin:0;float:left;display:block;background:url(../images/here.png) no-repeat top center #f2f2f2;}
 .easy_2046_lw #control_container strong, .easy_2046_lw #view_container strong{color:#2F5392;}
 .easy_2046_lw .control_h3{margin:-2em 0 0 315px;}/* fix for the alignment */
-.general_bank .rem, .easy_2046_lw .view_bank .rem, .easy_2046_lw .control_bank .rem,
-.easy_2046_lw .view_bank input, .easy_2046_lw .view_bank select,.easy_2046_lw .control_bank input, .easy_2046_lw .control_bank select,
-.easy_2046_lw .control_bank em,.easy_2046_lw .view_bank em, .easy_2046_lw .control_bank option,.easy_2046_lw .view_bank option,
-.easy_2046_lw .control_bank texarea,.easy_2046_lw .view_bank textarea
-{display:none;}/* do not let them delete thinks form the bank*/
-.easy_2046_lw .control_bank .ew2046_check_box, .easy_2046_lw .view_bank .ew2046_check_box, .ui-draggable-dragging .rem{display:none;}
+.easy_2046_lw .control_bank *, .easy_2046_lw .view_bank *, .easy_2046_lw .general_bank .rem{display:none;}
+.easy_2046_lw .control_bank ul, .easy_2046_lw .view_bank ul, .easy_2046_lw .control_bank li, .easy_2046_lw .view_bank li, .easy_2046_lw .control_bank strong, .easy_2046_lw .view_bank strong{display:block}
+.easy_2046_lw .view_bank li, .easy_2046_lw .control_bank li{width:88%;margin-left:1em;}
 .ew2046_check_box{margin-bottom:0.3em}
 .easy_2046_lw textarea { resize:vertical; }
-
-.easy_2046_lw .view_bank li, .easy_2046_lw .control_bank li{width:92%;margin-left:1em;}
+.easy_2046_lw input[type=checkbox], .easy_2046_lw input[type=radio]{margin-right:0.2em}
 .easy_2046_lw .view_bank, .easy_2046_lw .control_bank{overflow:auto;height:200px;}
+.easy_2046_lw .radiogroup{margin:0.5em 0 0.5em 0;padding:0.5em;width:95%;border:1px solid #ccc;border-radius:3px;}
 .ui-widget-content{display:block;border:0;padding-right:0.6em;background:#f2f2f2;}
 .ui-widget-content ol{min-height:160px;}
 
-
+li.li_5 {margin-top:-2em}
 

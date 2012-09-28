@@ -23,7 +23,8 @@ jQuery(document).ready(function($){
 			if(slot_name == 'b2046_bricks'){
 				var temp = name_parts[0] + '][' + slot_name + '][' + $(slot).index();
 			}else{
-				var temp = name_parts[0] + '][' + slot_name ;
+				//~ var temp = name_parts[0] + '][' + slot_name ;
+				var temp = name_parts[0] + '][' + slot_name + '][' + $(slot).index();
 			}
 			//~ append the rest to the name
 			for(i=1; i<l; i++){
@@ -49,7 +50,8 @@ jQuery(document).ready(function($){
 			if(slot_name == 'b2046_bricks'){
 				var temp = name_parts[0] + '][' + slot_name + '][' + li_index;
 			}else{
-				var temp = name_parts[0] + '][' + slot_name;
+				//~ var temp = name_parts[0] + '][' + slot_name;
+				var temp = name_parts[0] + '][' + slot_name + '][' + li_index;
 			}
 			//~ split the second part in to pieces, --- then through away the '0' chunk which is the old index
 			var second_chunks = name_parts[1].split('][');
@@ -136,27 +138,27 @@ jQuery(document).ready(function($){
 				$( this ).find( ".placeholder" ).remove();
 				// define the actual clone
 				var clone = $(ui.draggable).clone();
-				// add a class - not necessary
-				//$(clone).attr('class', 'me')
-				// add the clone to the final div
-				var clone_name = $(clone).attr('class');
-				//~ 
-				//~ TODO it alows more then one, fix it.. or let tem multiply the bricks or something.
-				//~ 
-				//~ var existing_li = $(this).find('li').attr('class');
-				//~ console.log(existing_li);
-				//~ console.log(clone_name);
-				if(!$(this).find("li").hasClass(clone_name)){
-					//~ }
-					//~ do not let them use same control twice
-					//~ console.log(match);
-					//~ if($('#control_container ol:contains').hasClass(existing_li) == false){
-					
+				var clone_class = $(clone).attr('class');
+				var clone_rel = $(clone).attr('rel');
+				var clonable = true;
+				
+				$(this).find('li').each( function(each_item){
+					var this_rel = $(this).attr('rel');
+					var this_class = $(this).attr('class');
+					if((typeof this_rel != 'undefined') && (this_rel == clone_rel) && (this_class == clone_class)){
+						clonable = false;
+						//~ console.log(this_rel + ' * ' + clone_rel);
+						//~ console.log(this_class + ' * ' + clone_class);
+					}
+				});
+				//~ if it is forbiden > do not let them use same control twice 
+				if(clonable == true){
 					$(this).append(clone);
 					manipulate_dropped_item_input_names(clone, 'b2046_controls');
 				}
 			}
 		}).sortable({
+			/*
 			items: "li:not(.placeholder)",
 			sort: function() {
 				// gets added unintentionally by droppable interacting with sortable
@@ -164,6 +166,34 @@ jQuery(document).ready(function($){
 				$( this ).removeClass( "ui-state-default" );
 				
 			}
+			* */
+			
+			items: "li:not(.placeholder)",
+			sort: function() {
+				// gets added unintentionally by droppable interacting with sortable
+				// using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
+				$( this ).removeClass( "ui-state-default" );
+				
+				
+			},
+			//~ start: function(event, ui) {
+					//~ var start_pos = ui.item.index();
+					//~ ui.item.data('start_pos', start_pos);
+				//~ },
+			update: function (event, ui) {
+				//~ var start_pos = ui.item.data('start_pos');
+				var end_pos = ui.item.index();
+				//~ this is 'ol'(.droppable .sortable)
+					
+				//~ for each parent li find index
+				$(this).find('li').each( function(index){
+					//~ this is 'li'
+					var li_index = index;
+					
+					manipulate_sorted_item_input_names(this, 'b2046_controls', li_index);
+				});
+			}
+			
 		});
 		//~ add dummy objects if the container is empty
 		$("#view_container ol:empty").html('<li class="placeholder">Drag the view object here.</li>');

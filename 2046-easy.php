@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/2046s-widget-loops/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.5.1
+ * Version: 0.5.2
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -57,7 +57,6 @@ function builder_2046_main_loop_load_widget() {
 	// localization
 	load_plugin_textdomain( 'builder_2046', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/'); 
 }
-
 
 // make class instance
 $EasyClassClone = new Easy_2046_builder();
@@ -157,88 +156,103 @@ $EasyClassClone::$EasyQuery = array(
 	 */
 	function widget($args, $instance) {
 		extract( $args );
+		//~ reset previous post data.. just to be sure 
+		//~ somebody could run their own wp_query and do not reset the data ;)
+		wp_reset_postdata();
+		
 		//~  define default query,so we get something at least, a working query
 		$default_query = $this::$EasyQuery;
-		//~ if the user used some query controls
-		$user_query = $this->f2046_output_control($default_query,$instance);
-
-		//~ if the user query is empty, use d default instead
-		if(empty($user_query)){
-			$query_args = $default_query;
-		}
-		//~ merge the default query by the user query, (If the input arrays have the same string keys, then the later value for that key will overwrite the previous one.)
-		else{
-			//~ mydump($user_query);
-			$query_args = array_merge($default_query, $user_query);
-		}
-	
-		// The Query
-		$the_query = new WP_Query( $query_args );
-		//~ General restrictions
-		//~ b2046_general_visibility
-		$permissions = '';
-		if(isset($instance['b2046_controls']['b2046_general_visibility']['gui']['0']['value'])){
-			$permissions = $instance['b2046_controls']['b2046_general_visibility']['gui']['0']['value'];
-		}
-		//~ do something with the scafolding
-		$b2046_scafold_type = $instance['b2046_scafold_type']['gui']['0']['value'];
-		$b2046_scafold_row_class = $instance['b2046_scafold_row_class']['gui']['0']['value'];
-		$b2046_scafolding_column_class = $instance['b2046_scafolding_column_class']['gui']['0']['value'];
-		$output = '';
-		$class= '';
-		
-		
-		//~ $permissions = EasyControl_b2046_general_visibility($the_query->post->ID, '');
-		if(empty($permissions) || $permissions == 'all' || current_user_can( $permissions )){
+		//~ check if it makes sense to process anything
+		//~ the resistor ids a filter that returns true if all the conditions are meet, flase if not.. if not then skip the next process
+		$resistor = $this->f2046_output_resistor($default_query,$instance);
+		//~ mydump($resistor);
+		if ($resistor == true){
+			//~ if the user used some query controls
+			$user_query = $this->f2046_output_control($default_query,$instance);
+			//~ if the user query is empty, use d default instead
+			if(empty($user_query)){
+				$query_args = $default_query;
+			}
+			//~ merge the default query by the user query, (If the input arrays have the same string keys, then the later value for that key will overwrite the previous one.)
+			else{
+				//~ mydump($user_query);
+				$query_args = array_merge($default_query, $user_query);
+			}
+			//~ mydump($query_args);
+			// The Query
+			$the_query = new WP_Query( $query_args );
+			//~ General restrictions
+			//~ b2046_general_visibility
+			//~ $permissions = '';
+			//~ if(isset($instance['b2046_controls']['b2046_general_visibility']['gui']['0']['value'])){
+				//~ $permissions = $instance['b2046_controls']['b2046_general_visibility']['gui']['0']['value'];
+			//~ }
+			//~ do something with the scafolding
+			$b2046_scafold_type = $instance['b2046_scafold_type']['gui']['0']['value'];
+			$b2046_scafold_row_class = $instance['b2046_scafold_row_class']['gui']['0']['value'];
+			$b2046_scafolding_column_class = $instance['b2046_scafolding_column_class']['gui']['0']['value'];
+			$widget_title = $instance["b2046_widget_title"]["gui"]['0']["value"];
+			$output = '';
+			$class= '';
 			
-			if($the_query->have_posts()) :
-				//~ many per row
-				if($b2046_scafold_type == 2){
-					$output .= '<div class="'.$b2046_scafold_row_class.'">';
-					$class = $b2046_scafolding_column_class;
-				}
-				//~  default widget classes
-				elseif($b2046_scafold_type == 0){
-					$output .= $before_widget;
-				}
+			
+			//~ $permissions = EasyControl_b2046_general_visibility($the_query->post->ID, '');
+			//~ if(empty($permissions) || $permissions == 'all' || current_user_can( $permissions )){
 				
-				$WPpostClass = get_post_class();
-				$class = implode(' ',$WPpostClass) .' '. $class;
+				if($the_query->have_posts()) :
 				
-				// The Loop
-				while ( $the_query->have_posts() ) : $the_query->the_post();
-					//~ scafold check
-					if($b2046_scafold_type == 1){
+					//~ many per row
+					if($b2046_scafold_type == 2){
 						$output .= '<div class="'.$b2046_scafold_row_class.'">';
-						$class .= $b2046_scafolding_column_class;
+						$class = $b2046_scafolding_column_class;
+					}
+					//~  default widget classes
+					elseif($b2046_scafold_type == 0){
+						$output .= $before_widget;
 					}
 					
-					$output .= '<div id="post-'.get_the_ID().'" class="'.$class.'"'; 
-					$output .= '>';
-					$output .= $this->f2046_front_end_builder($instance, $the_query->post->ID);
-					$output .= '</div>';
+					$WPpostClass = get_post_class();
+					$class = implode(' ',$WPpostClass) .' '. $class;
+					//~ widget title
+					if(!empty($widget_title)){
+						$output .='<h4 class="widget_title">'.$widget_title.'</h4>';
+					}
 					
-					//~ scafold - one per row - row
-					if($b2046_scafold_type == 1){
+					// The Loop
+					while ( $the_query->have_posts() ) : $the_query->the_post();
+						//~ scafold check
+						if($b2046_scafold_type == 1){
+							$output .= '<div class="'.$b2046_scafold_row_class.'">';
+							$class .= $b2046_scafolding_column_class;
+						}
+						
+						$output .= '<div id="post-'.get_the_ID().'" class="'.$class.'"'; 
+						$output .= '>';
+						$output .= $this->f2046_front_end_builder($instance, $the_query->post->ID);
+						$output .= '</div>';
+						
+						//~ scafold - one per row - row
+						if($b2046_scafold_type == 1){
+							$output .= '</div>';
+						}
+					endwhile;
+					
+					//~ many per row || one per row
+					if($b2046_scafold_type == 2){
 						$output .= '</div>';
 					}
-				endwhile;
-				
-				//~ many per row || one per row
-				if($b2046_scafold_type == 2){
-					$output .= '</div>';
-				}
-				//~  default widget classes
-				elseif($b2046_scafold_type == 0){
-					$output .= $after_widget;
-				}
-			endif;
-			// Reset Post Data
-			wp_reset_postdata();
+					//~  default widget classes
+					elseif($b2046_scafold_type == 0){
+						$output .= $after_widget;
+					}
+				endif;
+				// Reset Post Data
+				wp_reset_postdata();
+			//~ }
+			
+			//~ serve it out :)
+			echo $output;
 		}
-		
-		//~ serve it out :)
-		echo $output;
 	}
 	//~ END OF WORDPRESS DEFAULT WIDGET GAME
 	//~ HERE STARTS THE HELL ;)
@@ -285,13 +299,11 @@ $EasyClassClone::$EasyQuery = array(
 			//~  
 			//~ check if the array value under given key is defined
 			//~ in the case of checkboxed values, some might be empty, and then it trigers errors, obviously.
-			//~ mydump($val);
-			//~ mydump(count($val['gui']));
-			//~ mydump($val['gui']);
+			sort($val['gui']);
 			if(is_array($val['gui']) && count($val['gui']) > 1){
 				$values = array();
-				foreach($val['gui'] as $k => $v){
-					$values[] = $val['gui'][$k]['value'];
+				foreach($val['gui'] as $key => $v){
+					$values[] = $val['gui'][$key]['value'];
 				}
 			}else{
 				if(isset($val['gui'][0]['value'])){
@@ -302,39 +314,107 @@ $EasyClassClone::$EasyQuery = array(
 			$func = 'EasyControl_'.$val['tmp_title'];
 			//~ process data by that function --- should be declared outside , like in EasyFunctions.php
 			$function_result = $func($default_query, $values);
-			//~ mydump($function_result);
 			//~ echo '-----/\----after function EasyControl_'.$val['tmp_title'].' <br>';
 			$tmp_result = array_merge($tmp_result, $function_result);
 			$i++;
 		 }
-	
+		//~ mydump($output);
 		$output = $tmp_result;
 		return $output;
 	}
-
+	
+	//~ 
+	//~ Dynamicaly create function names which fas to be found "somewhere" and precess the data
+	//~ derivate of outputs
+	//~ but i this case these controls have to run before loop
+	function f2046_output_resistor($default_query, $instance){
+		$output = true;
+		$data_to_process = $this->f2046_matcher($instance, 'resistor');
+		//~ mydump($data_to_process);
+		//~ echo '--------- data<br>----------------<br>';
+		$values = array();
+		$i = 0;
+		foreach($data_to_process as $key => $val){
+			$output = true;
+			//~  
+			//~ check if the array value under given key is defined
+			//~ in the case of checkboxed values, some might be empty, and then it trigers errors, obviously.
+			sort($val['gui']);
+			if(is_array($val['gui']) && count($val['gui']) > 1){
+				$values = array();
+				foreach($val['gui'] as $key => $v){
+					$values[] = $val['gui'][$key]['value'];
+				}
+			}else{
+				if(isset($val['gui'][0]['value'])){
+					$values = ($val['gui'][0]['value']);
+				}
+			}
+			//~ create function
+			$func = 'EasyResistor_'.$val['tmp_title'];
+			//~ process data by that function --- should be declared outside , like in EasyFunctions.php
+			$function_result = $func($default_query, $values);
+			//~ if only just once any of the resistor functions triggers false
+			//~ stop the process and return "false"
+			if($function_result == false){
+				return false;
+				break;
+			}
+			$i++;
+		 }
+		 //~ if all resistors returns "true" meaning the expectations are meet
+		 //~ let them pass
+		 return true;
+	}
 	//~ 
 	//~ Matcher
-	//~ returns updated array made of the user data merged with the default item array
+	//~ returns updated array made out of the user data merged with the default item array
 	//~ 
-	
+	//~  TODO dodelat resistor y
 	function f2046_matcher($instance, $wanted_type){
 		$output = array();
 		//~ merge given data with the defults
 		//~ 
 		//~ load the default item structure
 		$defaults = $this::$EasyItems;
-		//mydump($defaults);
 		//~ remove possible helper: bricks array
 		unset($defaults['b2046_bricks']);
 		//~ mydump($instance['b2046_bricks']);
 		//~ do it for all bricks
 		$i = 0;
-		
-		if($wanted_type == 'view'){
-			//~ echo '---instance: '. $wanted_type;
-			//~ mydump($instance);
-			if(isset($instance['b2046_bricks'])){
-				foreach($instance['b2046_bricks'] as $key => $val) {
+		if($wanted_type == 'general'){
+			unset($instance['b2046_bricks']);
+			//~ mydump('general');
+			//mydump($instance);
+			foreach($instance as $key => $val) {
+				//~ mydump($defaults[$key]['block']);
+				//~ key['type'] has only one value for now.. the resistor, or any
+				//~ resistors are processed in f2046_output_resistor function
+				
+				if($defaults[$key]['block'] == $wanted_type){
+					//~ mydump($defaults[$key]['gui'][0]['value']);
+					//~ mydump($val['gui']['value']);
+					$tmp = $defaults[$key];
+					$tmp['gui'][0]['value'] = $val['gui']['value'];
+					//~ mydump($tmp);
+					$tmp['tmp_title'] = $key;
+					$output[] =  $tmp;
+				}
+				
+				$i++;
+			}
+		}
+		if($wanted_type == 'view' || $wanted_type == 'control' || $wanted_type == 'resistor'){
+			
+			if($wanted_type == 'view'){
+				$distinguisher = 'b2046_bricks';
+			}
+			else{
+				$distinguisher = 'b2046_controls';
+			}
+				
+			if(isset($instance[$distinguisher])){
+				foreach($instance[$distinguisher] as $key => $val) {
 					 //~ do it for all possible settings
 					foreach($val as $each){
 						if(array_key_exists(key($val), $defaults) && $defaults[key($val)]['block'] == $wanted_type){ 
@@ -349,46 +429,6 @@ $EasyClassClone::$EasyQuery = array(
 						}
 					}
 					$i++;
-				}
-			}
-		}elseif($wanted_type == 'general'){
-			unset($instance['b2046_bricks']);
-			//~ mydump('general');
-			//mydump($instance);
-			foreach($instance as $key => $val) {
-				//~ mydump($defaults[$key]['block']);
-				if($defaults[$key]['block'] == $wanted_type){
-					//~ mydump($defaults[$key]['gui'][0]['value']);
-					//~ mydump($val['gui']['value']);
-					$tmp = $defaults[$key];
-					$tmp['gui'][0]['value'] = $val['gui']['value'];
-					//~ mydump($tmp);
-					$tmp['tmp_title'] = $key;
-					$output[] =  $tmp;
-				}
-				$i++;
-			}
-		}
-		//~ control
-		else{
-			if(isset($instance['b2046_controls'])){
-				foreach($instance['b2046_controls'] as $key => $val) {
-					//~ mydump(key($val));
-					 //~ do it for all possible settings
-					foreach($val as $each){
-						if($defaults[$key]['block'] == $wanted_type){
-							//~ mydump($defaults[$key]['gui'][0]['value']);
-							//~ mydump($val['gui']['value']);
-							$tmp = $defaults[$key];
-							//~ mydump($val['gui']);
-							//~ $tmp['gui'][0]['value'] = $val['gui']['value'];
-							$tmp['gui'] = $val['gui'];
-							//~ mydump($tmp);
-							$tmp['tmp_title'] = $key;
-							$output[] =  $tmp;
-						}
-					$i++;
-					}
 				}
 			}
 		}
@@ -431,14 +471,18 @@ $EasyClassClone::$EasyQuery = array(
 			}
 			if ($val['block'] == 'view'){
 				$view_view_items[$key] = $val;
-				//~ mydump($val);
 			}
-			if ($val['block'] == 'control'){
+			//~ pass controls and resistors to the control slot
+			if ($val['block'] == 'control' || $val['block'] == 'resistor'){
 				$control_view_items[$key] = $val;
 			}
 		}
 		// output the inputs to the widget
 		$output .= '<div class="general_bank"><h3>General</h3><ul>';
+		//~ $post_types = get_post_types($args_types,'names'); 
+		//~ foreach ($post_types as $post_type ) {
+		  //~ echo '<p>'. $post_type. '</p>';
+		//~ }	
 			//~ $output .= $this->f2046_inputbuilder($global_view_items, $instance, 'default');
 			$output .= $this->f2046_widget_brick_collector($global_view_items, $instance, 'general');
 		$output .= '</ul></div>
@@ -493,65 +537,7 @@ $EasyClassClone::$EasyQuery = array(
 		// serve it to the input builder
 		//
 		$output = array();
-		//~ CONTROLS
-		if ($what == 'control_user_data' && isset($instance['b2046_controls'])){
-			//~ mydump($instance['b2046_controls']);
-			//~ mydump($instance);
-			//~  DO SOMETHING FOR EVERY USED CONTROL BRICK
-			foreach($instance['b2046_controls'] as $key => $val){
-				// this value will be pushed as the object positions
-				// that matches because the resulted array is naturaly sorted by numbers 0,1,2 etc. 
-				 //~ echo '<br />--- key '.$i.'---<br />';
-				 $tmp_name = $key;
-				
-				//~ If the bricks with the unique ID exists in in defaults (just to make sure no "noncomplete" stuff can pass)
-				$clone_brick = $view[$key];
-				$values = $val['gui'];
-				//~ mydump($clone_brick['gui']);
-				$contr_i = 0;
-				foreach($values as $key => $val){
-					$clone_brick['gui'][$key]['value'] = $val['value'];
-					$contr_i++;
-				}
-				//~ write the item name in to the temporary value
-				$clone_brick['tmp_name'] = $tmp_name;//key($val);
-				//~ write the block position in to the temporary value
-				array_push($output,$clone_brick);
-			}
-			
-			$output = $this->f2046_inputbuilder( $view,$output,'control_user_data');
-			
-			//~ VIEWS BRICKS - THE SLOT
-		}elseif($what == 'view_user_data' && isset($instance['b2046_bricks'])){
-				//~ $i = 0;
-				
-			//~ For each brick (li)
-			foreach($instance['b2046_bricks'] as $key => $val){
-				//echo '-------kiss <br />';
-				$tmp_name = key($val);
-				// this value will be pushed as the object positions
-				// that matches because the resulted array is naturaly sorted by numbers 0,1,2 etc. 
-				//~ widget-builder_2046_main_loop-widget[20][b2046_post_title][gui][0][value]
-				if(array_key_exists(key($val), $view)){
-					//~ for each gui
-					$clone_brick = $view[key($val)];
-					
-					$values =$val[key($val)]['gui'];
-					$ii = 0;
-					foreach($values as $key => $val){
-						$clone_brick['gui'][$key]['value'] = $val['value'];
-						$ii++;
-					}
-					//~ write the item name in to the temporary value
-					$clone_brick['tmp_name'] = $tmp_name;
-					//~ write the block position in to the temporary value
-					array_push($output,$clone_brick);
-				}
-				//~ $i++;
-			}
-			
-			$output = $this->f2046_inputbuilder( $view,$output,'view_user_data');
-		}elseif($what == 'general'){
+		if($what == 'general'){
 			//~ $i = 0;
 			//~ For each brick (li)
 			foreach($view as $key => $val){
@@ -581,42 +567,49 @@ $EasyClassClone::$EasyQuery = array(
 			
 			$output = $this->f2046_inputbuilder( $view,$output,'general');
 		}
-		//~ remove if note necassary !!!!
-		else{
-		//~ combiine data for views (multiple)	
-			if(isset($instance['b2046_bricks'])){
-				//~ $i = 0;
-				
-				//~ For each brick (li)
-				foreach($instance['b2046_bricks'] as $key => $val){
-					//echo '-------kiss <br />';
-					$tmp_name = key($val);
-					// this value will be pushed as the object positions
-					// that matches because the resulted array is naturaly sorted by numbers 0,1,2 etc. 
-					//~ widget-builder_2046_main_loop-widget[20][b2046_post_title][gui][0][value]
-					if(array_key_exists(key($val), $view)){
-						//~ for each gui
-						$clone_brick = $view[key($val)];
-						
-						$values =$val[key($val)]['gui'];
-						$ii = 0;
-						foreach($values as $key => $val){
-							$clone_brick['gui'][$key]['value'] = $val['value'];
-							$ii++;
-						}
-						//~ write the item name in to the temporary value
-						$clone_brick['tmp_name'] = $tmp_name;
-						//~ write the block position in to the temporary value
-						array_push($output,$clone_brick);
-					}
-					//~ $i++;
-				}
+		elseif(($what == 'view_user_data' && isset($instance['b2046_bricks'])) || ($what == 'control_user_data' && isset($instance['b2046_controls']))){
+			
+			if($what == 'view_user_data'){
+				$distinguisher = 'b2046_bricks';
+			}else{
+				$distinguisher = 'b2046_controls';
 			}
-			$output = $this->f2046_inputbuilder( $view,$output,'view_user_data');
+			
+			//~ For each brick (li)
+			foreach($instance[$distinguisher] as $key => $val){
+				//echo '-------kiss <br />';
+				$tmp_name = key($val);
+				// this value will be pushed as the object positions
+				// that matches because the resulted array is naturaly sorted by numbers 0,1,2 etc. 
+				//~ widget-builder_2046_main_loop-widget[20][b2046_post_title][gui][0][value]
+				if(array_key_exists(key($val), $view)){
+					//~ for each gui
+					$clone_brick = $view[key($val)];
+					
+					$values =$val[key($val)]['gui'];
+					$ii = 0;
+					foreach($values as $key => $val){
+						$clone_brick['gui'][$key]['value'] = $val['value'];
+						$ii++;
+					}
+					//~ write the item name in to the temporary value
+					$clone_brick['tmp_name'] = $tmp_name;
+					//~ write the block position in to the temporary value
+					array_push($output,$clone_brick);
+				}
+				//~ $i++;
+			}
+			
+			if($what == 'view_user_data'){
+				$output = $this->f2046_inputbuilder( $view,$output,'view_user_data');
+			}else{
+				$output = $this->f2046_inputbuilder( $view,$output,'control_user_data');
+			}
+			
 		}
-		//mydump($output);
-		
-		return $output;
+		if(!empty($output)){
+			return $output;
+		}
 	}
 	
 	//~ 
@@ -643,6 +636,7 @@ $EasyClassClone::$EasyQuery = array(
 			$bricks = array($instance);
 			$j_name = 'b2046_default';
 		}
+		
 		//~ for each brick
 		$each_brick_i = 0;
 		foreach($bricks as $loop){
@@ -665,8 +659,16 @@ $EasyClassClone::$EasyQuery = array(
 				//~ }else{
 					$li_class = $item_name;
 				//~ }
-				//~ mydump($item);
-				$output .= '<li class="li_'.$li_class.' ui-draggable">';
+				
+				//~ check if the input can be repeatable
+				//~ that user can repeatedly insert it in the slot
+				if(isset($item['repeatable']) && $item['repeatable'] == false){
+					$rel_repeatable = ' rel="non-repeatable"';
+				}else{
+					$rel_repeatable = '';
+				}
+				
+				$output .= '<li class="li_'.$li_class.' ui-draggable" '.$rel_repeatable.'>';
 				if(!empty($item['item_title'])){
 					$output .='<strong>'.$item['item_title'].'</strong> <b class="rem">x</b><br />';
 				}	
@@ -679,7 +681,7 @@ $EasyClassClone::$EasyQuery = array(
 					// user = read the name from the temporary place
 					//
 					
-					if($type == 'view_user_data'){
+					if($type == 'view_user_data' || $type == 'control_user_data'){
 						//~ split the fieldname so we can reconstruct it later on
 						$splited = explode('][',$this->get_field_name($item['tmp_name']));
 						//~  get the value-s
@@ -693,17 +695,6 @@ $EasyClassClone::$EasyQuery = array(
 						$div_id = $item['tmp_name'];
 					//widget-builder_2046_main_loop-widget[7][b2046_bricks][1][b2046_post_title][gui][value]
 					}
-					elseif($type == 'control_user_data'){
-						$splited = explode('][',$this->get_field_name($item["tmp_name"]));
-						$gui_value = $val['value'];
-						if(isset($val['ui_note'])){
-							$ui_note = $val['ui_note'];
-						}
-						$name = $splited[0].']['.$j_name.']['.$item["tmp_name"].']';
-						$div_id = $item_name;
-						
-					}
-					//~  most likely the global view
 					elseif($type == 'control_default' || $type == 'view_default'){
 						$name = $this->get_field_name($item_name);
 						//~ get the value from the instance (defauts)
@@ -732,12 +723,15 @@ $EasyClassClone::$EasyQuery = array(
 					
 					
 					
-					
+					//~ UI BUILDER
 					
 					//~ 
 					//~ simple inputs
 					//~ 
 					//mydump($val);
+					
+					
+					
 					if ($val['ui_type'] == 'input'){
 						if(isset($ui_note)){
 							$placeholder = 'placeholder="'.$ui_note.'"';
@@ -759,7 +753,6 @@ $EasyClassClone::$EasyQuery = array(
 					//~ 
 					//~ select box
 					//~ 
-					// TODO let the objects make multi input element
 					elseif ($val['ui_type'] == 'select_box'){
 						$output .= '<select name="'. $name .'[gui]['.$each_gui_i.'][value]">';
 						if(isset($ui_note)){
@@ -796,7 +789,6 @@ $EasyClassClone::$EasyQuery = array(
 					//~ 
 					//~ hidden
 					//~ 
-
 					if ($val['ui_type'] == 'hidden'){
 						if(isset($ui_note)){
 							$placeholder = 'placeholder="'.$ui_note.'"';
@@ -805,6 +797,24 @@ $EasyClassClone::$EasyQuery = array(
 						}
 						$output .= '<input '.$j_title.' type="hidden" name="'. $name .'[gui]['.$each_gui_i.'][value]" value="'. $gui_value .'"/>';
 						$output .= '<em>'.$placeholder.'</em>';
+					}
+					//~ 
+					//~ radio group
+					//~ 
+					elseif ($val['ui_type'] == 'radio_group'){
+						$output .='<div class="radiogroup">';
+						foreach($val['choices'] as $keyx => $valx){
+							if($keyx == $gui_value ){
+								$selected = ' checked="checked"';
+							}else{
+								$selected = '';
+							}
+							$output .= '<input'.$selected.' type="radio" name="'. $name .'[gui]['.$each_gui_i.'][value]" value="'.$keyx.'" /><label>'.$valx.'</label><br />';
+						}
+						if(isset($ui_note)){
+							$output .='<em>'.$ui_note.'</em>';
+						}
+						$output .= '</div>';
 					}
 					//~ iterate for each gui
 					$each_gui_i++;
@@ -815,6 +825,7 @@ $EasyClassClone::$EasyQuery = array(
 			}
 			
 		}
+
 		return $output;
 	}
 	
@@ -834,7 +845,15 @@ $EasyClassClone::$EasyQuery = array(
 			return $post_ids_string;
 		}
 	}
-	
+	//~  helper  for listing all the 
+	function f2046_get_post_types(){
+		$out = array();
+		$post_types = get_post_types($args_types,'names'); 
+			foreach ($post_types as $post_type ) {
+			  $out[] = $post_type;
+		}
+		return $out;
+	}
 
 } // END of Widget class
 

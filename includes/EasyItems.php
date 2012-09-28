@@ -10,11 +10,11 @@
 // specify the roles
 $levels = array( 
 	'all' => __('Anyone') ,
-	'level_0' => __('Subcriber'),
-	'level_1' => __('Contributor'),
-	'level_4' => __('Author'),
-	'level_7' => __('Editor'),
-	'level_10' => __('Administrator')
+	'subscriber' => __('Subcriber'),
+	'contributor' => __('Contributor'),
+	'author' => __('Author'),
+	'editor' => __('Editor'),
+	'administrator' => __('Administrator')
 	);
 
 // get all public post types
@@ -25,6 +25,9 @@ $args_types=array(
 ); 
 
 //~ get all post types
+//~  this does not get all regostered post types, because it runs before the wordpress init
+//~  post_types are not stored in databese, but are registered during the init
+/*
 $post_types = get_post_types($args_types,'objects'); 
 $post_types_allowed = array();
 $i = 0;
@@ -38,7 +41,7 @@ foreach($post_types as $post_t){
 	$post_types_allowed[$i] = $choices;
 	$i++;
 }
-
+*/
 // object title choices
 $object_title_choices =array(
 	'0' => __('no link'),
@@ -63,7 +66,9 @@ $scafolding_types =array(
 	
 $content_choices = array(
 	'content'=>'content',
-	'excerpt'=>'excerpt'
+	'excerpt'=>'excerpt',
+	'above' => 'above more tag',
+	'below' => 'below more tag',
 );
 
 //~ 
@@ -80,9 +85,11 @@ $show_post_categories = array(
 
 $intermediate_image_sizes = get_intermediate_image_sizes();
 $list_of_image_sizes = array();
+$full_image_width = array('full' => 'full');
 foreach($intermediate_image_sizes as $key){
 	$list_of_image_sizes[$key] = $key;
 }
+$list_of_image_sizes = array_merge($list_of_image_sizes, $full_image_width );
 
 $image_links = array(
 	'nolink' => 'no link',
@@ -116,6 +123,72 @@ $category_controls = array(
 	'category__in' => 'category__in', //(array) - use category id.
 	'category__not_in' => 'category__not_in', // (array) - use category id.
 );
+$conditional_tags_array = array(
+	array(
+		'ui_type' => 'radio_group', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+		'choices' => array(
+			'1' => 'show when',
+			'0' => 'hide when'
+		),	
+		'value' => '1',
+		'esc' => 'stip_tags'
+	),
+	array('ui_type' => 'check_box',
+		'choices' => array('is_home' => 'home'),
+		'value' => '',
+		'esc' => 'stip_tags'
+	),
+	array('ui_type' => 'check_box',
+		'choices' => array('is_front_page' => 'front page'),
+		'value' => '',
+		'esc' => 'stip_tags'
+	),
+	array('ui_type' => 'check_box',
+		'choices' => array('is_single' => 'single'),
+		'value' => '',
+		'esc' => 'stip_tags'
+	),
+	array('ui_type' => 'check_box',
+		'choices' => array('is_page' => 'page'),
+		'value' => '',
+		'esc' => 'stip_tags'
+	),
+	array('ui_type' => 'check_box',
+		'choices' => array('is_sticky' => 'sticky'),
+		'value' => '',
+		'esc' => 'stip_tags'
+	),
+	array('ui_type' => 'check_box',
+		'choices' => array('is_category' => 'category'),
+		'value' => '',
+		'esc' => 'stip_tags'
+	),
+	array('ui_type' => 'check_box',
+		'choices' => array('is_tax' => 'taxonomy archive'),
+		'value' => '',
+		'esc' => 'stip_tags'
+	),
+	array('ui_type' => 'check_box',
+		'choices' => array('is_archive' => 'archive'),
+		'value' => '',
+		'esc' => 'stip_tags'
+	),
+	array('ui_type' => 'check_box',
+		'choices' => array('is_search' => 'search result'),
+		'value' => '',
+		'esc' => 'stip_tags'
+	),
+	array('ui_type' => 'check_box',
+		'choices' => array('is_404' => '404 error'),
+		'value' => '',
+		'esc' => 'stip_tags'
+	),
+	array('ui_type' => 'check_box',
+		'choices' => array('is_attachment' => 'attachment page'),
+		'value' => '',
+		'esc' => 'stip_tags'
+	)
+);
 // ------------------------------------------------------------------- // 
 //                         Build the VIEW array
 // ------------------------------------------------------------------- // 
@@ -123,6 +196,7 @@ $EasyItems = array(
 	// category controls
 	'b2046_category_controls' => array(
 		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
+		'repeatable' => true,
 		'item_title' => __('Category','p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
@@ -142,9 +216,27 @@ $EasyItems = array(
 			)
 		)
 	),
+	
+	// widget title
+	'b2046_title' => array(
+		'position' => 15,
+		'block' => 'general', // 0 = general, 1 = view, 2 = logic 
+		'item_title' => __('Widget admin title','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => __('Admin widget title', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+				'choices' => '',
+				'value' => '',
+				'esc' => 'stip_tags'
+			)
+		),
+		'w_title' => '',  // this extra parametr tells the input builder to put in the element additional id
+	),
 	// scaffolding
 	'b2046_scafold_type' => array(
-		'position' =>1,
+		'position' =>10,
 		'block' => 'general', // 0 = general, 1 = view, 2 = logic 
 		'item_title' => __('Surrounding widget scafold type','p_2046s_easy_widget'),
 		// gui
@@ -158,9 +250,24 @@ $EasyItems = array(
 			)
 		)
 	),
+	'b2046_widget_title' => array(
+		'position' => 5,
+		'block' => 'general', // 0 = general, 1 = view, 2 = logic 
+		'item_title' => __('Widget frontend title','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => __('Rendered before the loop', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+				'choices' => '',
+				'value' => '',
+				'esc' => 'stip_tags'
+			)
+		)
+	),
 	// scaffolding
 	'b2046_scafold_row_class' => array(
-		'position' => 3,
+		'position' => 25,
 		'block' => 'general', // 0 = general, 1 = view, 2 = logic 
 		'item_title' => __('','p_2046s_easy_widget'),
 		// gui
@@ -174,42 +281,9 @@ $EasyItems = array(
 			)
 		)
 	),
-	// scaffolding
-	'b2046_scafolding_column_class' => array(
-		'position' => 4,
-		'block' => 'general', // 0 = general, 1 = view, 2 = logic 
-		'item_title' => __('','p_2046s_easy_widget'),
-		// gui
-		'gui' => array(
-			array(
-				'ui_note' => __('each (column) class', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
-				'choices' => '',
-				'value' => '',
-				'esc' => 'stip_tags'
-			)
-		)
-	),
-	// widget title
-	'b2046_title' => array(
-		'position' => 0,
-		'block' => 'general', // 0 = general, 1 = view, 2 = logic 
-		'item_title' => __('Name','p_2046s_easy_widget'),
-		// gui
-		'gui' => array(
-			array(
-				'ui_note' => __('Admin widget title', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
-				'choices' => '',
-				'value' => '',
-				'esc' => 'stip_tags'
-			)
-		),
-		'w_title' => '',  // this extra parametr tells the input builder to put in the element additional id
-	),
 	// widget note
 	'b2046_note' => array(
-		'position' => 2,
+		'position' => 35,
 		'block' => 'general', // 0 = general, 1 = view, 2 = logic 
 		'item_title' => __('Widget description','p_2046s_easy_widget'),
 		// gui
@@ -223,10 +297,29 @@ $EasyItems = array(
 			)
 		)
 	),
+	// scaffolding
+	'b2046_scafolding_column_class' => array(
+		'position' => 30,
+		'block' => 'general', // 0 = general, 1 = view, 2 = logic 
+		'item_title' => __('','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => __('each (column) class', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+				'choices' => '',
+				'value' => '',
+				'esc' => 'stip_tags'
+			)
+		)
+	),
 	// who can see the vidget on the front end
+	//~  -------------> TODO mix controlls and resistors together ..on final widget build separate them and used as needed
+	//~ 
 	'b2046_general_visibility' => array( 
 		// general
-		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
+		'block' => 'resistor', // 0 = general, 1 = view, 2 = logic 
+		'repeatable' => false,
 		'item_title' => __('Permissions','p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
@@ -239,14 +332,119 @@ $EasyItems = array(
 			)
 		),
 	),
+	'b2046_on_condition' => array( 
+		// general
+		'block' => 'resistor', // 0 = general, 1 = view, 2 = logic 
+		'repeatable' => false,
+		'item_title' => __('On template types: show / hide','p_2046s_easy_widget'),
+		// gui
+		'gui' => $conditional_tags_array
+	),
+	'b2046_on_p_ID' => array( 
+		// general
+		'block' => 'resistor', // 0 = general, 1 = view, 2 = logic 
+		'repeatable' => true,
+		'item_title' => __('On ID: show / hide','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_type' => 'radio_group', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+				'choices' => array(
+					'1' => 'show when',
+					'0' => 'hide when'
+				),	
+				'value' => '1',
+				'esc' => 'stip_tags'
+			),
+			array(
+				'ui_note' => __('IDs. Separed by comma','p_2046s_easy_widget'),
+				'ui_type' => 'input', 
+				'choices' => '',
+				'value' => '',
+				'esc' => 'stip_tags'
+			)
+		)
+	),
 	// post_types
 	'b2046_post_type' => array(
 		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
+		'repeatable' => false,
 		'item_title' => __('Post type','p_2046s_easy_widget'),
 		// gui
-		'gui' => $post_types_allowed
+		'gui' => array(
+			array(
+				'ui_note' => 'post, page, attachment,..',
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => '',
+				'value' => 'post'
+			),
+			//~ array(
+				//~ 'ui_type' => 'radio_group', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				//~ 'esc' => 'stip_tags',
+				//~ 'choices' => array(
+					//~ '1' => 'ON paging',
+					//~ '0' => 'OFF paging'
+				//~ ),
+				//~ 'value' => '1'
+			//~ ),
+			array(
+				'ui_type' => 'radio_group', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => array(
+					'1' => 'affected by page number',
+					'0' => 'no affected'
+				),
+				'value' => '1'
+			)
+		)
 	),
-	
+	// post_types
+	'b2046_taxonomy_parameters' => array(
+		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
+		'repeatable' => true,
+		'item_title' => __('Taxonomy','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => 'only one taxonomy (name)',
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => '',
+				'value' => 'category'
+			),
+			array(
+				'ui_note' => 'terms IDs, sapareted by comma',
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => '',
+				'value' => ''
+			),
+			//~ operator for each term / //~ 'IN', 'NOT IN', 'AND'
+			array(
+				'ui_note' => 'terms operator',
+				'ui_type' => 'radio_group', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'select_box',
+				'choices' => array(
+					'AND' => 'AND (operator)',
+					'IN' => 'IN',
+					'NOT IN' => 'NOT IN'
+				),
+				'value' => 'IN'
+			),
+			//~ relation between multiple taxonomies
+			array(
+				'ui_note' => 'Taxonomy relation. If you use multiple taxonomy bricks, the later relation beats previous ones.',
+				'ui_type' => 'radio_group', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'select_box',
+				'choices' => array(
+					'AND' => 'AND (relation)',
+					'OR' => 'OR'
+				),
+				'value' => 'OR'
+			)
+		)
+	),
 	'b2046_post_title' => array(
 		'block' => 'view', // 0 = general, 1 = view, 2 = logic 
 		'item_title' => __('Title','p_2046s_easy_widget'),
@@ -296,7 +494,8 @@ $EasyItems = array(
 	),
 	'b2046_post_number' => array(
 		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
-		'item_title' => __('Post number','p_2046s_easy_widget'),
+		'repeatable' => false,
+		'item_title' => __('Number','p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
 			array(
@@ -310,7 +509,8 @@ $EasyItems = array(
 	),
 	'b2046_post_offset' => array(
 		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
-		'item_title' => __('Post offset','p_2046s_easy_widget'),
+		'repeatable' => false,
+		'item_title' => __('Offset','p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
 			array(
@@ -324,7 +524,8 @@ $EasyItems = array(
 	),
 	'b2046_post_status' => array(
 		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
-		'item_title' => __('Post status','p_2046s_easy_widget'),
+		'repeatable' => false,
+		'item_title' => __('Status','p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
 			array(
@@ -335,9 +536,44 @@ $EasyItems = array(
 			)
 		)
 	),
-	'b2046_post_categories' => array(
+	'b2046_order' => array(
+		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
+		'repeatable' => false,
+		'item_title' => __('Order','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => array(
+					'ASC' => 'Ascendingly',
+					'DESC' => 'Descendingly'
+				),
+				'value' => 'DESC'
+			),
+			array(
+				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => array(
+					'none' => 'none',
+					'ID' => 'ID',  
+					'title' => 'title', 
+					'date' => 'date',
+					'modified' => 'modified',
+					'rand' => 'rand',
+					'comment_count' => 'comment_count',
+					'menu_order' => 'menu_order',
+					'parent' => 'parent',
+					'meta_value' => 'meta_value',
+					'meta_value_num' => 'meta_value_num'
+				),
+				'value' => 'none'
+			)
+		)
+	),
+	'b2046_post_taxonomies' => array(
 		'block' => 'view', // 0 = general, 1 = view, 2 = logic 
-		'item_title' => __('Post categories','p_2046s_easy_widget'),
+		'item_title' => __('Taxonomies (Categories)','p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
 			array(
@@ -345,6 +581,13 @@ $EasyItems = array(
 				'esc' => 'stip_tags',
 				'choices' => $show_post_categories,
 				'value' => 0
+			),
+			array(
+				'ui_note' => __('taxonomy name', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => '',
+				'value' => 'category'
 			),
 			array(
 				'ui_type' => 'check_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
@@ -525,6 +768,45 @@ $EasyItems = array(
 			)
 		)
 	),
+	'b2046_date' => array(
+		'block' => 'view', // 0 = general, 1 = view, 2 = logic 
+		'item_title' => __('Date','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => array(
+						'published' => 'published',
+						'modifed' => 'modified',
+					),
+				'value' => 'published'
+			),
+			//~ array(
+				//~ 'ui_type' => 'check_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				//~ 'esc' => 'stip_tags',
+				//~ 'choices' => array(
+					//~ 1 => 'link to archive'
+				//~ ),
+				//~ 'value' => '1'
+			//~ ),
+			array(
+				'ui_note' => __('PHP date format', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => '',
+				'value' => 'D. M. Y'
+			),
+			array(
+				'ui_note' => __('class', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => '',
+				'value' => ''
+			)
+		)
+	),
+
 	// 
 	// Bricks is the storage for elements in charge. Both Views & Controls.
 	// The data are stored in:

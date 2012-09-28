@@ -29,6 +29,7 @@ function EasyView_b2046_scafolding($value, $custom_class){ // custom_class will 
  //~ change number of posts to be seen 
 function EasyControl_b2046_post_number($default_query, $values){
 	$output = $default_query;
+	//~ mydump($values);
 		$args = array(
 			'posts_per_page' => $values
 		);
@@ -48,14 +49,58 @@ function EasyControl_b2046_post_offset($default_query, $values){
 	return $output;
 }
 
+function EasyControl_b2046_taxonomy_parameters($default_query, $values){
+	$output = array();
+	//~ mydump($values);
+
+	if(isset($values[3]) && isset($values[2])){
+		$taxonomy = Easy_2046_builder::f2046_id_cleaner_to_array($values[3]);
+		$the_only_taxonomy = $taxonomy[0];
+		$terms = Easy_2046_builder::f2046_id_cleaner_to_array($values[0]);
+		$args =  array(
+			'tax_query' => array(
+				'relation' => $values[1], 
+				 array(
+					'taxonomy' => $the_only_taxonomy,
+					'field' => 'id',
+					'terms' => $terms,
+					'operator' => $values[2]
+				)
+			)
+		);
+		$output = array_merge( $output, $args);
+		return $output;
+	}
+}
+
 //~ Change post type
 function EasyControl_b2046_post_type($default_query, $values){
 	$output = $default_query;
-		$args = array(
-			'post_type' => $values
+	global $post;
+	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+	//~ post type
+	$args = array(
+		'post_type' => $values[1]
+	);
+	//~ paging
+	//~ if ($values[1] == 1){
+		//~ $pages = array(
+			//~ 'nopaging' => false
+			//~ );
+	//~ }else{
+		//~ $pages = array(
+			//~ 'nopaging' => true
+		//~ );
+	//~ }
+	//~ $output = array_merge( $args , $pages);
+	//~ pagination
+	if($values[0] == 1){
+		$paged = array(
+			'paged' => $paged
 		);
-		//~ rewrite the default data with our own
-		$output =  $args;
+		$output = array_merge( $args , $paged);
+	}
+	
 	return $output;
 }
 //~  post status
@@ -84,6 +129,19 @@ function EasyControl_b2046_category_controls($default_query, $values){
 	//~ rewrite the default data with our own
 	$output =  $args;
 	return $output;
+}
+
+//~ 
+//~ Control order
+//~ 
+function EasyControl_b2046_order($default_query, $values){
+	$order = $values[0];
+	$order_by = $values[1];
+	$args = array(
+		'order' => $order,
+		'order_by' => $order_by
+	);
+	return $args;
 }
 
 
@@ -121,55 +179,82 @@ function EasyView_b2046_post_title($post_id, $values){
 function EasyView_b2046_post_content($post_id, $values){
 	$content_type = $values[0];
 	$class = $values[1];
+	$morestring = '<!--more-->';
+	
 	$out = '<div class="entry-content '.$class.'">';
 	if($content_type == 'content'){
 			$out .= apply_filters('the_content',get_the_content());
 	}
-	else{
+	elseif($content_type == 'excerpt'){
 			$out .= get_the_excerpt();
+	}
+	elseif($content_type == 'above'){
+		global $post;
+		$explodemore = explode($morestring, $post->post_content);
+		$out .= $explodemore[0];
+	}
+	elseif($content_type == 'below'){
+		global $post;
+		$explodemore = explode($morestring, $post->post_content);
+		$out .= $explodemore[1];
 	}
 	$out .= '</div>';
 	return $out;
 }
 //~ List post categories
-function EasyView_b2046_post_categories($post_id, $values){
-	$cat_count = $values[1];
-	$class = $values[2];
-	$post_categories = wp_get_post_categories( $post_id );
-	$cats = array();
+function EasyView_b2046_post_taxonomies($post_id, $values){
 	$out = '';
-	if($values[0] == 0){
-		if(!empty($class)){
-			$out .='<div class="'.$class.'">';
+	if(!empty($values[1])){
+		$user_given_taxonomy = Easy_2046_builder::f2046_id_cleaner_to_array($values[1]);
+		$taxonomy = $user_given_taxonomy[0];
+		$cat_count = $values[2];
+		if(!empty($values[3])){
+			$class = $values[3];
+		}else{
+			$class = '';
 		}
-		foreach($post_categories as $c){
-			$cat = get_category( $c );
-			if($cat_count == 1){
-				$count = ' ('.$cat->count.')';
+		//~ Easy_2046_builder::f2046_id_cleaner_to_array($values[1]);
+		//~ $post_categories = wp_get_post_categories( $post_id );
+		$terms = wp_get_post_terms( $post_id, $taxonomy, array("fields" => "all") );
+		//~  if the user want to see the result as links
+		if($values[0] == 0){
+			if(!empty($class)){
+				$out .='<div class="'.$class.'">';
 			}
-			$cat_link = get_category_link($c);
-			$cat_name = $cat->name;
-			$out .= '<a href="'.$cat_link.'">'.$cat->name.'</a>'.$count;
-			if (end($post_categories) != $c){
-				$out .= ', ';
+			foreach($terms as $c){
+				$tax = get_term( $c, $taxonomy );//get_category( $c );
+				if($cat_count == 1){
+					$count = ' ('.$tax->count.')';
+				}else{
+					$count= '';
 				}
-		}
-		if(!empty($class)){
-			$out .='</div>';
-		}
-	}else{
-		$out .= '<ul class="'.$class.'">';
-		foreach($post_categories as $c){
-			$cat = get_category( $c );
-			if($cat_count == 1){
-				$count = ' ('.$cat->count.')';
+				$tax_link = get_term_link( $c, $taxonomy );//get_category_link($c);
+				$out .= '<a href="'.$tax_link.'">'.$tax->name.'</a>'.$count;
+				if (end($terms) != $c){
+					$out .= ', ';
+					}
 			}
-			
-			$cat_link = get_category_link($c);
-			$out .= '<li class="'.$cat->category_nicename.'"><a href="'.$cat_link.'">'.$cat->name.'</a>'.$count.'</li>';
+			if(!empty($class)){
+				$out .='</div>';
+			}
 		}
-		$out .='</ul>';
+		//~  if the user want to see the result as list
+		else{
+			$out .= '<ul class="'.$class.'">';
+			foreach($terms as $c){
+				$tax = get_term( $c, $taxonomy );
+				if($cat_count == 1){
+					$count = ' ('.$tax->count.')';
+				}else{
+					$count= '';
+				}
+				
+				$tax_link = get_term_link( $c, $taxonomy );
+				$out .= '<li class="'.$tax->slug.'"><a href="'.$tax_link.'">'.$tax->name.'</a>'.$count.'</li>';
+			}
+			$out .='</ul>';
 		}
+	}
 	return $out;
 }
 
@@ -329,6 +414,146 @@ function EasyView_b2046_comments_template($post_id, $values){
 
 function EasyControl_b2046_general_visibility($post_id, $values){
 	$out = array();
-		$out = $values;
+		$out[] = $values;
 	return $out;
 }
+
+//~ 
+//~ Get date of the "post"
+//~ 
+function EasyView_b2046_date($post_id, $values){
+	$out = '';
+	$type = $values[0];
+	//~ $link = $values[0];
+	$date_format = $values[1];
+	$class = $values[2];
+	
+	//~ show the published date
+	if($type == 'published'){
+		if(!empty($date_format)){
+			$the_date = get_the_date($date_format);
+		}else{
+			$the_date = get_the_date('d. M. Y.');
+		}
+	}
+	//~ show modified date
+	else{
+		if(!empty($date_format)){
+			$the_date = get_the_modified_date($date_format);
+		}else{
+			$the_date = get_the_modified_date('d. M. Y.');
+		}
+	}
+	$out .= '<div class="'.$class.'">';
+		$out .= $the_date;
+	$out .= '</div>';
+	return $out;
+	
+}
+
+//~ 
+//~ Global permission resistor 
+//~ 
+function EasyResistor_b2046_general_visibility($default_query, $values){
+	global $current_user;
+	if (isset($current_user->roles[0])){
+		$user_level =  $current_user->roles[0];
+	}else{
+		$user_level = '';
+	}
+	
+	if($values == 'all' || empty($values) ){
+		echo('true');
+		return true;
+		
+	}elseif(!empty($user_level) && $user_level >= $values ){
+		echo('true');
+		return true;
+	}else{
+		echo('false');
+		return false;
+	}
+}
+
+//~ 
+//~ Hide on view type
+//~ 
+function EasyResistor_b2046_on_condition($default_query, $values){
+	global $wp_query;
+	$output = true;
+	//~  do not show on conditions
+	if($values[0] == 0 && isset($values[1])){
+		//~ $i = 1;
+		//~ check if the values against the global query
+		unset($values[0]);
+		foreach($values as $val){
+			if($wp_query->$val == 1){
+				$output = false;
+				//~ echo $output.' (' .$i.')<br>';
+				break;
+				
+			}else{
+				$output = true;
+				//~ echo $output .' (' .$i.')<br>';
+			}
+			//~ $i++;
+		}
+	}
+	//~ show on conditions
+	elseif($values[0] == 1 && isset($values[1])){
+		unset($values[0]);
+		foreach($values as $val){
+			if($wp_query->$val == 1){
+				$output = true;
+				//~ echo $output.' (' .$i.')<br>';
+				
+			}else{
+				$output = false;
+				//~ echo $output .' (' .$i.')<br>';
+				break;
+			}
+			//~ $i++;
+		}
+	}
+	return $output;
+}
+
+//~ 
+//~ Show on post, page, what ever id
+//~ 
+function EasyResistor_b2046_on_p_ID($default_query, $values){
+	if($values[0] == 1){
+		$a = true; 
+		$b = false;
+	}else{
+		$a = false; 
+		$b = true;
+	}
+
+	if(!empty($values[1])){
+		global $wp_query;
+		$output = true;
+		$pids = Easy_2046_builder::f2046_id_cleaner_to_array($values[1]);
+		$object_id = '';
+		if(isset($wp_query->query_vars['p'])){
+			$object_id = $wp_query->query_vars['p'];
+		}
+		elseif(isset($wp_query->query_vars['page_id'])){
+			$object_id = $wp_query->query_vars['page_id'];
+		}
+		
+		foreach($pids as $pid){
+			if($object_id == $pid || $object_id == $pid ){
+				$output = $a;
+			}else{
+				$output = $b;
+			}
+		}
+		
+	}else{
+		$output = true;
+	}
+	
+	return $output;
+}
+
