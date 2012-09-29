@@ -356,7 +356,7 @@ function EasyView_b2046_textfield($post_id, $values){
 //~ 
 //~ Debug
 //~ 
-function EasyControl_b2046_view_debug($tmp_query, $values){
+function EasyControl_b2046_query_debug($tmp_query, $values){
 	echo '<pre><b>DEBUG:</b><br />';
 	var_dump( $tmp_query);
 	echo '</pre>';
@@ -364,6 +364,24 @@ function EasyControl_b2046_view_debug($tmp_query, $values){
 	return $out;
 }
 
+//~ 
+//~ link to archive
+//~ 
+function EasyView_b2046_link_to_archive($tmp_query, $values){
+	$out = '';
+	$type = $values[0];
+	$base_name = $values[1];
+	$sec_name = $values[2];
+	$text = $values[3];
+	$class = $values[4];
+	if($type == 'taxonomy' && !empty($base_name) && !empty($sec_name)){
+		$out .= '<div class="'.$class.'"><a href="'.get_term_link( $base_name, $sec_name ).'">'.$text.'</a></div>';
+	}elseif($type =='post_type'){
+		$out .= '<div class="'.$class.'"><a href="'.get_post_type_archive_link($base_name).'">'.$text.'</a></div>';
+	}
+	
+	return $out;
+}
 
 //~ 
 //~ Shortcode 

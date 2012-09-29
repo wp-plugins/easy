@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.4.1
-Stable tag: 0.6.1
+Stable tag: 0.6.2
 
 Easy, but complex GUI website builder.
 
@@ -69,9 +69,15 @@ Allways back up your widgets, do not let the sky fall. Use the <a href="http://w
 
 == Change log ==
 
+= 0.6.2 =
+
+ * NEW - VIEW brick - link to archive (taxonomy, post_type (if is allowed))
+ * FIX - jQuery droppable did not accept larger bricks.
+ * FIX - I did not realized how ugly it looks under the Firefox ;/ It's bit polished now :) {Chrome is perfect.. Don't know about the ancient pseudo browser Explorer though.. will check it later.}
+ 
 = 0.6.1 = 
  
- * NEW - Controler: show ID or IDS only
+ * NEW - Controler: show post/page based on ID or IDS only
  * NEW - Controler: Debug a flexible debug feature (Though it is in the control slot, it doesn't change anything it just outputs the debug.).
  * FIX - The post type has been broken, it doesn't reflect the user "post type" value, sorry for that.
 

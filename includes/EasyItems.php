@@ -415,7 +415,7 @@ $EasyItems = array(
 			)
 		)
 	),
-	// post_types
+	
 	'b2046_taxonomy_parameters' => array(
 		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
 		'repeatable' => true,
@@ -440,7 +440,7 @@ $EasyItems = array(
 			array(
 				'ui_note' => 'terms operator',
 				'ui_type' => 'radio_group', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
-				'esc' => 'select_box',
+				'esc' => '',
 				'choices' => array(
 					'AND' => 'AND (operator)',
 					'IN' => 'IN',
@@ -452,7 +452,7 @@ $EasyItems = array(
 			array(
 				'ui_note' => 'Taxonomy relation. If you use multiple taxonomy bricks, the later relation beats previous ones.',
 				'ui_type' => 'radio_group', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
-				'esc' => 'select_box',
+				'esc' => '',
 				'choices' => array(
 					'AND' => 'AND (relation)',
 					'OR' => 'OR'
@@ -461,6 +461,54 @@ $EasyItems = array(
 			)
 		)
 	),
+	
+	
+	'b2046_link_to_archive' => array(
+		'block' => 'view', // 0 = general, 1 = view, 2 = logic 
+		'repeatable' => true,
+		'item_title' => __('Link to archive','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_type' => 'select_box', 
+				'esc' => 'stip_tags',
+				'choices' => array(
+					'taxonomy' => 'taxonomy',
+					'post_type' => 'post_type',
+				),
+				'value' => 'taxonomy'
+			),
+			array(
+				'ui_note' => 'Taxonomy or Post type name',
+				'ui_type' => 'input', 
+				'esc' => 'stip_tags',
+				'choices' => '',
+				'value' => 'category'
+			),
+			array(
+				'ui_note' => 'term ID (in case of Taxonomy)',
+				'ui_type' => 'input', 
+				'esc' => '',
+				'choices' => '',
+				'value' => ''
+			),
+			array(
+				'ui_note' => 'Link text',
+				'ui_type' => 'input', 
+				'esc' => '',
+				'choices' => '',
+				'value' => 'Link to archive ..'
+			),
+			array(
+				'ui_note' => __('custom class', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', 
+				'esc' => 'stip_tags',
+				'choices' => '',
+				'value' => ''
+			)
+		)
+	),
+	
 	'b2046_post_title' => array(
 		'block' => 'view', // 0 = general, 1 = view, 2 = logic 
 		'item_title' => __('Title','p_2046s_easy_widget'),
@@ -735,7 +783,7 @@ $EasyItems = array(
 		),
 		
 	),
-	'b2046_view_debug' => array(
+	'b2046_query_debug' => array(
 		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
 		'item_title' => __('Debug Controls','p_2046s_easy_widget'),
 		// gui

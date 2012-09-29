@@ -75,18 +75,22 @@ jQuery(document).ready(function($){
 		$( ".view_bank li" ).draggable({
 			appendTo: "body",
 			helper: "clone",
-			opacity: 0.7
+			opacity: 0.7,
 		});
 		$( ".control_bank li" ).draggable({
 			appendTo: "body",
 			helper: "clone",
-			opacity: 0.7
+			opacity: 0.7,
 		});
+		//~ needed fix for droppable not able to handle large objects over smaller slots
+		//~  getter
+		var tolerance = $( "#view_container ol,#control_container ol" ).droppable( "option", "tolerance" );
 		// append new item in the list - after it's draged in the div
 		$( "#view_container ol" ).droppable({
 			activeClass: "ui-state-default",
 			hoverClass: "ui-state-hover",
 			accept: ".view_bank li:not(.ui-sortable-helper)",
+			tolerance: "touch",
 			drop: function( event, ui ) {  
 				// define the actual clone
 				var clone = $(ui.draggable).clone();
@@ -106,7 +110,7 @@ jQuery(document).ready(function($){
 				// gets added unintentionally by droppable interacting with sortable
 				// using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
 				$( this ).removeClass( "ui-state-default" );
-				console.log('sort');
+				//~ console.log('sort');
 				
 			},
 			//~ start: function(event, ui) {
@@ -129,11 +133,13 @@ jQuery(document).ready(function($){
 		});
 		
 		//~  For CONTROLS
+
 		// append new item in the list - after it's draged in the div
 		$( "#control_container ol" ).droppable({
 			activeClass: "ui-state-default",
 			hoverClass: "ui-state-hover",
 			accept: ".control_bank li:not(.ui-sortable-helper)",
+			tolerance: "touch",
 			drop: function( event, ui ) {
 				$( this ).find( ".placeholder" ).remove();
 				// define the actual clone

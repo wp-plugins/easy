@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/2046s-widget-loops/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.6.1
+ * Version: 0.6.2
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -293,7 +293,7 @@ $EasyClassClone::$EasyQuery = array(
 		$output = $data_to_process;
 		$tmp_result = $default_query;
 		//~ mydump($data_to_process);
-		//~ echo '--------- data<br>----------------<br>';
+		//~ echo '--------- data<br />----------------<br />';
 		$values = array();
 		$i = 0;
 		foreach($data_to_process as $key => $val){
@@ -315,7 +315,7 @@ $EasyClassClone::$EasyQuery = array(
 			$func = 'EasyControl_'.$val['tmp_title'];
 			//~ process data by that function --- should be declared outside , like in EasyFunctions.php
 			$function_result = $func($tmp_result, $values);
-			//~ echo '-----/\----after function EasyControl_'.$val['tmp_title'].' <br>';
+			//~ echo '-----/\----after function EasyControl_'.$val['tmp_title'].' <br />';
 			$tmp_result = array_merge($tmp_result, $function_result);
 			$i++;
 		 }
@@ -332,7 +332,7 @@ $EasyClassClone::$EasyQuery = array(
 		$output = true;
 		$data_to_process = $this->f2046_matcher($instance, 'resistor');
 		//~ mydump($data_to_process);
-		//~ echo '--------- data<br>----------------<br>';
+		//~ echo '--------- data<br />----------------<br />';
 		$values = array();
 		$i = 0;
 		foreach($data_to_process as $key => $val){
@@ -739,7 +739,7 @@ $EasyClassClone::$EasyQuery = array(
 						}else{
 							$placeholder = '';
 						}
-						$output .= '<input '.$j_title.' '.$placeholder.' type="text" name="'. $name .'[gui]['.$each_gui_i.'][value]" value="'. $gui_value .'"/>';
+						$output .= '<input '.$j_title.' '.$placeholder.' type="text" name="'. $name .'[gui]['.$each_gui_i.'][value]" value="'. $gui_value .'">';
 					}
 
 					// textarea
@@ -822,6 +822,7 @@ $EasyClassClone::$EasyQuery = array(
 				$i++;
 				unset($ui_note);
 				}
+				$output .= '</li>';
 			$each_brick_i++;
 			}
 			
