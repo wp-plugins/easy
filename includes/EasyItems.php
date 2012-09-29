@@ -400,6 +400,22 @@ $EasyItems = array(
 		)
 	),
 	// post_types
+	'b2046_show_post_by_id' => array(
+		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
+		'repeatable' => false,
+		'item_title' => __('Show only (by ID)','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => __('post / page / custom IDs (separate by coma)', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => '',
+				'value' => ''
+			)
+		)
+	),
+	// post_types
 	'b2046_taxonomy_parameters' => array(
 		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
 		'repeatable' => true,
@@ -715,6 +731,21 @@ $EasyItems = array(
 				'esc' => 'stip_tags',
 				'choices' => '',
 				'value' => ''
+			)
+		),
+		
+	),
+	'b2046_view_debug' => array(
+		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
+		'item_title' => __('Debug Controls','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => __('Debug will output the Query made by control bricks ABOVE this debug brick!</br></br>See the out put on frontend.', 'p_2046s_easy_widget'),
+				'ui_type' => 'hidden', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+				'choices' => '',
+				'value' => 1,
+				'esc' => 'stip_tags'
 			)
 		),
 		

@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.4.1
-Stable tag: 0.6
+Stable tag: 0.6.1
 
 Easy, but complex GUI website builder.
 
@@ -68,6 +68,12 @@ Allways back up your widgets, do not let the sky fall. Use the <a href="http://w
 1. Screenshot of the version 0.5
 
 == Change log ==
+
+= 0.6.1 = 
+ 
+ * NEW - Controler: show ID or IDS only
+ * NEW - Controler: Debug a flexible debug feature (Though it is in the control slot, it doesn't change anything.).
+ * FIX - The post type has been broken, it doesn't reflect the user "post type" value, sorry for that.
 
 = 0.6 =
 

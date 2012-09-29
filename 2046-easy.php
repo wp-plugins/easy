@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/2046s-widget-loops/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.6
+ * Version: 0.6.1
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -288,7 +288,8 @@ $EasyClassClone::$EasyQuery = array(
 	//~ 
 	function f2046_output_control($default_query, $instance){
 		$output = array();
-		$data_to_process = $this->f2046_matcher($instance, 'control');
+		$data_to_process = Easy_2046_builder::f2046_matcher($instance, 'control');
+		//~ mydump($data_to_process);
 		$output = $data_to_process;
 		$tmp_result = $default_query;
 		//~ mydump($data_to_process);
@@ -313,7 +314,7 @@ $EasyClassClone::$EasyQuery = array(
 			//~ create function
 			$func = 'EasyControl_'.$val['tmp_title'];
 			//~ process data by that function --- should be declared outside , like in EasyFunctions.php
-			$function_result = $func($default_query, $values);
+			$function_result = $func($tmp_result, $values);
 			//~ echo '-----/\----after function EasyControl_'.$val['tmp_title'].' <br>';
 			$tmp_result = array_merge($tmp_result, $function_result);
 			$i++;
@@ -376,7 +377,7 @@ $EasyClassClone::$EasyQuery = array(
 		//~ merge given data with the defults
 		//~ 
 		//~ load the default item structure
-		$defaults = $this::$EasyItems;
+		$defaults = Easy_2046_builder::$EasyItems;
 		//~ remove possible helper: bricks array
 		unset($defaults['b2046_bricks']);
 		//~ mydump($instance['b2046_bricks']);
@@ -791,7 +792,7 @@ $EasyClassClone::$EasyQuery = array(
 					//~ 
 					if ($val['ui_type'] == 'hidden'){
 						if(isset($ui_note)){
-							$placeholder = 'placeholder="'.$ui_note.'"';
+							$placeholder = $ui_note;
 						}else{
 							$placeholder = '';
 						}
