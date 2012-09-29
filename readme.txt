@@ -37,8 +37,8 @@ As usual. If you don't know how, check out the <a href="http://codex.wordpress.o
  * Core - <b>DONE</b>
  * Multi selector for each item - <b>DONE</b>
  * Multiple controls of the same type - <b>DONE</b>
- * Finish the input builder - IN PROGRESS
- * Create all view items for.. taxonomies, categories, author, meta values, etc. - IN PROGRESS
+ * Finish the input builder - NEARLY COMPLETE
+ * Create all view items for.. taxonomies, categories, author, meta values, etc. - NEARLY COMPLETE
  * Create items covering all native Wordpress WP_Query possibilities. - IN PROGRESS
  * NEW Extra_views bricks (subviews) - the output can be placed before or after the main query loop - IN CONSIDERATION
  * Controllers weight - ..in case when one controller logic is meet and other not...possibility to set which ones beats the other - IN CONSIDERATION
@@ -50,8 +50,9 @@ As usual. If you don't know how, check out the <a href="http://codex.wordpress.o
 
 = Why I cannot use more then one instance of control brick of the same type? =
 
-Yep, you cannot, at least for now.
-It make sense in some cases, and make no sense in others.. (in case of IDs for categories you can still use minus sings... like 1, 2, -6, 7..)
+Yep, you can, but only for some control bricks.
+It make sense in some cases, and make no sense in others. 
+For example you can add multiple category controler in order to be more precise on filtering the result, But you cannot add more then one Post type controller. Why should you, when you can set up multiple post types separating their names by coma :)
 
 = Why did you make such a thing for free? =
 
