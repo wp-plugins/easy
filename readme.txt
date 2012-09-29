@@ -15,12 +15,11 @@ Easy, but complex GUI website builder.
 "Easy" is a widget based Drag&Drop content builder.
 Making website in Wordpress has never been easier. You can literally drop any part of the website anywhere.
 
-= "Easy" offers =
+= Easy description =
 * VIEW slot where you decide what you want to see from the post or any of your custom content type the way you like - title, content, category, your custom meta, Edit link... Each bricks can be wrapped in your own class and has many nice settings.
 * CONTROL slot lets you restrict the VIEW content to be shown on certain template type, or on post/page IDs or any custom post type ID and much much more.
 * GENERAL slot lets you entitle the widget, make admin note, and select what kind of scafold (div structure) you like etc.
 
-= Still not convinced =
 "Easy" is done in extensible way. So that anybody can plug in their own VIEW or CONTROL brick with its own logic. Make an CONTROL brick is matter of minutes. Make VIEW bricks is even faster.
 The Documentation will be ready soon.
 
