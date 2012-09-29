@@ -16,11 +16,11 @@ Easy, but complex GUI website builder.
 Making website in Wordpress has never been easier. You can literally drop any part of the website anywhere.
 
 = Easy description =
-* VIEW slot where you decide what you want to see from the post or any of your custom content type the way you like - title, content, category, your custom meta, Edit link... Each bricks can be wrapped in your own class and has many nice settings.
-* CONTROL slot lets you restrict the VIEW content to be shown on certain template type, or on post/page IDs or any custom post type ID and much much more.
-* GENERAL slot lets you entitle the widget, make admin note, and select what kind of scafold (div structure) you like etc.
+* <b>VIEW</b> slot where you decide what you want to see from the post or any of your custom content type the way you like - title, content, category, your custom meta, Edit link... Each bricks can be wrapped in your own class and has many nice settings.
+* <b>CONTROL</b> slot lets you restrict the VIEW content to be shown on certain template type, or on post/page IDs or any custom post type ID and much much more.
+* <b>GENERAL</b> slot lets you entitle the widget, make admin note, and select what kind of scafold (div structure) you like etc.
 
-"Easy" is done in extensible way. So that anybody can plug in their own VIEW or CONTROL brick with its own logic. Make an CONTROL brick is matter of minutes. Make VIEW bricks is even faster.
+"Easy" is done in extensible way. So that anybody can plug in their own VIEW or CONTROL brick with its own logic. Make a CONTROL brick is matter of minutes. Make VIEW bricks is even faster.
 The Documentation will be ready soon.
 
 This widget is a new much better version then its ancestor <a href="http://wordpress.org/extend/plugins/2046s-widget-loops/">2046's loop widget</a> which serves as a the testing platform, before the real thing comes.
@@ -72,7 +72,7 @@ Allways back up your widgets, do not let the sky fall. Use the <a href="http://w
 = 0.6.1 = 
  
  * NEW - Controler: show ID or IDS only
- * NEW - Controler: Debug a flexible debug feature (Though it is in the control slot, it doesn't change anything.).
+ * NEW - Controler: Debug a flexible debug feature (Though it is in the control slot, it doesn't change anything it just outputs the debug.).
  * FIX - The post type has been broken, it doesn't reflect the user "post type" value, sorry for that.
 
 = 0.6 =
