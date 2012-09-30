@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.4.1
-Stable tag: 0.6.2
+Stable tag: 0.6.3
 
 Easy, but complex GUI website builder.
 
@@ -69,6 +69,10 @@ Allways back up your widgets, do not let the sky fall. Use the <a href="http://w
 
 == Change log ==
 
+= 0.6.2 =
+
+ * FIX - no "big" changes for today. I have fixed the UI CSS. The widget looks good .) on all major browsers. Chrome (v.21), Firefox (v.15+) and also the Explorer (v 8+)
+  
 = 0.6.2 =
 
  * NEW - VIEW brick - link to archive (taxonomy, post_type (if is allowed))
