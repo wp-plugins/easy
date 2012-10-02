@@ -5,14 +5,15 @@ Plugin URI: http://wordpress.org/extend/easy
 Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
-Tested up to: 3.4.1
-Stable tag: 0.6.3
+Tested up to: 3.4.2
+Stable tag: 0.6.4
 
 Easy, but complex GUI website builder.
 
 == Description ==
 
 "Easy" is a widget based Drag&Drop content builder.
+
 Making website in Wordpress has never been easier. You can literally drop any part of the website anywhere.
 
 = Easy description =
@@ -48,11 +49,10 @@ As usual. If you don't know how, check out the <a href="http://codex.wordpress.o
  * Create an well documented example extension in form of WP plugin.
  * Listen to you guys.
 
-= Why I cannot use more then one instance of control brick of the same type? =
+= Why I cannot use more then one instance of some control bricks? =
 
 Yep, you can, but only for some control bricks.
 It make sense in some cases, and make no sense in others. 
-For example you can add multiple category controler in order to be more precise on filtering the result, But you cannot add more then one Post type controller. Why should you, when you can set up multiple post types separating their names by coma :)
 
 = Why did you make such a thing for free? =
 
@@ -60,6 +60,8 @@ This is my reward to the WP community
 
 
 == Upgrade Notice ==
+
+Please if you encounter any misbehavior, let my know on the forum. I'll be happy to fix it!
 
 Allways back up your widgets, do not let the sky fall. Use the <a href="http://wordpress.org/extend/plugins/widget-saver/">Widget saver</a> plugin.
 
@@ -69,7 +71,11 @@ Allways back up your widgets, do not let the sky fall. Use the <a href="http://w
 
 == Change log ==
 
-= 0.6.2 =
+= 0.6.4 =
+ * NEW - CONTROL - show pages based on hierarchy level (like: child pages of the parent page by ID, child pages of current page etc.)
+ * FIX - resorting the settings aray was not a good idea - removed and so the CONTROL taxonomy has been rewriten a bit
+ 
+= 0.6.3 =
 
  * FIX - no "big" changes for today. I have fixed the UI CSS. The widget looks good .) on all major browsers. Chrome (v.21), Firefox (v.15+) and also the Explorer (v 8+)
   

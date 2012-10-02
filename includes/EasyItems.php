@@ -798,6 +798,40 @@ $EasyItems = array(
 		),
 		
 	),
+	//~ hyerarchical control
+	'b2046_hierarchy_based' => array(
+		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
+		'item_title' => __('Hierarchy based','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+				'choices' => array(
+						'0' => 'Pages from the same level as current page',
+						'1' => 'Pages from the same level as given ID',
+						'2' => 'Child pages of current page',
+						'3' => 'Child pages of given ID'
+					),
+				'value' => 0,
+				'esc' => 'stip_tags'
+			),
+			array(
+				'ui_note' => __('given ID, only one', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+				'choices' => '',
+				'value' => '',
+				'esc' => 'stip_tags'
+			),
+			array(
+				'ui_note' => __('(in case of: ..from same level)', 'p_2046s_easy_widget'),
+				'ui_type' => 'check_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+				'choices' => array( 1 => 'Exclude current'),
+				'value' => '',
+				'esc' => 'stip_tags'
+			)
+		),
+		
+	),
 	'b2046_shortcode' => array(
 		'block' => 'view', // 0 = general, 1 = view, 2 = logic 
 		'item_title' => __('Shortcode','p_2046s_easy_widget'),

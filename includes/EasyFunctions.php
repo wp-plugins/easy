@@ -52,14 +52,17 @@ function EasyControl_b2046_post_offset($tmp_query, $values){
 function EasyControl_b2046_taxonomy_parameters($tmp_query, $values){
 	$output = array();
 	//~ mydump($values);
-
-	if(isset($values[3]) && isset($values[2])){
-		$taxonomy = Easy_2046_builder::f2046_id_cleaner_to_array($values[3]);
+	//~ 0 - taxonomy
+	//~ 1 - terms
+	//~ 2 - term operator
+	//~ 3 - taxonomy relation
+	if(!empty($values[0]) && !empty($values[1])){
+		$taxonomy = Easy_2046_builder::f2046_id_cleaner_to_array($values[0]);
 		$the_only_taxonomy = $taxonomy[0];
-		$terms = Easy_2046_builder::f2046_id_cleaner_to_array($values[0]);
+		$terms = Easy_2046_builder::f2046_id_cleaner_to_array($values[1]);
 		$args =  array(
 			'tax_query' => array(
-				'relation' => $values[1], 
+				'relation' => $values[3], 
 				 array(
 					'taxonomy' => $the_only_taxonomy,
 					'field' => 'id',
@@ -69,8 +72,8 @@ function EasyControl_b2046_taxonomy_parameters($tmp_query, $values){
 			)
 		);
 		$output = array_merge( $output, $args);
-		return $output;
 	}
+	return $output;
 }
 
 //~ Change post type
@@ -81,11 +84,11 @@ function EasyControl_b2046_post_type($tmp_query, $values){
 	//~ post type
 
 	$args = array(
-		'post_type' => $values[1]
+		'post_type' => $values[0]
 	);
 	$output = array_merge( $output, $args);
 
-	if($values[0] == 1){
+	if($values[1] == 1){
 		$paged = array(
 			'paged' => $paged
 		);
@@ -582,4 +585,72 @@ function EasyResistor_b2046_on_p_ID($tmp_query, $values){
 	
 	return $output;
 }
+
+//~ 
+//~ restrict based on hierarchy
+//~ 
+
+function EasyControl_b2046_hierarchy_based($tmp_query, $values){
+	//~ '0' => 'Pages from the same level as current page',
+	//~ '1' => 'Pages from the same level as given ID',
+	//~ '2' => 'Child pages of current page',
+	//~ '3' => 'Child pages of given ID'
+	$output = array();
+	$args = array();
+	$choice = $values[0];
+	$page_ids = Easy_2046_builder::f2046_id_cleaner_to_array($values[1]);
+	if(!empty($values[2])){
+		$xclude = $values[2];
+	}else{
+		$xclude = '';
+	}
+	$args_parent = array();
+	global $post;
+	
+	
+	//~ '0' => 'Pages from the same level as current page',
+	if($choice == 0){
+		if (!empty($post->post_parent)){
+			$output['post_parent'] = $post->post_parent;
+			if($xclude == '1'){
+				$output['post__not_in'] = array($post->ID); 
+			}
+		}else{
+			//~  if there are no parent, we are in the top level and so will return only top level pages with zero parent
+			$output['post_parent'] = '0';
+			if($xclude == '1'){
+				$output['post__not_in'] = array($post->ID);
+			}
+		}
+		//~ force the post type to be the same as the current page, or the given page ID
+		$output['post_type'] = $post->post_type;
+	//~ '2' => 'Child pages of current page',
+	}elseif($choice == 2){
+		$output['post_parent'] = $post->ID;
+		$output['post_type'] = $post->post_type;
+	}
+	//~ '1' => 'Pages from the same level as given ID',
+	elseif($choice == 1){
+		if (!empty(get_post($page_ids[0])->post_parent)){
+			$output['post_parent'] = get_post($page_ids[0])->post_parent;
+		}else{
+			$output['post_parent'] = '0';
+		}
+		$output['post_type'] = get_post_type($page_ids[0]);
+		if($xclude == 1){
+			$output['post__not_in'] = array($page_ids[0]); 
+		}
+	}
+	//~ '3' => 'Child pages of given ID'
+	elseif($choice == 3){
+		$output['post_parent'] = $page_ids[0];
+		$output['post_type'] = get_post_type($page_ids[0]);
+	}
+
+	return $output;
+}
+
+
+
+
 

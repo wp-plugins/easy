@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/2046s-widget-loops/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.6.3
+ * Version: 0.6.4
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -300,7 +300,7 @@ $EasyClassClone::$EasyQuery = array(
 			//~  
 			//~ check if the array value under given key is defined
 			//~ in the case of checkboxed values, some might be empty, and then it trigers errors, obviously.
-			sort($val['gui']);
+			//~ sort($val['gui']); // seams like that this was bogus.. it actually resorts some thing inproperly.. come controls might be wrong now!
 			if(is_array($val['gui']) && count($val['gui']) > 1){
 				$values = array();
 				foreach($val['gui'] as $key => $v){
@@ -371,7 +371,6 @@ $EasyClassClone::$EasyQuery = array(
 	//~ Matcher
 	//~ returns updated array made out of the user data merged with the default item array
 	//~ 
-	//~  TODO dodelat resistor y
 	function f2046_matcher($instance, $wanted_type){
 		$output = array();
 		//~ merge given data with the defults
