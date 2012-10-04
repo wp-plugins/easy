@@ -73,7 +73,7 @@ Allways back up your widgets, do not let the sky fall. Use the <a href="http://w
 
 = 0.6.5 =
 
- * FIX - I've been mixing an instance calls with static calls .) , which triggers :: errors on some server setups
+ * FIX - I've been mixing an instance calls with static calls .) , which triggers errors on some server setups
 
 = 0.6.4 =
  * NEW - CONTROL - show pages based on hierarchy level (like: child pages of the parent page by ID, child pages of current page etc.)
