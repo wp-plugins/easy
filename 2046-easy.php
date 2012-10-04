@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/2046s-widget-loops/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.6.4
+ * Version: 0.6.5
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -59,10 +59,10 @@ function builder_2046_main_loop_load_widget() {
 }
 
 // make class instance
-$EasyClassClone = new Easy_2046_builder();
+//~ $EasyClassClone = new Easy_2046_builder();
 // trespass data to the widget class val
-$EasyClassClone::$EasyItems = $EasyItems;
-$EasyClassClone::$EasyQuery = array(
+Easy_2046_builder::$EasyItems = $EasyItems;
+Easy_2046_builder::$EasyQuery = array(
 	'post_type' => 'post',
 	'posts_per_page' => 1,
 	'post_status' => 'publish'
@@ -121,7 +121,7 @@ $EasyClassClone::$EasyQuery = array(
 		
 		/* Set up some default widget settings. */
 		// initialize data - read the externals to the default widget 
-		$defaults = $this::$EasyItems;
+		$defaults = Easy_2046_builder::$EasyItems;
 		//$instance = wp_parse_args( $instance, $defaults );
 		//extract( $instance, EXTR_SKIP );
 		
@@ -161,7 +161,7 @@ $EasyClassClone::$EasyQuery = array(
 		wp_reset_postdata();
 		
 		//~  define default query,so we get something at least, a working query
-		$default_query = $this::$EasyQuery;
+		$default_query = Easy_2046_builder::$EasyQuery;
 		//~ check if it makes sense to process anything
 		//~ the resistor ids a filter that returns true if all the conditions are meet, flase if not.. if not then skip the next process
 		$resistor = $this->f2046_output_resistor($default_query,$instance);

@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.4.2
-Stable tag: 0.6.4
+Stable tag: 0.6.5
 
 Easy, but complex GUI website builder.
 
@@ -70,6 +70,10 @@ Allways back up your widgets, do not let the sky fall. Use the <a href="http://w
 1. Screenshot of the version 0.5
 
 == Change log ==
+
+= 0.6.5 =
+
+ * FIX - I've been mixing an instance calls with static calls .) , which triggers :: errors on some server setups
 
 = 0.6.4 =
  * NEW - CONTROL - show pages based on hierarchy level (like: child pages of the parent page by ID, child pages of current page etc.)
