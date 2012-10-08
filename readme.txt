@@ -26,7 +26,9 @@ The Documentation will be ready soon.
 
 This widget is a new much better version then its ancestor <a href="http://wordpress.org/extend/plugins/2046s-widget-loops/">2046's loop widget</a> which serves as a the testing platform, before the real thing comes.
 
-"more on": <a href="http://2046.cz/freestuff/easy.html">Project homepage</a>
+<a href="http://2046.cz/easy/">Easy</a>
+<a href="http://2046.cz/easy/view">View description</a>
+<a href="http://2046.cz/easy/control">Control description</a>
 
 == Installation ==
 
