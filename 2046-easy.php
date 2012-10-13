@@ -520,7 +520,9 @@ Easy_2046_builder::$EasyQuery = array(
 					$output .= '</ol>
 				</div>
 			</div>
-		</div>';
+		</div>
+		<div style="float:left;clear:both;width:100%"><a target="_blank" href="http://2046.cz/easy">Documentation</a></div>
+		';
 		// get the gold
 		return $output;
 	}
