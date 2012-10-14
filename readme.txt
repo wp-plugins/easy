@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.4.2
-Stable tag: 0.6.5
+Stable tag: 0.7
 
 Easy, but complex GUI website builder.
 
@@ -28,7 +28,7 @@ This widget is a new much better version then its ancestor <a href="http://wordp
 
 = Documentation =
 
- * <a href="http://2046.cz/easy/">Easy</a>
+ * <b><a href="http://2046.cz/easy/">Easy</a></b>
  * <a href="http://2046.cz/easy/general">General description</a>
  * <a href="http://2046.cz/easy/view">View description</a>
  * <a href="http://2046.cz/easy/control">Control description</a>
@@ -77,6 +77,15 @@ Allways back up your widgets, do not let the sky fall. Use the <a href="http://w
 
 == Change log ==
 
+= 0.7 =
+
+ * NEW - VIEW brick: internal type which is rendered after the view content.. (interesting only for developers)
+ * NEW - VIEW brick: WP-Page navigation brick (Works when the <a href="http://wordpress.org/extend/plugins/wp-pagenavi/">WP-Pagenavi</a> plugin is active
+ * NEW - VIEW brick - prev link
+ * CHANGE - Couple changes in inner function names and structure (it should not affect your actual setup)
+ * CHANGE - the function "f2046_front_end_builder" that actualy renders the loop content is given the whole query object instead the post->ID. Which means you can get more data to play with.. if you are developer
+ 
+ 
 = 0.6.5 =
 
  * FIX - I've been mixing an instance calls with static calls .) , which triggers errors on some server setups

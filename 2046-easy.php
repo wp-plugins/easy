@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/2046s-widget-loops/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.6.5
+ * Version: 0.7
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -180,7 +180,7 @@ Easy_2046_builder::$EasyQuery = array(
 			}
 			//~ mydump($query_args);
 			// The Query
-			$the_query = new WP_Query( $query_args );
+			$easy_query = new WP_Query( $query_args );
 			//~ General restrictions
 			//~ b2046_general_visibility
 			//~ $permissions = '';
@@ -199,7 +199,7 @@ Easy_2046_builder::$EasyQuery = array(
 			//~ $permissions = EasyControl_b2046_general_visibility($the_query->post->ID, '');
 			//~ if(empty($permissions) || $permissions == 'all' || current_user_can( $permissions )){
 				
-				if($the_query->have_posts()) :
+				if($easy_query->have_posts()) :
 				
 					//~ many per row
 					if($b2046_scafold_type == 2){
@@ -219,7 +219,7 @@ Easy_2046_builder::$EasyQuery = array(
 					}
 					
 					// The Loop
-					while ( $the_query->have_posts() ) : $the_query->the_post();
+					while ( $easy_query->have_posts() ) : $easy_query->the_post();
 						//~ scafold check
 						if($b2046_scafold_type == 1){
 							$output .= '<div class="'.$b2046_scafold_row_class.'">';
@@ -228,7 +228,7 @@ Easy_2046_builder::$EasyQuery = array(
 						
 						$output .= '<div id="post-'.get_the_ID().'" class="'.$class.'"'; 
 						$output .= '>';
-						$output .= $this->f2046_front_end_builder($instance, $the_query->post->ID);
+						$output .= $this->f2046_front_end_builder($instance, $easy_query);
 						$output .= '</div>';
 						
 						//~ scafold - one per row - row
@@ -246,6 +246,8 @@ Easy_2046_builder::$EasyQuery = array(
 						$output .= $after_widget;
 					}
 				endif;
+				//~ view-after
+				$output .= $this->f2046_front_end_after_builder($instance, $easy_query);
 				// Reset Post Data
 				wp_reset_postdata();
 			//~ }
@@ -264,7 +266,7 @@ Easy_2046_builder::$EasyQuery = array(
 	//~ execute the function with the same name as the view title
 	//~ plus add values
 	//~ add function result to the output string
-	function f2046_front_end_builder($instance, $post_ID){
+	function f2046_front_end_builder($instance, $easy_query){
 		$data_to_process = $this->f2046_matcher($instance, 'view');
 		$output = '';
 		$values = array();
@@ -275,8 +277,30 @@ Easy_2046_builder::$EasyQuery = array(
 			foreach($val['gui'] as $each){
 				$values[] = $each['value'];
 			}
-			$func = 'EasyView_'.$val['tmp_title'];
-			$output .= $func($post_ID, $values);
+			$func = $val['tmp_title'];
+			$output .= $func($easy_query, $values);
+			unset($values);
+			$i++;
+		 }
+		return	$output;
+	}
+	
+	//~ 
+	//~ build the "something" after the loop, "based on the query"
+	//~ 
+	function f2046_front_end_after_builder($instance, $easy_query){
+		$data_to_process = $this->f2046_matcher($instance, 'view_after');
+		$output = '';
+		$values = array();
+		
+		foreach($data_to_process as $key => $val){
+			$i = 0;
+			
+			foreach($val['gui'] as $each){
+				$values[] = $each['value'];
+			}
+			$func = $val['tmp_title'];
+			$output .= $func($easy_query, $values);
 			unset($values);
 			$i++;
 		 }
@@ -312,7 +336,7 @@ Easy_2046_builder::$EasyQuery = array(
 				}
 			}
 			//~ create function
-			$func = 'EasyControl_'.$val['tmp_title'];
+			$func = $val['tmp_title'];
 			//~ process data by that function --- should be declared outside , like in EasyFunctions.php
 			$function_result = $func($tmp_result, $values);
 			//~ echo '-----/\----after function EasyControl_'.$val['tmp_title'].' <br />';
@@ -323,6 +347,7 @@ Easy_2046_builder::$EasyQuery = array(
 		$output = $tmp_result;
 		return $output;
 	}
+	
 	
 	//~ 
 	//~ Dynamicaly create function names which fas to be found "somewhere" and precess the data
@@ -352,7 +377,7 @@ Easy_2046_builder::$EasyQuery = array(
 				}
 			}
 			//~ create function
-			$func = 'EasyResistor_'.$val['tmp_title'];
+			$func = $val['tmp_title'];
 			//~ process data by that function --- should be declared outside , like in EasyFunctions.php
 			$function_result = $func($default_query, $values);
 			//~ if only just once any of the resistor functions triggers false
@@ -404,9 +429,9 @@ Easy_2046_builder::$EasyQuery = array(
 				$i++;
 			}
 		}
-		if($wanted_type == 'view' || $wanted_type == 'control' || $wanted_type == 'resistor'){
+		if($wanted_type == 'view' || $wanted_type == 'view_after' || $wanted_type == 'control' || $wanted_type == 'resistor'){
 			
-			if($wanted_type == 'view'){
+			if($wanted_type == 'view' || $wanted_type == 'view_after'){
 				$distinguisher = 'b2046_bricks';
 			}
 			else{
@@ -469,7 +494,7 @@ Easy_2046_builder::$EasyQuery = array(
 			if ($val['block'] == 'general'){
 				$global_view_items[$key] = $val;
 			}
-			if ($val['block'] == 'view'){
+			if ($val['block'] == 'view' || $val['block'] == 'view_after'){
 				$view_view_items[$key] = $val;
 			}
 			//~ pass controls and resistors to the control slot

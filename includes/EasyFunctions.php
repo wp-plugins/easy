@@ -1,7 +1,7 @@
 <?php
 
 //~ returns two scafolding classes
-function EasyView_b2046_scafolding($value, $custom_class){ // custom_class will come with when will work the multi input
+function b2046_scafolding($value, $custom_class){ // custom_class will come with when will work the multi input
 	$out = array('','');
 	if(isset($value)){
 		 if ($value == '1'){
@@ -23,15 +23,15 @@ function EasyView_b2046_scafolding($value, $custom_class){ // custom_class will 
 //~ 
 //~ 
 //~ ONTROL FUNCTIONS - creates front end content
-//~ EasyControl_*
+//~ *
 //~
 
  //~ change number of posts to be seen 
-function EasyControl_b2046_post_number($tmp_query, $values){
+function b2046_post_number($tmp_query, $values){
 	$output = array();
 	//~ mydump($values);
 		$args = array(
-			'posts_per_page' => $values
+			'posts_per_page' => (int)$values
 		);
 		//~ rewrite the default data with our own
 		$output = $args;
@@ -39,7 +39,7 @@ function EasyControl_b2046_post_number($tmp_query, $values){
 }
 
 //~ offset posts
-function EasyControl_b2046_post_offset($tmp_query, $values){
+function b2046_post_offset($tmp_query, $values){
 	$output = array();
 		$args = array(
 			'offset' => $values
@@ -49,7 +49,7 @@ function EasyControl_b2046_post_offset($tmp_query, $values){
 	return $output;
 }
 
-function EasyControl_b2046_taxonomy_parameters($tmp_query, $values){
+function b2046_taxonomy_parameters($tmp_query, $values){
 	$output = array();
 	//~ mydump($values);
 	//~ 0 - taxonomy
@@ -77,7 +77,7 @@ function EasyControl_b2046_taxonomy_parameters($tmp_query, $values){
 }
 
 //~ Change post type
-function EasyControl_b2046_post_type($tmp_query, $values){
+function b2046_post_type($tmp_query, $values){
 	$output = array();
 	global $post;
 	$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
@@ -98,7 +98,7 @@ function EasyControl_b2046_post_type($tmp_query, $values){
 	return $output;
 }
 //~  post status
-function EasyControl_b2046_post_status($tmp_query, $values){
+function b2046_post_status($tmp_query, $values){
 	$output = array();
 		$args = array(
 			'post_status' => $values
@@ -108,7 +108,7 @@ function EasyControl_b2046_post_status($tmp_query, $values){
 	return $output;
 }
 //~ category control
-function EasyControl_b2046_category_controls($tmp_query, $values){
+function b2046_category_controls($tmp_query, $values){
 	$output = array();
 	$control = $values[0];
 	$cats = $values[1];
@@ -128,7 +128,7 @@ function EasyControl_b2046_category_controls($tmp_query, $values){
 //~ 
 //~ Control order
 //~ 
-function EasyControl_b2046_order($tmp_query, $values){
+function b2046_order($tmp_query, $values){
 	$order = $values[0];
 	$order_by = $values[1];
 	$args = array(
@@ -142,11 +142,11 @@ function EasyControl_b2046_order($tmp_query, $values){
 //~ 
 //~ 
 //~ VIEW FUNCTIONS - creates front end content
-//~ EasyView_*
+//~ *
 //~ 
 
 //~ This extension si to build the title of the desired object
-function EasyView_b2046_post_title($post_id, $values){
+function b2046_post_title($easy_query, $values){
 	$link = $values[0];
 	$scafold = $values[1];
 	$class = $values[2]; 
@@ -157,9 +157,9 @@ function EasyView_b2046_post_title($post_id, $values){
 	}
 	
 	if($link == 0){
-		$out .= get_the_title($post_id);
+		$out .= get_the_title($easy_query->post->ID);
 	}else{
-		$out .= '<a href="'.get_permalink($post_id).'">'.get_the_title($post_id).'</a>';
+		$out .= '<a href="'.get_permalink($easy_query->post->ID).'">'.get_the_title($easy_query->post->ID).'</a>';
 	}
 	
 	if($scafold !='0'){
@@ -170,7 +170,7 @@ function EasyView_b2046_post_title($post_id, $values){
 }
 
 //~ This extension si to build contet or excerpt,...
-function EasyView_b2046_post_content($post_id, $values){
+function b2046_post_content($easy_query, $values){
 	$content_type = $values[0];
 	$class = $values[1];
 	$morestring = '<!--more-->';
@@ -196,7 +196,7 @@ function EasyView_b2046_post_content($post_id, $values){
 	return $out;
 }
 //~ List post categories
-function EasyView_b2046_post_taxonomies($post_id, $values){
+function b2046_post_taxonomies($easy_query, $values){
 	$out = '';
 	if(!empty($values[1])){
 		$user_given_taxonomy = Easy_2046_builder::f2046_id_cleaner_to_array($values[1]);
@@ -207,9 +207,7 @@ function EasyView_b2046_post_taxonomies($post_id, $values){
 		}else{
 			$class = '';
 		}
-		//~ Easy_2046_builder::f2046_id_cleaner_to_array($values[1]);
-		//~ $post_categories = wp_get_post_categories( $post_id );
-		$terms = wp_get_post_terms( $post_id, $taxonomy, array("fields" => "all") );
+		$terms = wp_get_post_terms( $easy_query->post->ID, $taxonomy, array("fields" => "all") );
 		//~  if the user want to see the result as links
 		if($values[0] == 0){
 			if(!empty($class)){
@@ -253,30 +251,30 @@ function EasyView_b2046_post_taxonomies($post_id, $values){
 }
 
 //~ edit link
-function EasyView_b2046_edit_link($post_id, $values){
+function b2046_edit_link($easy_query, $values){
 	$value = $values[0];
 	$class = $values[1];
 	$out = '';
-		$link =  get_edit_post_link($post_id);
+		$link =  get_edit_post_link($easy_query->post->ID);
 		if($value == 0){
 			$out = '<a class="edit_link '.$class.'" href="'.$link.'">'.__('Edit').'</a>';
 		}else{
-			$out = '<span class="edit_link '.$class.'"><a href="'.$link.'">'.__('Edit').'</a> '.$post_id.'</span>';
+			$out = '<span class="edit_link '.$class.'"><a href="'.$link.'">'.__('Edit').'</a> '.$easy_query->post->ID.'</span>';
 		}
 	return $out;
 }
 
 //~ get images
 //~ 
-function EasyView_b2046_post_image($post_id, $values){
+function b2046_post_image($easy_query, $values){
 	$image = $values[0];
 	$link = $values[1];
 	$class = $values[2];
 	$out = '';
-	$att_id =get_post_thumbnail_id($post_id);
+	$att_id =get_post_thumbnail_id($easy_query->post->ID);
 	
 	if($link == 'objectlink'){
-		$url = get_permalink($post_id);
+		$url = get_permalink($easy_query->post->ID);
 	}elseif($link != 'objectlink' || $link != 'nolink'){
 		$img_obj = wp_get_attachment_image_src( $att_id, $link);
 		$url = $img_obj[0];
@@ -291,7 +289,7 @@ function EasyView_b2046_post_image($post_id, $values){
 			$out .= '<a href="'.$url.'">';
 		}
 		
-		$out .= '<img src="'.$image_url[0].'" alt="'.get_the_title($post_id).'" />';
+		$out .= '<img src="'.$image_url[0].'" alt="'.get_the_title($easy_query->post->ID).'" />';
 		
 		if($link != 'nolink'){
 			$out .= '</a>';
@@ -306,15 +304,13 @@ function EasyView_b2046_post_image($post_id, $values){
 //~ 
 //~ custom meta data
 //~ 
-function EasyView_b2046_object_meta($post_id, $values){
+function b2046_object_meta($easy_query, $values){
 	$out = '';
 	$show_as = $values[0];
 	$meta_key = $values[1];
-	//~ $meta_val = $values[2];
 	$separator = $values[2];
 	$class = $values[3];
-	//~ $post_meta_keys = get_post_custom_keys($post_id);
-	$post_meta_values = get_post_custom_values($meta_key, $post_id);
+	$post_meta_values = get_post_custom_values($meta_key, $easy_query->post->ID);
 
 	if(!empty($post_meta_values)){
 		//~ show as raw text
@@ -344,7 +340,7 @@ function EasyView_b2046_object_meta($post_id, $values){
 //~ 
 //~ Simple text
 //~ 
-function EasyView_b2046_textfield($post_id, $values){
+function b2046_textfield($easy_query, $values){
 	$value = $values[0];
 	$class = $values[1];
 	$out = '';
@@ -359,7 +355,7 @@ function EasyView_b2046_textfield($post_id, $values){
 //~ 
 //~ Debug
 //~ 
-function EasyControl_b2046_query_debug($tmp_query, $values){
+function b2046_query_debug($tmp_query, $values){
 	echo '<pre><b>DEBUG:</b><br />';
 	var_dump( $tmp_query);
 	echo '</pre>';
@@ -370,7 +366,7 @@ function EasyControl_b2046_query_debug($tmp_query, $values){
 //~ 
 //~ link to archive
 //~ 
-function EasyView_b2046_link_to_archive($tmp_query, $values){
+function b2046_link_to_archive($tmp_query, $values){
 	$out = '';
 	$type = $values[0];
 	$base_name = $values[1];
@@ -390,7 +386,7 @@ function EasyView_b2046_link_to_archive($tmp_query, $values){
 //~ Shortcode 
 //~ 
 
-function EasyView_b2046_shortcode($post_id, $values){
+function b2046_shortcode($easy_query, $values){
 	$value = $values[0];
 	$class = $values[1];
 	$out = '';
@@ -406,13 +402,13 @@ function EasyView_b2046_shortcode($post_id, $values){
 //~ Comments number
 //~ 
 
-function EasyView_b2046_comments_number($post_id, $values){
+function b2046_comments_number($easy_query, $values){
 	$class = $values[0];
 	$out = '';
 		if(!empty($value) && !empty($class)){
-			$out .= '<div class="'.$class.'">'.get_comments_number($post_id).'</div>';
+			$out .= '<div class="'.$class.'">'.get_comments_number($easy_query->post->ID).'</div>';
 		}elseif(!empty($value)){
-			$out .= get_comments_number($post_id);
+			$out .= get_comments_number($easy_query->post->ID);
 		}
 	return $out;
 }
@@ -421,7 +417,7 @@ function EasyView_b2046_comments_number($post_id, $values){
 //~ Comments number
 //~ 
 
-function EasyView_b2046_comments_template($post_id, $values){
+function b2046_comments_template($easy_query, $values){
 	$class = $values[0];
 	$out = '';
 		if(!empty($class)){
@@ -436,7 +432,7 @@ function EasyView_b2046_comments_template($post_id, $values){
 //~ Permissions
 //~ 
 
-function EasyControl_b2046_show_post_by_id($post_id, $values){
+function b2046_show_post_by_id($easy_query, $values){
 	$out = array();
 	if(!empty($values)){
 		$out = array(
@@ -450,7 +446,7 @@ function EasyControl_b2046_show_post_by_id($post_id, $values){
 //~ 
 //~ Get date of the "post"
 //~ 
-function EasyView_b2046_date($post_id, $values){
+function b2046_date($easy_query, $values){
 	$out = '';
 	$type = $values[0];
 	//~ $link = $values[0];
@@ -483,7 +479,7 @@ function EasyView_b2046_date($post_id, $values){
 //~ 
 //~ Global permission resistor 
 //~ 
-function EasyResistor_b2046_general_visibility($tmp_query, $values){
+function b2046_general_visibility($tmp_query, $values){
 	global $current_user;
 	if (isset($current_user->roles[0])){
 		$user_level =  $current_user->roles[0];
@@ -507,7 +503,7 @@ function EasyResistor_b2046_general_visibility($tmp_query, $values){
 //~ 
 //~ Hide on view type
 //~ 
-function EasyResistor_b2046_on_condition($tmp_query, $values){
+function b2046_on_condition($tmp_query, $values){
 	global $wp_query;
 	$output = true;
 	//~  do not show on conditions
@@ -550,7 +546,7 @@ function EasyResistor_b2046_on_condition($tmp_query, $values){
 //~ 
 //~ Show on post, page, what ever id
 //~ 
-function EasyResistor_b2046_on_p_ID($tmp_query, $values){
+function b2046_on_p_ID($tmp_query, $values){
 	if($values[0] == 1){
 		$a = true; 
 		$b = false;
@@ -590,7 +586,7 @@ function EasyResistor_b2046_on_p_ID($tmp_query, $values){
 //~ restrict based on hierarchy
 //~ 
 
-function EasyControl_b2046_hierarchy_based($tmp_query, $values){
+function b2046_hierarchy_based($tmp_query, $values){
 	//~ '0' => 'Pages from the same level as current page',
 	//~ '1' => 'Pages from the same level as given ID',
 	//~ '2' => 'Child pages of current page',
@@ -650,7 +646,39 @@ function EasyControl_b2046_hierarchy_based($tmp_query, $values){
 	return $output;
 }
 
-
+//~ 
+//~ navigation - View
+//~ 
+function b2046_WP_pagenavi($easy_query, $values){
+	ob_start();
+	wp_pagenavi( array( 'query' => $easy_query ) );
+	$output = ob_get_clean();
+	wp_reset_postdata();	// avoid errors further down the page
+	return $output;
+}
+function b2046_previous_post_link($easy_query, $values){
+	$class = $values[1];
+	$output = '';
+	if(!empty($class)){
+		$output .= '<div class="'.$class.'">';
+	}
+	$output .= get_previous_posts_link($values[0]);
+	if(!empty($class)){
+		$output .= '</div>';
+	}
+	return $output;
+}
+function b2046_next_post_link($easy_query, $values){
+	$class = $values[1];
+	if(!empty($class)){
+		$output .= '<div class="'.$class.'">';
+	}
+	$output = get_next_posts_link($values[0]);
+	if(!empty($class)){
+		$output .= '</div>';
+	}
+	return $output;
+}
 
 
 

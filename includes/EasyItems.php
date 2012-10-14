@@ -189,6 +189,8 @@ $conditional_tags_array = array(
 		'esc' => 'stip_tags'
 	)
 );
+
+
 // ------------------------------------------------------------------- // 
 //                         Build the VIEW array
 // ------------------------------------------------------------------- // 
@@ -785,7 +787,7 @@ $EasyItems = array(
 	),
 	'b2046_query_debug' => array(
 		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
-		'item_title' => __('Debug Controls','p_2046s_easy_widget'),
+		'item_title' => __('Debug controls','p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
 			array(
@@ -909,6 +911,63 @@ $EasyItems = array(
 				'esc' => 'stip_tags',
 				'choices' => '',
 				'value' => 'D. M. Y'
+			),
+			array(
+				'ui_note' => __('class', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => '',
+				'value' => ''
+			)
+		)
+	),
+	'b2046_WP_pagenavi' => array(
+		'block' => 'view_after', // 0 = general, 1 = view, 2 = logic 
+		'item_title' => __('WP-Pagenavi','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => __('<a href="http://wordpress.org/extend/plugins/wp-pagenavi/">WP-Pagenavi</a> works when the plugin is installed and active.<br />The navigation will be placed automatically after the View content.', 'p_2046s_easy_widget'),
+				'ui_type' => 'hidden', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+				'choices' => '',
+				'value' => 1,
+				'esc' => 'stip_tags'
+			)
+		)
+	),
+	'b2046_previous_post_link' => array(
+		'block' => 'view_after', // 0 = general, 1 = view, 2 = logic 
+		'item_title' => __('Previous link','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => __('Previous text', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+				'choices' => '',
+				'value' =>'',
+				'esc' => 'stip_tags'
+			),
+			array(
+				'ui_note' => __('class', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => '',
+				'value' => ''
+			)
+			
+		)
+	),
+	'b2046_next_post_link' => array(
+		'block' => 'view_after', // 0 = general, 1 = view, 2 = logic 
+		'item_title' => __('Next link','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => __('Next text', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+				'choices' => '',
+				'value' =>'',
+				'esc' => 'stip_tags'
 			),
 			array(
 				'ui_note' => __('class', 'p_2046s_easy_widget'),
