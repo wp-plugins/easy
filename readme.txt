@@ -10,6 +10,11 @@ Stable tag: 0.7
 
 Easy, but complex GUI website builder.
 
+== Unique offer ==
+I'm moved for couple days to Falmouth, Cornwall. If you need ny help with Easy I'll be happy to assist you personally.
+Contact me on 2046@2046.cz
+(the offer is actual until it disappears)
+
 == Description ==
 
 "Easy" is a widget based Drag&Drop content builder.
@@ -32,38 +37,26 @@ This widget is a new much better version then its ancestor <a href="http://wordp
  * <a href="http://2046.cz/easy/general">General description</a>
  * <a href="http://2046.cz/easy/view">View description</a>
  * <a href="http://2046.cz/easy/control">Control description</a>
- 
+ * <a href="http://2046.cz/easy/extend">Extend</a>
 
 == Installation ==
 
 As usual. If you don't know how, check out the <a href="http://codex.wordpress.org/Managing_Plugins">official how-to</a>.
 
 == Frequently Asked Questions ==
-
-= What is to be done =
- * Core - <b>DONE</b>
- * Multi selector for each item - <b>DONE</b>
- * Multiple controls of the same type - <b>DONE</b>
- * Finish the input builder - NEARLY COMPLETE
- * Create all view items for.. taxonomies, categories, author, meta values, etc. - NEARLY COMPLETE
- * Create items covering all native Wordpress WP_Query possibilities. - IN PROGRESS
- * NEW Extra_views bricks (subviews) - the output can be placed before or after the main query loop - IN CONSIDERATION
- * Controllers weight - ..in case when one controller logic is meet and other not...possibility to set which ones beats the other - IN CONSIDERATION
-
- * Localization
- * Write nice Documentation
- * Create an well documented example extension in form of WP plugin.
- * Listen to you guys.
+ 
 
 = Why I cannot use more then one instance of some control bricks? =
 
-Yep, you can, but only for some control bricks.
-It make sense in some cases, and make no sense in others. 
+Yep, you cannot. You can do it only for some control bricks where it "makes sense".
 
 = Why did you make such a thing for free? =
 
 This is my reward to the WP community
 
+= What if I want my to make my own function part of the Easy widget? =
+
+It is possible and even more, it's easy. Check out the documentation <a href="http://2046.cz/easy/extend">Extend</a>.
 
 == Upgrade Notice ==
 
