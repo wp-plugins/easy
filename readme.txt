@@ -11,7 +11,7 @@ Stable tag: 0.7
 Easy, but complex GUI website builder.
 
 == Unique offer ==
-I'm moved for couple days to Falmouth, Cornwall. If you need ny help with Easy I'll be happy to assist you personally.
+I'm in Falmouth, Cornwall for couple days. If you need ny help with Easy I'll be happy to assist you personally.
 Contact me on 2046@2046.cz
 (the offer is actual until it disappears)
 
