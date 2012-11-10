@@ -6,14 +6,9 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.4.2
-Stable tag: 0.7
+Stable tag: 0.7.1
 
 Easy, but complex GUI website builder.
-
-== Unique offer ==
-I'm in Falmouth, Cornwall for couple days. If you need ny help with Easy I'll be happy to assist you personally.
-Contact me on 2046@2046.cz
-(the offer is actual until it disappears)
 
 == Description ==
 
@@ -69,6 +64,12 @@ Allways back up your widgets, do not let the sky fall. Use the <a href="http://w
 1. Screenshot of the version 0.5
 
 == Change log ==
+
+= 0.7.1 =
+
+ * to be more precise I have renamed it to "Featured image" (no function change)
+ * NEW - VIEW brick - "Post gallery" - it takes all the post images for the post/pages defined in the control logic 
+ * NEW - CONTROL - "For actualpost/page" - it will "guess" the actually visible post/page ID and shows the elements defined in the CONTENT slot.
 
 = 0.7 =
 

@@ -195,7 +195,7 @@ function b2046_post_content($easy_query, $values){
 	$out .= '</div>';
 	return $out;
 }
-//~ List post categories
+//~ VIEW - List post categories
 function b2046_post_taxonomies($easy_query, $values){
 	$out = '';
 	if(!empty($values[1])){
@@ -271,6 +271,7 @@ function b2046_post_image($easy_query, $values){
 	$link = $values[1];
 	$class = $values[2];
 	$out = '';
+	
 	$att_id =get_post_thumbnail_id($easy_query->post->ID);
 	
 	if($link == 'objectlink'){
@@ -301,8 +302,74 @@ function b2046_post_image($easy_query, $values){
 	return $out;
 }
 
+//~ gel n images form the post
+function b2046_post_images($easy_query, $values){
+	$image = $values[0];
+	$link = $values[1];
+	$order = $values[2];
+	$orderby = $values[3];
+	$class = $values[4];
+	$out = '';
+	//~ get all posts based on the user query
+	//~ get all its IDs and make arrayy late used as parent pages
+	$the_query = new WP_Query($easy_query->query);
+	
+	if($the_query->have_posts()){
+		while ( $the_query->have_posts() ) : $the_query->the_post();
+			$attachments = get_children(array(
+				'post_parent' => $the_query->post->ID,
+				'post_status' => 'inherit',
+				'post_type' => 'attachment',
+				'post_mime_type' => 'image',
+				'order' => $order,
+				'orderby' => $orderby
+				)
+			);
+			//~ process all found
+			foreach($attachments as $key => $val) {
+				if(!empty($val->ID)){
+					$image_url = wp_get_attachment_image_src( $val->ID, $image);
+					$img_obj = wp_get_attachment_image_src( $val->ID, $link);
+					$url = $img_obj[0];
+
+					if(!empty($class)){
+						$out .= '<div class="'.$class.'">';
+					}
+					if($link != 'nolink'){
+						$out .= '<a href="'.$url.'">';
+					}
+					
+					$out .= '<img src="'.$image_url[0].'" alt="'.$val->post_title.'" />';
+					
+					if($link != 'nolink'){
+						$out .= '</a>';
+					}
+					if(!empty($class)){
+						$out .= '</div>';
+					}
+				}
+			}
+		endwhile;
+	}
+	// Reset Post Data
+	wp_reset_postdata();
+	
+	return $out;
+}
 //~ 
-//~ custom meta data
+//~ CONTROL - finds the actual post id and ad it to the query
+//~ 
+function b2046_for_actual_postid($tmp_query, $values){
+	global $post;
+	
+	$args = array(
+		'post__in' => array($post->ID)
+	);
+	return $args;
+}
+
+//~ 
+//~ VIEW - custom meta data
 //~ 
 function b2046_object_meta($easy_query, $values){
 	$out = '';

@@ -189,7 +189,20 @@ $conditional_tags_array = array(
 		'esc' => 'stip_tags'
 	)
 );
-
+//~ sorting choices
+$sorting_choices = array(
+	'Sort by' => 'Sort by',
+	'ID' => 'ID',  
+	'title' => 'title', 
+	'date' => 'date',
+	'modified' => 'modified',
+	'rand' => 'rand',
+	'comment_count' => 'comment_count',
+	'menu_order' => 'menu_order',
+	'parent' => 'parent',
+	'meta_value' => 'meta_value',
+	'meta_value_num' => 'meta_value_num'
+);
 
 // ------------------------------------------------------------------- // 
 //                         Build the VIEW array
@@ -620,19 +633,7 @@ $EasyItems = array(
 			array(
 				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
 				'esc' => 'stip_tags',
-				'choices' => array(
-					'none' => 'none',
-					'ID' => 'ID',  
-					'title' => 'title', 
-					'date' => 'date',
-					'modified' => 'modified',
-					'rand' => 'rand',
-					'comment_count' => 'comment_count',
-					'menu_order' => 'menu_order',
-					'parent' => 'parent',
-					'meta_value' => 'meta_value',
-					'meta_value_num' => 'meta_value_num'
-				),
+				'choices' => $sorting_choices,
 				'value' => 'none'
 			)
 		)
@@ -672,7 +673,7 @@ $EasyItems = array(
 	),
 	'b2046_post_image' => array(
 		'block' => 'view', // 0 = general, 1 = view, 2 = logic 
-		'item_title' => __('Image','p_2046s_easy_widget'),
+		'item_title' => __('Featured image','p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
 			array(
@@ -688,6 +689,50 @@ $EasyItems = array(
 				'esc' => 'stip_tags',
 				'choices' => $image_links,
 				'value' => ''
+			),
+			array(
+				'ui_note' => __('class', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => '',
+				'value' => ''
+			)
+		)
+	),
+	//~ n Images from the selected posts
+	'b2046_post_images' => array(
+		'block' => 'view', // 0 = general, 1 = view, 2 = logic 
+		'item_title' => __('Post gallery','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => __('Image size','p_2046s_easy_widget'),
+				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => $list_of_image_sizes,
+				'value' => ''
+			),
+			array(
+				'ui_note' => __('Link image to','p_2046s_easy_widget'),
+				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => $list_of_image_sizes,
+				'value' => ''
+			),
+			array(
+				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => array(
+					'ASC' => 'Ascendingly',
+					'DESC' => 'Descendingly'
+				),
+				'value' => 'DESC'
+			),
+			array(
+				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => $sorting_choices,
+				'value' => 'none'
 			),
 			array(
 				'ui_note' => __('class', 'p_2046s_easy_widget'),
@@ -792,6 +837,22 @@ $EasyItems = array(
 		'gui' => array(
 			array(
 				'ui_note' => __('Debug will output the Query made by control bricks ABOVE this debug brick!</br></br>See the out put on frontend.', 'p_2046s_easy_widget'),
+				'ui_type' => 'hidden', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+				'choices' => '',
+				'value' => 1,
+				'esc' => 'stip_tags'
+			)
+		),
+		
+	),
+	'b2046_for_actual_postid' => array(
+		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
+		'repeatable' => false,
+		'item_title' => __('For actual post/page','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => __('It will "guess" the actual post and show the VIEW content for it', 'p_2046s_easy_widget'),
 				'ui_type' => 'hidden', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
 				'choices' => '',
 				'value' => 1,
