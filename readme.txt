@@ -67,9 +67,10 @@ Allways back up your widgets, do not let the sky fall. Use the <a href="http://w
 
 = 0.7.1 =
 
- * to be more precise I have renamed it to "Featured image" (no function change)
- * NEW - VIEW brick - "Post gallery" - it takes all the post images for the post/pages defined in the control logic 
- * NEW - CONTROL - "For actualpost/page" - it will "guess" the actually visible post/page ID and shows the elements defined in the CONTENT slot.
+ * to be more precise I have renamed the Image brick to "Featured image" (no function change)
+ * NEW - VIEW brick - "Post gallery" - you can now take all the post images for the post/pages defined in the control logic and build a image gallery. 
+ * NEW - CONTROL - "For actualpost/page" - it will "guess" the actually visible post/page ID and shows the elements defined in the CONTENT slot. This is usefull especially together with the 
+ Post gallery VIEW brick. When you use them together it makes creates post/page the gallery for you automatically.
 
 = 0.7 =
 
