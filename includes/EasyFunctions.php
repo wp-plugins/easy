@@ -133,7 +133,7 @@ function b2046_order($tmp_query, $values){
 	$order_by = $values[1];
 	$args = array(
 		'order' => $order,
-		'order_by' => $order_by
+		'orderby' => $order_by
 	);
 	return $args;
 }
@@ -308,7 +308,8 @@ function b2046_post_images($easy_query, $values){
 	$link = $values[1];
 	$order = $values[2];
 	$orderby = $values[3];
-	$class = $values[4];
+	$title_value = $values[4];
+	$class = $values[5];
 	$out = '';
 	//~ get all posts based on the user query
 	//~ get all its IDs and make arrayy late used as parent pages
@@ -338,9 +339,13 @@ function b2046_post_images($easy_query, $values){
 					if($link != 'nolink'){
 						$out .= '<a href="'.$url.'">';
 					}
-					
-					$out .= '<img src="'.$image_url[0].'" alt="'.$val->post_title.'" />';
-					
+					$the_title = '';
+					if ($title_value == 1){
+						$the_title = $val->post_title;
+					}elseif($title_value == 2){
+						$the_title = $val->post_excerpt;
+					}
+					$out .= '<img src="'.$image_url[0].'" title="'.$the_title.'" alt="'.$val->post_title.'" />';
 					if($link != 'nolink'){
 						$out .= '</a>';
 					}
@@ -363,7 +368,8 @@ function b2046_for_actual_postid($tmp_query, $values){
 	global $post;
 	
 	$args = array(
-		'post__in' => array($post->ID)
+		'post__in' => array($post->ID),
+		'post_type' => $post->post_type
 	);
 	return $args;
 }

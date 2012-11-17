@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.4.2
-Stable tag: 0.7.1
+Stable tag: 0.7.2
 
 Easy, but complex GUI website builder.
 
@@ -65,6 +65,13 @@ Allways back up your widgets, do not let the sky fall. Use the <a href="http://w
 
 == Change log ==
 
+= 0.7.2 =
+
+ * NEW - select box in "Post gallery" that lets you select where from the image title will be taken or if any. choices: empty title attribute, image as image title attribute, caption as image title attribute. The title is used in the img HTML tag.. and is used by most lightboxes.
+ * FIX - VIEW - Taxonomies (Categories) - the class has not been considered when the number check box has not been checked
+ * FIX - CONTROL - "For actual post/page" - the brick worked only for posts. From now on it guesses the actual post/page/... type and so you can make gallery for any post type automatically
+ * FIX - CONTROL - sorting - this functin doesn't sorted att all, now it does.. can't believe nobody complained so far.
+ 
 = 0.7.1 =
 
  * to be more precise I have renamed the "Image" brick to "Featured image" (no function change)

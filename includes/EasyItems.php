@@ -657,9 +657,9 @@ $EasyItems = array(
 				'value' => 'category'
 			),
 			array(
-				'ui_type' => 'check_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'radio_group', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
 				'esc' => 'stip_tags',
-				'choices' => array(1 => __('Show count')),
+				'choices' => array(0 => __('Do not show count'), 1 => __('Show count')),
 				'value' => 0
 			),
 			array(
@@ -732,6 +732,16 @@ $EasyItems = array(
 				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
 				'esc' => 'stip_tags',
 				'choices' => $sorting_choices,
+				'value' => 'none'
+			),
+			array(
+				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'stip_tags',
+				'choices' => array(
+					'0' => 'empty title attribute',
+					'1' => 'image as image title attribute',
+					'2' => 'caption as image title attribute',
+				),
 				'value' => 'none'
 			),
 			array(
