@@ -29,6 +29,7 @@ This widget is a new much better version then its ancestor <a href="http://wordp
 = Documentation =
 
  * <b><a href="http://2046.cz/easy/">Easy</a></b>
+ * <a href="http://2046.cz/blog">Tutorials</a>
  * <a href="http://2046.cz/easy/general">General description</a>
  * <a href="http://2046.cz/easy/view">View description</a>
  * <a href="http://2046.cz/easy/control">Control description</a>
