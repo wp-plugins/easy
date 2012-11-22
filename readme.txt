@@ -18,35 +18,11 @@ You can place almost any part of your content anywhere in your sidebars.
 The widget is made out of drag&drop bits (bricks) and is totally up to you what you want to show on your website.
 
 Easy widget has variety of bricks representing the content and its logic. You can make simple or complex layout simply by dragging the bricks in to their slots and define on what cases it has to be shown or not.
-Content bricks are:
- * title
- * content
- * featured image
- * categories
- * tags
- * taxonomies
- * custom meta
- * comments
- * author
- * date
- * shortcode
- * ...
- * and even your own content bricks if you like
+Content bricks are: title, content, featured image, categories, tags, taxonomies, custom meta, comments, author, date, shortcode ... and even your own content bricks if you like.
  
 The resulting content is displayed based on the logic you build the same way as you did the content.
 You just drag the logical bricks to their slot and the content will be shown based on that logic.
-Logical bricks are:
- * Number of posts
- * post type chooser
- * offset
- * hierarchical logic (for pages and alike) 
- * category filter
- * custom meta filter
- * post status
- * edit link
- * permissions
- * ...
- * and even your own logic bricks if you like
+Logical bricks are: Number of posts, post type chooser, offset, hierarchical logic (for pages and alike), category filter, custom meta filter, post status, edit link, permissions ... and even your own logic bricks if you like.
  
 In adition to that the result can be designed to your needs. You can add your own classes to the whole widget (the HTML structure) and also to each content brick (a part of the content).
 Then again it is totally up to you how you design your website.
