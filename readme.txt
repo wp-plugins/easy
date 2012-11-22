@@ -15,10 +15,10 @@ Easy, but complex GUI website builder.
 Easy is a multi-functional widget covering most of the native Wordpress functions commonly used in templates.
 You can place almost any part of your content anywhere in your sidebars.
 
-The widget is made out of drag&drop bits (bricks). It is totally up to you what you want to display.
-You can make simple or complex content simply by dragging the bricks in to their slots and define on what cases it has to be shown or not.
+The widget is made out of drag&drop bits (bricks). It is totally up to you what you want to show on your website.
 
-Easy widget has variety of bricks representing the content and logical parts. Content bricks are: title, content, featured image, categories, taxonomies, custom meta, comments, author, date, ...
+Easy widget has variety of bricks representing the content and logical parts. You can make simple or complex content simply by dragging the bricks in to their slots and define on what cases it has to be shown or not.
+Content bricks are: title, content, featured image, categories, taxonomies, custom meta, comments, author, date, ...
 The resulting content is displayed based on the logic you build the same way as you did the content.
 You just drag the logical bricks to their slot and the content will be shown based on that logic.
 Logical bricks are: Number of posts, post type chooser, offset, hierarchical logic (for pages and alike), category filter, custom meta filter, post status, permissions, ...
