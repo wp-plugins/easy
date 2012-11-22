@@ -12,19 +12,24 @@ Easy, but complex GUI website builder.
 
 == Description ==
 
-"Easy" is a widget based Drag&Drop content builder.
+Easy is a multi-functional widget covering most of the native Wordpress functions commonly used in templates.
+You can place almost any part of your content anywhere in your sidebars.
 
-Making website in Wordpress has never been easier. You can literally drop any part of the website anywhere.
+The widget is made out of drag&drop bits (bricks). It is totally up to you what you want to display.
+You can make simple or complex content simply by dragging the bricks in to their slots and define on what cases it has to be shown or not.
 
-= Easy description =
-* <b>VIEW</b> slot where you decide what you want to see from the post or any of your custom content type the way you like - title, content, category, your custom meta, Edit link... Each bricks can be wrapped in your own class and has many nice settings.
-* <b>CONTROL</b> slot lets you restrict the VIEW content to be shown on certain template type, or on post/page IDs or any custom post type ID and much much more.
-* <b>GENERAL</b> slot lets you entitle the widget, make admin note, and select what kind of scafold (div structure) you like etc.
+Easy widget has variety of bricks representing the content and logical parts. Content bricks are: title, content, featured image, categories, taxonomies, custom meta, comments, author, date, ...
+The resulting content is displayed based on the logic you build the same way as you did the content.
+You just drag the logical bricks to their slot and the content will be shown based on that logic.
+Logical bricks are: Number of posts, post type chooser, offset, hierarchical logic (for pages and alike), category filter, custom meta filter, post status, permissions, ...
 
-"Easy" is done in extensible way. So that anybody can plug in their own VIEW or CONTROL brick with its own logic. Make a CONTROL brick is matter of minutes. Make VIEW bricks is even faster.
-The Documentation will be ready soon.
+Does it reminds you something?
+Yes, it is exactly what you do when you design your template; you loop through the post or pages in your template, but this time without touching the code.
+All the content and logical bricks are only graphical representation of the Wordpress functions.
 
-This widget is a new much better version then its ancestor <a href="http://wordpress.org/extend/plugins/2046s-widget-loops/">2046's loop widget</a> which serves as a the testing platform, before the real thing comes.
+The aim of this plugin is to speed up common programming work, so we do not have to repeat our selves.
+Imagine a website made out of "sidebars" filled with widgets representing the list of last posts, menu, the image gallery, any content that is actually the website.
+All built out of widgets that you can re-arrange anyway you or your client like right out of the admin area. That is the main purpose of the widgets anyway, Easy makes it real.
 
 = Documentation =
 
