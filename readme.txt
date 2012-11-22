@@ -28,7 +28,10 @@ Content bricks are:
  * custom meta
  * comments
  * author
- * date, ...
+ * date
+ * shortcode
+ * ...
+ * and even your own content bricks if you like
  
 The resulting content is displayed based on the logic you build the same way as you did the content.
 You just drag the logical bricks to their slot and the content will be shown based on that logic.
@@ -41,7 +44,9 @@ Logical bricks are:
  * custom meta filter
  * post status
  * edit link
- * permissions, ...
+ * permissions
+ * ...
+ * and even your own logic bricks if you like
  
 In adition to that the result can be designed to your needs. You can add your own classes to the whole widget (the HTML structure) and also to each content brick (a part of the content).
 Then again it is totally up to you how you design your website.
