@@ -35,23 +35,6 @@ Content bricks are:
  * WPpagenavi (when installed)
  * ...
  * and even your own content bricks if you like
-
-Content bricks are:
-
- * title
- * content
- * featured image
- * categories
- * tags
- * taxonomies
- * custom meta
- * comments
- * author
- * date
- * shortcode
- * ...
- * and even your own content bricks if you like
-
  
 The resulting content is displayed based on the logic you build the same way as you did the content.
 You just drag the logical bricks to their slot and the content will be shown based on that logic.
