@@ -18,7 +18,7 @@ You can place almost any part of your content anywhere in your sidebars.
 The widget is made out of drag&drop bits (bricks) and is totally up to you what you want to show on your website.
 
 Easy widget has variety of bricks representing the content and its logic. You can make simple or complex layout simply by dragging the bricks in to their slots and define on what cases it has to be shown or not.
-<<<<<<< .mine
+
 Content bricks are:
 
  * title
@@ -35,7 +35,7 @@ Content bricks are:
  * WPpagenavi (when installed)
  * ...
  * and even your own content bricks if you like
-=======
+
 Content bricks are:
 
  * title
@@ -51,7 +51,7 @@ Content bricks are:
  * shortcode
  * ...
  * and even your own content bricks if you like
->>>>>>> .r629777
+
  
 The resulting content is displayed based on the logic you build the same way as you did the content.
 You just drag the logical bricks to their slot and the content will be shown based on that logic.
