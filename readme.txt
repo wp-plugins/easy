@@ -5,8 +5,8 @@ Plugin URI: http://wordpress.org/extend/easy
 Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
-Tested up to: 3.4.2
-Stable tag: 0.7.2
+Tested up to: 3.5
+Stable tag: 0.7.3
 
 Easy, but complex GUI website builder.
 
@@ -18,6 +18,24 @@ You can place almost any part of your content anywhere in your sidebars.
 The widget is made out of drag&drop bits (bricks) and is totally up to you what you want to show on your website.
 
 Easy widget has variety of bricks representing the content and its logic. You can make simple or complex layout simply by dragging the bricks in to their slots and define on what cases it has to be shown or not.
+<<<<<<< .mine
+Content bricks are:
+
+ * title
+ * content
+ * featured image
+ * categories
+ * tags
+ * taxonomies
+ * custom meta
+ * comments
+ * author
+ * date
+ * shortcode
+ * WPpagenavi (when installed)
+ * ...
+ * and even your own content bricks if you like
+=======
 Content bricks are:
 
  * title
@@ -33,6 +51,7 @@ Content bricks are:
  * shortcode
  * ...
  * and even your own content bricks if you like
+>>>>>>> .r629777
  
 The resulting content is displayed based on the logic you build the same way as you did the content.
 You just drag the logical bricks to their slot and the content will be shown based on that logic.
@@ -100,6 +119,9 @@ Allways back up your widgets, do not let the sky fall. Use the <a href="http://w
 1. Screenshot of the version 0.5
 
 == Change log ==
+
+= 0.7.3 =
+ * FIX -small javascript fix needed for upcoming WP 3.5.
 
 = 0.7.2 =
 

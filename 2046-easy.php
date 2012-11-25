@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/2046s-widget-loops/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.7.2
+ * Version: 0.7.3
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -900,7 +900,7 @@ function f2046_Easy_insert_custom_css(){
 	wp_enqueue_style( 'easy_2046');
 	
 	wp_register_script('easy_2046_widget',plugins_url( 'js/2046_easy_widget.js' , __FILE__ ));
-	wp_enqueue_script('easy_2046_widget');
+	wp_enqueue_script('easy_2046_widget', array('jquery'),null, null, true);
 	
 }
 
