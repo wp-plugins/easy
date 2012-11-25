@@ -8,7 +8,7 @@ Requires at least: 3.4.1
 Tested up to: 3.5
 Stable tag: 0.7.3
 
-Easy, but complex GUI website builder.
+Easy, but complex widget website builder.
 
 == Description ==
 
