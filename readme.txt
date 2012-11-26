@@ -1,6 +1,6 @@
 === Easy ===
 Plugin name: Easy
-Contributors: 2046
+Contributors: o----o
 Plugin URI: http://wordpress.org/extend/easy
 Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
