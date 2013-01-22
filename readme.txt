@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.5
-Stable tag: 0.7.3
+Stable tag: 0.7.4
 
 Easy, but complex widget website builder.
 
@@ -106,6 +106,9 @@ Allways back up your widgets, do not let the sky fall. Use the <a href="http://w
 1. Screenshot of the version 0.5
 
 == Change log ==
+
+= 0.7.4 =
+ * You can exclude the featured image from the gallery in "Post gallery" brick. Warning! All "Post gallery" bricks has to be updated!
 
 = 0.7.3 =
  * FIX -small javascript fix needed for upcoming WP 3.5.
