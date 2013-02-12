@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.5.1
-Stable tag: 0.8
+Stable tag: 0.8.1
 
 Easy, but complex widget website builder.
 
@@ -106,6 +106,10 @@ Always back up your widgets, do not let the sky fall. Use the <a href="http://wo
 1. Screenshot of the version 0.5
 
 == Change log ==
+
+= 0.8.1 =
+* small fix (before & after widget)
+* text Brick allows html tags, same as you can use in post content
 
 = 0.8 =
  * The security time comes.

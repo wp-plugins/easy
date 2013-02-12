@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/2046s-widget-loops/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.8
+ * Version: 0.8.1
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -143,7 +143,6 @@ Easy_2046_builder::$EasyQuery = array(
 	 */
 	function widget($args, $instance) {
 		
-		
 		//~ reset previous post data.. just to be sure 
 		//~ somebody could run their own wp_query and do not reset the data ;)
 		wp_reset_postdata();
@@ -197,7 +196,7 @@ Easy_2046_builder::$EasyQuery = array(
 					}
 					//~  default widget classes
 					elseif($b2046_scafold_type == 0){
-						$output .= $before_widget;
+						$output .= $args['before_widget'];
 					}
 					
 					$WPpostClass = get_post_class();
@@ -232,7 +231,7 @@ Easy_2046_builder::$EasyQuery = array(
 					}
 					//~  default widget classes
 					elseif($b2046_scafold_type == 0){
-						$output .= $after_widget;
+						$output .= $args['after_widget'];
 					}
 				endif;
 				//~ view-after

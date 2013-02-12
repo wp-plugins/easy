@@ -836,7 +836,7 @@ $EasyItems = array(
 				'ui_type' => 'textarea', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
 				'choices' => '',
 				'value' => '',
-				'esc' => 'esc_html__'
+				'esc' => 'wp_kses_post'
 			),
 			array(
 				'ui_note' => __('class', 'p_2046s_easy_widget'),
