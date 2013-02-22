@@ -429,7 +429,22 @@ $EasyItems = array(
 			)
 		)
 	),
-	
+	// post_types
+	'b2046_exclude_actual' => array(
+		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
+		'repeatable' => false,
+		'item_title' => __('Exclude actual post/page','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => __('Exclude currently displayed post/page from this Easy loop', 'p_2046s_easy_widget'),
+				'ui_type' => 'hidden', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'filter_number_space_dash',
+				'choices' => '',
+				'value' => ''
+			)
+		)
+	),
 	'b2046_taxonomy_parameters' => array(
 		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
 		'repeatable' => true,
@@ -1014,13 +1029,13 @@ $EasyItems = array(
 			)
 		)
 	),
-	'b2046_previous_post_link' => array(
+	'b2046_previous_posts_link' => array(
 		'block' => 'view_after', // 0 = general, 1 = view, 2 = logic 
 		'item_title' => __('Previous link','p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
 			array(
-				'ui_note' => __('Previous text', 'p_2046s_easy_widget'),
+				'ui_note' => __('Previous text - Post name if empty', 'p_2046s_easy_widget'),
 				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
 				'choices' => '',
 				'value' =>'',
@@ -1036,13 +1051,13 @@ $EasyItems = array(
 			
 		)
 	),
-	'b2046_next_post_link' => array(
+	'b2046_next_posts_link' => array(
 		'block' => 'view_after', // 0 = general, 1 = view, 2 = logic 
 		'item_title' => __('Next link','p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
 			array(
-				'ui_note' => __('Next text', 'p_2046s_easy_widget'),
+				'ui_note' => __('Next text - Post name if empty', 'p_2046s_easy_widget'),
 				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
 				'choices' => '',
 				'value' =>'',

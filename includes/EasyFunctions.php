@@ -567,14 +567,11 @@ function b2046_general_visibility($tmp_query, $values){
 	}
 	
 	if($values == 'all' || empty($values) ){
-		echo('true');
 		return true;
 		
 	}elseif(!empty($user_level) && $user_level >= $values ){
-		echo('true');
 		return true;
 	}else{
-		echo('false');
 		return false;
 	}
 }
@@ -735,28 +732,70 @@ function b2046_WP_pagenavi($easy_query, $values){
 	wp_reset_postdata();	// avoid errors further down the page
 	return $output;
 }
-function b2046_previous_post_link($easy_query, $values){
-	$class = $values[1];
+
+// Previous post on current Easy loop
+function b2046_previous_posts_link($easy_query, $values){
+	
 	$output = '';
-	if(!empty($class)){
-		$output .= '<div class="'.$class.'">';
-	}
-	$output .= get_previous_posts_link($values[0]);
-	if(!empty($class)){
-		$output .= '</div>';
+	$previous_post_obj = get_previous_post();
+
+	// if previous post exists
+	if(isset($previous_post_obj->ID)){
+		$text = $values[0];
+		$class = $values[1];
+		if(!empty($class)){
+			$output .= '<div class="'.$class.'">';
+		}
+			//  check if they do not want to use their own string
+			if(!empty($text)){$text_string = $text;}else{$text_string = $previous_post_obj->post_title;}
+			$output .= '<a href="'.get_permalink( $previous_post_obj->ID ).'">'.$text_string.'</a>';
+		
+		if(!empty($class)){
+			$output .= '</div>';
+		}
 	}
 	return $output;
 }
-function b2046_next_post_link($easy_query, $values){
-	$class = $values[1];
-	if(!empty($class)){
-		$output .= '<div class="'.$class.'">';
-	}
-	$output = get_next_posts_link($values[0]);
-	if(!empty($class)){
-		$output .= '</div>';
+// Next post on current Easy loop
+function b2046_next_posts_link($easy_query, $values){
+	$output = '';
+	$next_post_obj = get_next_post();
+	// if the next page exist
+	if(isset($next_post_obj->ID)){
+		$text = $values[0];
+		$class = $values[1];
+		if(!empty($class)){
+			$output .= '<div class="'.$class.'">';
+		}
+			//  check if they do not want to use their own string
+			if(!empty($text)){$text_string = $text;}else{$text_string = $next_post_obj->post_title;}
+			$output .= '<a href="'.get_permalink( $next_post_obj->ID ).'">'.$text_string.'</a>';
+		if(!empty($class)){
+			$output .= '</div>';
+		}
 	}
 	return $output;
+}
+
+//~ 
+//~ CONTROL - finds the actual post id and ad it to the query
+//~ 
+function b2046_exclude_actual($tmp_query, $values){	
+	// get the global post object
+	global $post;
+	// check if the post__not_in is not emapty, if not then combine what we got already with the actual post
+	if(!empty($tmp_query['post__not_in'])){
+		$id_array = array_push($tmp_query['post__not_in'], $post->ID);
+	}
+	// 
+	else{
+		$id_array = array($post->ID);
+	}
+
+	$args = array(
+		'post__not_in' => $id_array
+	);
+	return $args;
 }
 
 
