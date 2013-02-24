@@ -1031,7 +1031,7 @@ $EasyItems = array(
 	),
 	'b2046_previous_posts_link' => array(
 		'block' => 'view_after', // 0 = general, 1 = view, 2 = logic 
-		'item_title' => __('Previous link','p_2046s_easy_widget'),
+		'item_title' => __('Link to previous post','p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
 			array(
@@ -1053,7 +1053,7 @@ $EasyItems = array(
 	),
 	'b2046_next_posts_link' => array(
 		'block' => 'view_after', // 0 = general, 1 = view, 2 = logic 
-		'item_title' => __('Next link','p_2046s_easy_widget'),
+		'item_title' => __('Link to next post','p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
 			array(
@@ -1072,7 +1072,41 @@ $EasyItems = array(
 			)
 		)
 	),
-
+	'b2046_posts_nav_link' => array(
+		'block' => 'view_after', // 0 = general, 1 = view, 2 = logic 
+		'item_title' => __('Prev/Next link','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => __('Separator', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+				'choices' => '',
+				'value' =>'',
+				'esc' => 'esc_attr'
+			),
+			array(
+				'ui_note' => __('Prev label', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+				'choices' => '',
+				'value' =>'',
+				'esc' => 'esc_attr'
+			),
+			array(
+				'ui_note' => __('Next label', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+				'choices' => '',
+				'value' =>'',
+				'esc' => 'esc_attr'
+			),
+			array(
+				'ui_note' => __('class', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'filter_attribute_characters',
+				'choices' => '',
+				'value' => ''
+			)
+		)
+	),
 	// 
 	// Bricks is the storage for elements in charge. Both Views & Controls.
 	// The data are stored in:

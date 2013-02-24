@@ -777,6 +777,23 @@ function b2046_next_posts_link($easy_query, $values){
 	return $output;
 }
 
+// Next post on current Easy loop
+function b2046_posts_nav_link($easy_query, $values){
+	$output = '';
+	$separator = (empty($values[0])) ? '' : $values[0];
+	$prevlabel = (empty($values[1])) ? __('&laquo; Previous Page') : $values[1];
+	$nextlabel = (empty($values[2])) ? __('Next Page &raquo;') : $values[2];
+	$class =     (empty($values[3])) ? ' &#8212; '          : $values[3];
+	
+	if(!empty($class)){
+		$output = '<div class="'.$class.'">'.get_previous_posts_link($prevlabel) . $separator . get_next_posts_link($nextlabel).'</div>';
+	}else{
+		$output = get_previous_posts_link($prevlabel) . $separator . get_next_posts_link($nextlabel);
+	}
+	
+	return $output;
+}
+
 //~ 
 //~ CONTROL - finds the actual post id and ad it to the query
 //~ 
