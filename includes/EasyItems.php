@@ -1074,7 +1074,7 @@ $EasyItems = array(
 	),
 	'b2046_posts_nav_link' => array(
 		'block' => 'view_after', // 0 = general, 1 = view, 2 = logic 
-		'item_title' => __('Prev/Next link','p_2046s_easy_widget'),
+		'item_title' => __('Navigation (Prev/Next links)','p_2046s_easy_widget'),
 		// gui
 		'gui' => array(
 			array(
