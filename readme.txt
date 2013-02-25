@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.5.1
-Stable tag: 0.8.3
+Stable tag: 0.8.4
 
 Easy, but complex widget website builder.
 
@@ -106,6 +106,9 @@ Always back up your widgets, do not let the sky fall. Use the <a href="http://wo
 1. Screenshot of the version 0.5
 
 == Change log ==
+
+= 0.8.4 =
+* FIX - the "Post gallery" brick really lists all registred image sizes now.
 
 = 0.8.3 =
 * NEW - VIEW - "Prev/Next link" - mimics the native posts_nav_link() function

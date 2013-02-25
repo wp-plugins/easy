@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/2046s-widget-loops/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.8.3
+ * Version: 0.8.4
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -939,3 +939,33 @@ function mydump($a){
 		var_dump($a);
 	echo '</pre>';
 };
+
+// 
+// WRITE PLUGIN OPTIONS IN TO DB
+// 
+// get registred image sizes 
+// write them in to the DB
+// so that WP can use them sooner or later
+// --why -- Wordpress has no trace of what image sizes are registered. instead it register them on the way .. which not much handy for us
+// we need the values before the WP is on the way, we have to get it from somewhere .. this time from DB
+add_action('init', 'easy_widget_DB_options', 99);
+
+function easy_widget_DB_options() {
+	// define the table prefix
+	$easy_widget_DB_options = 'easy_2046_';
+	// get extra image sizes if any
+	$e_images = get_intermediate_image_sizes();
+	// check the image sizes and make the value
+	$extra_image_sizes = empty($e_images) ? array() : $e_images;
+	// get the options from DB
+	$easy_options = get_option($easy_widget_DB_options);
+	// update only when the it the data are not there already
+	if($easy_options['extra_image_sizes'] != $extra_image_sizes){
+		// build the data
+		$data = array(
+			'extra_image_sizes' => $extra_image_sizes
+			);
+		// update the options
+		update_option($easy_widget_DB_options, $data);
+	}
+}
