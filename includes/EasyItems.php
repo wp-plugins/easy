@@ -85,6 +85,7 @@ $show_post_categories = array(
 // get our DB options
 $image_size_from_DB_options = get_option('easy_2046_');
 // get the extra image sizes form our options
+$intermediate_image_sizes = array();
 $intermediate_image_sizes = $image_size_from_DB_options['extra_image_sizes'];
 
 $list_of_image_sizes = array();
