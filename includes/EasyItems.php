@@ -90,8 +90,10 @@ $intermediate_image_sizes = $image_size_from_DB_options['extra_image_sizes'];
 
 $list_of_image_sizes = array();
 $full_image_width = array('full' => 'full');
-foreach($intermediate_image_sizes as $key){
-	$list_of_image_sizes[$key] = $key;
+if(isset($list_of_image_sizes[0])){
+	foreach($intermediate_image_sizes as $key){
+		$list_of_image_sizes[$key] = $key;
+	}
 }
 $list_of_image_sizes = array_merge($list_of_image_sizes, $full_image_width );
 
