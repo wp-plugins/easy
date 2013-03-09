@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.5.1
-Stable tag: 0.8.5
+Stable tag: 0.8.6
 
 Easy, but complex widget website builder.
 
@@ -106,6 +106,8 @@ Always back up your widgets, do not let the sky fall. Use the <a href="http://wo
 1. Screenshot of the version 0.5
 
 == Change log ==
+= 0.8.6 =
+* FIX - another fix for "Post gallery brick"
 = 0.8.5 =
  * FIX - Invalid argument supplied for foreach() in ..easy/includes/EasyItems.php 
 = 0.8.4 =

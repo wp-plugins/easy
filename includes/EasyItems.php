@@ -85,17 +85,12 @@ $show_post_categories = array(
 // get our DB options
 $image_size_from_DB_options = get_option('easy_2046_');
 // get the extra image sizes form our options
-$intermediate_image_sizes = array();
-$intermediate_image_sizes = $image_size_from_DB_options['extra_image_sizes'];
-
-$list_of_image_sizes = array();
+$intermediate_image_sizes = get_intermediate_image_sizes();
+if(isset($image_size_from_DB_options['extra_image_sizes'])){
+	$intermediate_image_sizes = array_combine($intermediate_image_sizes, $image_size_from_DB_options['extra_image_sizes']);
+} 
 $full_image_width = array('full' => 'full');
-if(isset($list_of_image_sizes[0])){
-	foreach($intermediate_image_sizes as $key){
-		$list_of_image_sizes[$key] = $key;
-	}
-}
-$list_of_image_sizes = array_merge($list_of_image_sizes, $full_image_width );
+$list_of_image_sizes = array_merge($intermediate_image_sizes,$full_image_width );
 
 $image_links = array(
 	'nolink' => 'no link',
