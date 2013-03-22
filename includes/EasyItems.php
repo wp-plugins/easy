@@ -87,7 +87,7 @@ $image_size_from_DB_options = get_option('easy_2046_');
 // get the extra image sizes form our options
 $intermediate_image_sizes = get_intermediate_image_sizes();
 if(isset($image_size_from_DB_options['extra_image_sizes'])){
-	$intermediate_image_sizes = array_combine($intermediate_image_sizes, $image_size_from_DB_options['extra_image_sizes']);
+	$intermediate_image_sizes = $intermediate_image_sizes + $image_size_from_DB_options['extra_image_sizes'];
 } 
 $full_image_width = array('full' => 'full');
 $list_of_image_sizes = array_merge($intermediate_image_sizes,$full_image_width );
@@ -579,6 +579,43 @@ $EasyItems = array(
 			),
 			array(
 				'ui_note' => __('class', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'filter_attribute_characters',
+				'choices' => '',
+				'value' => ''
+			)
+		)
+	),
+	'b2046_post_author' => array(
+		'block' => 'view', // 0 = general, 1 = view, 2 = logic 
+		'item_title' => __('Author','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'filter_attribute_characters',
+				'choices' => array( 
+					0 => 'plain text',
+					1 => 'link to authors posts',
+					2 => 'link to authors url',
+				),
+				'value' => '0'
+			),
+			array(
+				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'esc' => 'filter_attribute_characters',
+				'choices' => array( 
+					0 => 'ID',
+					1 => 'user_login',
+					2 => 'user_nicename',
+					3 => 'user_email',
+					4 => 'user_url',
+					5 => 'display_name'
+				),
+				'value' => '0'
+			),
+			array(
+				'ui_note' => __('custom class', 'p_2046s_easy_widget'),
 				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
 				'esc' => 'filter_attribute_characters',
 				'choices' => '',

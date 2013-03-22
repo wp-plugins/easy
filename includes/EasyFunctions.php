@@ -169,6 +169,41 @@ function b2046_post_title($easy_query, $values){
 	return $out;
 }
 
+function b2046_post_author($easy_query, $values){
+	$linkType = $values[0];
+	$linkVar = $values[1]; 
+	$class = $values[2]; 
+	$link_choices = array( 
+					0 => 'ID',
+					1 => 'user_login',
+					2 => 'user_nicename',
+					3 => 'user_email',
+					4 => 'user_url',
+					5 => 'display_name'
+				);
+	$out = '';
+	$user = get_userdata($easy_query->post->post_author);
+
+	$out .= '<div class="'.$class.' '.$easy_query->post->display_name.'">';
+
+	// plain text
+	if($linkType == 0){
+		$out .= $user->$link_choices[$linkVar];
+	}
+	// link to authors post archive
+	elseif($linkType == 1){
+		$out .= '<a href="'.get_author_posts_url( $easy_query->post->post_author).'">'.$user->$link_choices[$linkVar].'</a>';
+	}
+	// link to authors url
+	else{
+		$out .= '<a href="'.$user->user_url.'">'.$user->$link_choices[$linkVar].'</a>';
+	}
+	
+	$out .= '</div>';
+				
+	return $out;
+}
+
 //~ This extension si to build contet or excerpt,...
 function b2046_post_content($easy_query, $values){
 	$content_type = $values[0];
