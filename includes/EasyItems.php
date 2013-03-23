@@ -7,6 +7,17 @@
 //                   declare some variations first
 // ------------------------------------------------------------------- // 
 
+
+// 
+// UI choices
+// @input
+// @check_box
+// @select_box - 
+// @radio_group -
+// @textarea - textarea
+// @hidden - hidden value
+// @plain - just a raw text , good for notes
+// 
 // specify the roles
 $levels = array( 
 	'all' => __('Anyone') ,
@@ -24,24 +35,6 @@ $args_types=array(
 	//'capability_type' => 'post' // and only types of post
 ); 
 
-//~ get all post types
-//~  this does not get all regostered post types, because it runs before the wordpress init
-//~  post_types are not stored in databese, but are registered during the init
-/*
-$post_types = get_post_types($args_types,'objects'); 
-$post_types_allowed = array();
-$i = 0;
-foreach($post_types as $post_t){
-	$choices = array(
-				'ui_type' => 'check_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
-				'choices' => array($post_t->name => $post_t->labels->singular_name),
-				'esc' => 'esc_attr',
-				'value' => ''
-			);
-	$post_types_allowed[$i] = $choices;
-	$i++;
-}
-*/
 // object title choices
 $object_title_choices =array(
 	'0' => __('no link'),
@@ -389,13 +382,13 @@ $EasyItems = array(
 		'gui' => array(
 			array(
 				'ui_note' => 'post, page, attachment,..',
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'filter_save_characters',
 				'choices' => '',
 				'value' => 'post'
 			),
 			//~ array(
-				//~ 'ui_type' => 'radio_group', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				//~ 'ui_type' => 'radio_group', 
 				//~ 'esc' => 'esc_attr',
 				//~ 'choices' => array(
 					//~ '1' => 'ON paging',
@@ -404,11 +397,11 @@ $EasyItems = array(
 				//~ 'value' => '1'
 			//~ ),
 			array(
-				'ui_type' => 'radio_group', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'radio_group', 
 				'esc' => 'filter_number',
 				'choices' => array(
 					'1' => 'affected by page number',
-					'0' => 'no affected'
+					'0' => 'not affected'
 				),
 				'value' => '1'
 			)
@@ -423,7 +416,7 @@ $EasyItems = array(
 		'gui' => array(
 			array(
 				'ui_note' => __('post / page / custom IDs (separate by coma)', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'filter_number_space_dash',
 				'choices' => '',
 				'value' => ''
@@ -439,7 +432,7 @@ $EasyItems = array(
 		'gui' => array(
 			array(
 				'ui_note' => __('Exclude currently displayed post/page from this Easy loop', 'p_2046s_easy_widget'),
-				'ui_type' => 'hidden', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'hidden', 
 				'esc' => 'filter_number_space_dash',
 				'choices' => '',
 				'value' => ''
@@ -454,14 +447,14 @@ $EasyItems = array(
 		'gui' => array(
 			array(
 				'ui_note' => 'only one taxonomy (name)',
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => '',
 				'value' => 'category'
 			),
 			array(
-				'ui_note' => 'terms IDs, sapareted by comma',
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_note' => 'terms IDs, separated by comma',
+				'ui_type' => 'input', 
 				'esc' => 'filter_number_space_dash',
 				'choices' => '',
 				'value' => ''
@@ -469,7 +462,7 @@ $EasyItems = array(
 			//~ operator for each term / //~ 'IN', 'NOT IN', 'AND'
 			array(
 				'ui_note' => 'terms operator',
-				'ui_type' => 'radio_group', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'radio_group', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => array(
 					'AND' => 'AND (operator)',
@@ -481,7 +474,58 @@ $EasyItems = array(
 			//~ relation between multiple taxonomies
 			array(
 				'ui_note' => 'Taxonomy relation. If you use multiple taxonomy bricks, the later relation beats previous ones.',
-				'ui_type' => 'radio_group', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'radio_group', 
+				'esc' => 'filter_attribute_characters',
+				'choices' => array(
+					'AND' => 'AND (relation)',
+					'OR' => 'OR'
+				),
+				'value' => 'OR'
+			)
+		)
+	),'b2046_based_on_actual_taxonomy' => array(
+		'block' => 'control', // 0 = general, 1 = view, 2 = logic 
+		'repeatable' => true,
+		'item_title' => __('Taxonomy match','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => 'only one taxonomy (name)',
+				'ui_type' => 'input', 
+				'esc' => 'filter_attribute_characters',
+				'choices' => '',
+				'value' => 'category'
+			),
+			// array(
+			// 	'ui_note' => 'term IDs. If left empty it\'ll match all found terms',
+			// 	'ui_type' => 'input', 
+			// 	'esc' => 'filter_number_space_dash',
+			// 	'choices' => '',
+			// 	'value' => ''
+			// ),
+			// array(
+			// 	'ui_note' => 'If empty - all terms from the defined taxonomy are taken in to an account.',
+			// 	'ui_type' => 'plain', 
+			// 	'esc' => '',
+			// 	'choices' => '',
+			// 	'value' => ''
+			// ),
+			//~ operator for each term / //~ 'IN', 'NOT IN', 'AND'
+			array(
+				'ui_note' => 'terms operator',
+				'ui_type' => 'radio_group', 
+				'esc' => 'filter_attribute_characters',
+				'choices' => array(
+					'AND' => 'AND (operator)',
+					'IN' => 'IN',
+					'NOT IN' => 'NOT IN'
+				),
+				'value' => 'IN'
+			),
+			//~ relation between multiple taxonomies
+			array(
+				'ui_note' => 'Taxonomy relation. If you use multiple taxonomy bricks, the later relation beats previous ones.',
+				'ui_type' => 'radio_group', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => array(
 					'AND' => 'AND (relation)',
@@ -545,21 +589,21 @@ $EasyItems = array(
 		// gui
 		'gui' => array(
 			array(
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'filter_save_characters',
 				'choices' => $object_title_choices,
 				'value' => $object_title_choices[0]
 			),
 			array(
 				'ui_note' => __('Scafolding', 'p_2046s_easy_widget'),
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'filter_save_characters',
 				'choices' => $object_title_extension_choices,
 				'value' => $object_title_extension_choices['h1']
 			),
 			array(
 				'ui_note' => __('custom class', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => '',
 				'value' => ''
@@ -572,14 +616,14 @@ $EasyItems = array(
 		// gui
 		'gui' => array(
 			array(
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => $content_choices,
 				'value' => $content_choices['content']
 			),
 			array(
 				'ui_note' => __('class', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => '',
 				'value' => ''
@@ -592,7 +636,7 @@ $EasyItems = array(
 		// gui
 		'gui' => array(
 			array(
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => array( 
 					0 => 'plain text',
@@ -602,7 +646,7 @@ $EasyItems = array(
 				'value' => '0'
 			),
 			array(
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => array( 
 					0 => 'ID',
@@ -616,7 +660,7 @@ $EasyItems = array(
 			),
 			array(
 				'ui_note' => __('custom class', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => '',
 				'value' => ''
@@ -631,7 +675,7 @@ $EasyItems = array(
 		'gui' => array(
 			array(
 				'ui_note' => __('Number of objects.', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'filter_number',
 				'choices' => '',
 				'value' => '1'
@@ -646,7 +690,7 @@ $EasyItems = array(
 		'gui' => array(
 			array(
 				'ui_note' => __('Number', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'filter_number',
 				'choices' => '',
 				'value' => ''
@@ -660,7 +704,7 @@ $EasyItems = array(
 		// gui
 		'gui' => array(
 			array(
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => $post_statuses,
 				'value' => 'publish'
@@ -674,7 +718,7 @@ $EasyItems = array(
 		// gui
 		'gui' => array(
 			array(
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => array(
 					'ASC' => 'Ascendingly',
@@ -683,7 +727,7 @@ $EasyItems = array(
 				'value' => 'DESC'
 			),
 			array(
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'esc_attr',
 				'choices' => $sorting_choices,
 				'value' => 'none'
@@ -696,27 +740,27 @@ $EasyItems = array(
 		// gui
 		'gui' => array(
 			array(
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'esc_attr',
 				'choices' => $show_post_categories,
 				'value' => 0
 			),
 			array(
 				'ui_note' => __('taxonomy name', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'esc_attr',
 				'choices' => '',
 				'value' => 'category'
 			),
 			array(
-				'ui_type' => 'radio_group', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'radio_group', 
 				'esc' => 'esc_attr',
 				'choices' => array(0 => __('Do not show count'), 1 => __('Show count')),
 				'value' => 0
 			),
 			array(
 				'ui_note' => __('class', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'esc_attr',
 				'choices' => '',
 				'value' => ''
@@ -730,21 +774,21 @@ $EasyItems = array(
 		'gui' => array(
 			array(
 				'ui_note' => __('Get featured image.','p_2046s_easy_widget'),
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'esc_attr',
 				'choices' => $list_of_image_sizes,
 				'value' => ''
 			),
 			array(
 				'ui_note' => __('Link image to','p_2046s_easy_widget'),
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'esc_attr',
 				'choices' => $image_links,
 				'value' => ''
 			),
 			array(
 				'ui_note' => __('class', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'esc_attr',
 				'choices' => '',
 				'value' => ''
@@ -759,20 +803,20 @@ $EasyItems = array(
 		'gui' => array(
 			array(
 				'ui_note' => __('Image size','p_2046s_easy_widget'),
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'esc_attr',
 				'choices' => $list_of_image_sizes,
 				'value' => ''
 			),
 			array(
 				'ui_note' => __('Link image to','p_2046s_easy_widget'),
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'esc_attr',
 				'choices' => $list_of_image_sizes,
 				'value' => ''
 			),
 			array(
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'esc_attr',
 				'choices' => array(
 					'ASC' => 'Ascendingly',
@@ -781,13 +825,13 @@ $EasyItems = array(
 				'value' => 'DESC'
 			),
 			array(
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => $sorting_choices,
 				'value' => 'none'
 			),
 			array(
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => array(
 					'0' => 'empty title attribute',
@@ -797,7 +841,7 @@ $EasyItems = array(
 				'value' => 'none'
 			),
 			array(
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'filter_number',
 				'choices' => array(
 					'0' => 'include featured image',
@@ -807,7 +851,7 @@ $EasyItems = array(
 			),
 			array(
 				'ui_note' => __('class', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'esc_attr',
 				'choices' => '',
 				'value' => ''
@@ -820,7 +864,7 @@ $EasyItems = array(
 		// gui
 		'gui' => array(
 			array(
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'filter_number',
 				'choices' => array(
 					'0' => 'Link',
@@ -830,7 +874,7 @@ $EasyItems = array(
 			),
 			array(
 				'ui_note' => __('class', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => '',
 				'value' => ''
@@ -844,35 +888,35 @@ $EasyItems = array(
 		'gui' => array(
 			array(
 				'ui_note' => __('Show as', 'p_2046s_easy_widget'),
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => $meta_show_choices,
 				'value' => ''
 			),
 			array(
 				'ui_note' => __('meta key', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => '',
 				'value' => ''
 			),
 			//~ array(
 				//~ 'ui_note' => __('meta value', 'p_2046s_easy_widget'),
-				//~ 'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				//~ 'ui_type' => 'input', 
 				//~ 'esc' => 'esc_attr',
 				//~ 'choices' => '',
 				//~ 'value' => ''
 			//~ ),
 			array(
 				'ui_note' => __('separator', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'esc_attr',
 				'choices' => '',
 				'value' => ''
 			),
 			array(
 				'ui_note' => __('class', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => '',
 				'value' => ''
@@ -893,7 +937,7 @@ $EasyItems = array(
 			),
 			array(
 				'ui_note' => __('class', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => '',
 				'value' => ''
@@ -980,7 +1024,7 @@ $EasyItems = array(
 			),
 			array(
 				'ui_note' => __('class', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => '',
 				'value' => ''
@@ -994,7 +1038,7 @@ $EasyItems = array(
 		'gui' => array(
 			array(
 				'ui_note' => __('class', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'filter_number',
 				'choices' => '',
 				'value' => ''
@@ -1008,7 +1052,7 @@ $EasyItems = array(
 		'gui' => array(
 			array(
 				'ui_note' => __('class', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => '',
 				'value' => ''
@@ -1021,7 +1065,7 @@ $EasyItems = array(
 		// gui
 		'gui' => array(
 			array(
-				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'select_box', 
 				'esc' => 'filter_letter',
 				'choices' => array(
 						'published' => 'published',
@@ -1030,7 +1074,7 @@ $EasyItems = array(
 				'value' => 'published'
 			),
 			//~ array(
-				//~ 'ui_type' => 'check_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				//~ 'ui_type' => 'check_box', 
 				//~ 'esc' => 'esc_attr',
 				//~ 'choices' => array(
 					//~ 1 => 'link to archive'
@@ -1039,14 +1083,14 @@ $EasyItems = array(
 			//~ ),
 			array(
 				'ui_note' => __('PHP date format', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'esc_attr',
 				'choices' => '',
 				'value' => 'D. M. Y'
 			),
 			array(
 				'ui_note' => __('class', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => '',
 				'value' => ''
@@ -1081,7 +1125,7 @@ $EasyItems = array(
 			),
 			array(
 				'ui_note' => __('class', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => '',
 				'value' => ''
@@ -1103,7 +1147,7 @@ $EasyItems = array(
 			),
 			array(
 				'ui_note' => __('class', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => '',
 				'value' => ''
@@ -1138,7 +1182,7 @@ $EasyItems = array(
 			),
 			array(
 				'ui_note' => __('class', 'p_2046s_easy_widget'),
-				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea, hidden
+				'ui_type' => 'input', 
 				'esc' => 'filter_attribute_characters',
 				'choices' => '',
 				'value' => ''

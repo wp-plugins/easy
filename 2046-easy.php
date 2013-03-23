@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/2046s-widget-loops/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.8.7
+ * Version: 0.8.8
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -804,7 +804,7 @@ Easy_2046_builder::$EasyQuery = array(
 					//~ 
 					//~ hidden
 					//~ 
-					if ($val['ui_type'] == 'hidden'){
+					elseif ($val['ui_type'] == 'hidden'){
 						if(isset($ui_note)){
 							$placeholder = $ui_note;
 						}else{
@@ -831,6 +831,19 @@ Easy_2046_builder::$EasyQuery = array(
 						}
 						$output .= '</div>';
 					}
+					//~ 
+					//~ playin text - note
+					//~ 
+					elseif ($val['ui_type'] == 'plain'){
+						if(isset($ui_note)){
+							$placeholder = $ui_note;
+						}else{
+							$placeholder = '';
+						}
+						// $output .= '<input '.$j_title.' type="hidden" name="'. $name .'[gui]['.$each_gui_i.'][value]" value="'. $gui_value .'"/>';
+						$output .= '<em>'.$placeholder.'</em>';
+					}
+
 					//~ iterate for each gui
 					$each_gui_i++;
 				$i++;

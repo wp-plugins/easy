@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.5.1
-Stable tag: 0.8.7
+Stable tag: 0.8.8
 
 Easy, but complex widget website builder.
 
@@ -106,6 +106,8 @@ Always back up your widgets, do not let the sky fall. Use the <a href="http://wo
 1. Screenshot of the version 0.5
 
 == Change log ==
+= 0.8.8 =
+ * NEW - CONTROL brick - Taxonomy matcher - it gets terms from the main post/page and adjusts the Easy widget query according to it. You can show post on the side that are in the same category as the actual post ..or something like that.  
 = 0.8.7 =
 * FIX - array_combine error
 * NEW - Author VIEW brick - shows the author or his/her name, url, ... 

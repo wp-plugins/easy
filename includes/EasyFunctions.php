@@ -75,7 +75,29 @@ function b2046_taxonomy_parameters($tmp_query, $values){
 	}
 	return $output;
 }
+function b2046_based_on_actual_taxonomy($tmp_query, $values){
+	$output = array();
+	$taxonomy = !empty($values[0]) ? $values[0] : 'category';
+	$operator = $values[1];
+	$relation = $values[2];
+	global $post;
+	
+	$term_list = wp_get_post_terms($post->ID, $taxonomy, array("fields" => "ids"));
+	$args =  array(
+		'tax_query' => array(
+			'relation' => $relation, 
+			 array(
+				'taxonomy' => $taxonomy,
+				'field' => 'id',
+				'terms' => $term_list,
+				'operator' => $operator
+			)
+		)
+	);
 
+	$output = array_merge( $output, $args);
+	return $output;
+}
 //~ Change post type
 function b2046_post_type($tmp_query, $values){
 	$output = array();
@@ -815,17 +837,13 @@ function b2046_next_posts_link($easy_query, $values){
 // Next post on current Easy loop
 function b2046_posts_nav_link($easy_query, $values){
 	$output = '';
-	$separator = (empty($values[0])) ? '' : $values[0];
+	$separator = (empty($values[0])) ? '&#8212;' : $values[0];
 	$prevlabel = (empty($values[1])) ? __('&laquo; Previous Page') : $values[1];
 	$nextlabel = (empty($values[2])) ? __('Next Page &raquo;') : $values[2];
-	$class =     (empty($values[3])) ? ' &#8212; '          : $values[3];
+	$class =     (empty($values[3])) ? 'post_nav_link'          : $values[3];
 	
-	if(!empty($class)){
-		$output = '<div class="'.$class.'">'.get_previous_posts_link($prevlabel) . $separator . get_next_posts_link($nextlabel).'</div>';
-	}else{
-		$output = get_previous_posts_link($prevlabel) . $separator . get_next_posts_link($nextlabel);
-	}
-	
+	$output = '<div class="'.$class.'">'.get_previous_posts_link($prevlabel) . $separator . get_next_posts_link($nextlabel).'</div>';
+
 	return $output;
 }
 
