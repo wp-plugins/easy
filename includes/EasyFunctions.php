@@ -400,7 +400,7 @@ function b2046_post_image($easy_query, $values){
 	$link = $values[1];
 	$class = $values[2];
 	$out = '';
-	
+
 	$att_id =get_post_thumbnail_id($easy_query->post->ID);
 	
 	if($link == 'objectlink'){

@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/2046s-widget-loops/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.8.9
+ * Version: 0.9
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -969,7 +969,13 @@ function easy_widget_DB_options() {
 	// get extra image sizes if any
 	$e_images = get_intermediate_image_sizes();
 	// check the image sizes and make the value
-	$extra_image_sizes = empty($e_images) ? array() : $e_images;
+	if(!empty($e_images)){
+		foreach ($e_images as $key => $value) {
+			$extra_image_sizes[$value] = $value;
+		}
+	}else{
+		$extra_image_sizes = array();
+	}
 	// get the options from DB
 	$easy_options = get_option($easy_widget_DB_options);
 	// update only when the it the data are not there already
@@ -992,4 +998,18 @@ if (!function_exists('get_dynamic_sidebar')) {
 		$sidebar_contents = ob_get_clean();
 		return $sidebar_contents;
 	}
+}
+function list_of_image_sizes(){
+	$image_size_from_DB_options = get_option('easy_2046_');
+	// get the extra image sizes form our options
+	$intermediate_image_sizes_raw = get_intermediate_image_sizes();
+	foreach ($intermediate_image_sizes_raw as $key => $value) {
+			$intermediate_image_sizes[$value] = $value;
+		}
+	if(isset($image_size_from_DB_options['extra_image_sizes'])){
+		$intermediate_image_sizes = $intermediate_image_sizes + $image_size_from_DB_options['extra_image_sizes'];
+	} 
+	$full_image_width = array('full' => 'full');
+	$list_of_image_sizes = array_merge($intermediate_image_sizes,$full_image_width );
+	return $list_of_image_sizes;
 }

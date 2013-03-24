@@ -75,15 +75,7 @@ $show_post_categories = array(
 //~ 
 //~ get images
 //~ 
-// get our DB options
-$image_size_from_DB_options = get_option('easy_2046_');
-// get the extra image sizes form our options
-$intermediate_image_sizes = get_intermediate_image_sizes();
-if(isset($image_size_from_DB_options['extra_image_sizes'])){
-	$intermediate_image_sizes = $intermediate_image_sizes + $image_size_from_DB_options['extra_image_sizes'];
-} 
-$full_image_width = array('full' => 'full');
-$list_of_image_sizes = array_merge($intermediate_image_sizes,$full_image_width );
+$list_of_image_sizes = list_of_image_sizes();
 
 $image_links = array(
 	'nolink' => 'no link',
@@ -916,14 +908,14 @@ $EasyItems = array(
 			array(
 				'ui_note' => __('Image size','p_2046s_easy_widget'),
 				'ui_type' => 'select_box', 
-				'esc' => 'esc_attr',
+				'esc' => 'filter_attribute_characters',
 				'choices' => $list_of_image_sizes,
 				'value' => ''
 			),
 			array(
 				'ui_note' => __('Link image to','p_2046s_easy_widget'),
 				'ui_type' => 'select_box', 
-				'esc' => 'esc_attr',
+				'esc' => 'filter_attribute_characters',
 				'choices' => $list_of_image_sizes,
 				'value' => ''
 			),

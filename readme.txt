@@ -36,6 +36,8 @@ Content bricks are:
  * author
  * date
  * shortcode
+ * post gallery
+ * sidebar
  * WPpagenavi (when installed)
  * ...
  * and even your own content bricks if you like
@@ -53,6 +55,8 @@ Logical bricks are:
  * post status
  * edit link
  * permissions
+ * meta filter
+ * taxonomy filter
  * ...
  * and even your own logic bricks if you like
  
@@ -106,6 +110,9 @@ Always back up your widgets, do not let the sky fall. Use the <a href="http://wo
 1. Screenshot of the version 0.5
 
 == Change log ==
+= 0.9 =
+* FIX - Featured image did not point to where it has to !!! you should deactivate and reactivate the plugin, in order to see all image versions as they exists. Otherwise you'll se a weird mix of "same" sizes !!!
+
 = 0.8.9 =
  * FIX - CONTROL - Show-Hide on ID
  * NEW - CONTROL - Meta - a custom meta filter
