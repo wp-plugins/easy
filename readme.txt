@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.5.1
-Stable tag: 0.8.8
+Stable tag: 0.8.9
 
 Easy, but complex widget website builder.
 
@@ -106,6 +106,11 @@ Always back up your widgets, do not let the sky fall. Use the <a href="http://wo
 1. Screenshot of the version 0.5
 
 == Change log ==
+= 0.8.9 =
+ * FIX - CONTROL - Show-Hide on ID
+ * NEW - CONTROL - Meta - a custom meta filter
+ * NEW - VIEW - sidebar - shows sidebar within sidebar :O . Grate if you would like to use the Easy control logic for widgets that have no controls of that kind.. about 99.99% ;) DO NOT include a sidebar within it self!
+
 = 0.8.8 =
  * NEW - CONTROL brick - Taxonomy matcher - it gets terms from the main post/page and adjusts the Easy widget query according to it. You can show post on the side that are in the same category as the actual post ..or something like that.  
 = 0.8.7 =

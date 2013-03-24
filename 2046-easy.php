@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/2046s-widget-loops/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.8.8
+ * Version: 0.8.9
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -980,5 +980,16 @@ function easy_widget_DB_options() {
 			);
 		// update the options
 		update_option($easy_widget_DB_options, $data);
+	}
+}
+// create our own get_dynamic_sidebar function, which is not in the WP core
+if (!function_exists('get_dynamic_sidebar')) {
+	function get_dynamic_sidebar($index) 
+	{
+		$sidebar_contents = "";
+		ob_start();
+		dynamic_sidebar($index);
+		$sidebar_contents = ob_get_clean();
+		return $sidebar_contents;
 	}
 }
