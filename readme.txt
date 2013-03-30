@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.5.1
-Stable tag: 0.8.9
+Stable tag: 0.9.1
 
 Easy, but complex widget website builder.
 
@@ -110,6 +110,10 @@ Always back up your widgets, do not let the sky fall. Use the <a href="http://wo
 1. Screenshot of the version 0.5
 
 == Change log ==
+= 0.9.1 =
+ * the Hierarchical CONTROL no longer forces to the query "page" type. The type have to be set explicitly!
+ * FIX - show-hide on ID - there was a bug when multipple IDs where defined.
+ 
 = 0.9 =
 * FIX - Featured image did not point to where it has to !!! you should deactivate and reactivate the plugin, in order to see all image versions as they exists. Otherwise you'll se a weird mix of "same" sizes !!!
 

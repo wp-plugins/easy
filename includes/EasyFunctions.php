@@ -752,7 +752,8 @@ function b2046_on_condition($tmp_query, $values){
 //~ Show on post, page, what ever id
 //~ 
 function b2046_on_p_ID($tmp_query, $values){
-	if($values[0] == 1){
+	// 1 = show
+	if($values[0] == '1'){
 		$a = true; 
 		$b = false;
 	}else{
@@ -766,8 +767,9 @@ function b2046_on_p_ID($tmp_query, $values){
 		$pids = Easy_2046_builder::f2046_id_cleaner_to_array($values[1]);
 		$object_id = $post->ID;
 		foreach($pids as $pid){
-			if($object_id == $pid || $object_id == $pid ){
+			if($object_id == $pid){
 				$output = $a;
+				break;
 			}else{
 				$output = $b;
 			}
@@ -776,7 +778,6 @@ function b2046_on_p_ID($tmp_query, $values){
 	}else{
 		$output = true;
 	}
-	
 	return $output;
 }
 
@@ -817,11 +818,11 @@ function b2046_hierarchy_based($tmp_query, $values){
 			}
 		}
 		//~ force the post type to be the same as the current page, or the given page ID
-		$output['post_type'] = $post->post_type;
+		// $output['post_type'] = $post->post_type;
 	//~ '2' => 'Child pages of current page',
 	}elseif($choice == 2){
 		$output['post_parent'] = $post->ID;
-		$output['post_type'] = $post->post_type;
+		// $output['post_type'] = $post->post_type;
 	}
 	//~ '1' => 'Pages from the same level as given ID',
 	elseif($choice == 1){
@@ -830,7 +831,7 @@ function b2046_hierarchy_based($tmp_query, $values){
 		}else{
 			$output['post_parent'] = '0';
 		}
-		$output['post_type'] = get_post_type($page_ids[0]);
+		//  $output['post_type'] = get_post_type($page_ids[0]);
 		if($xclude == 1){
 			$output['post__not_in'] = array($page_ids[0]); 
 		}
@@ -838,7 +839,7 @@ function b2046_hierarchy_based($tmp_query, $values){
 	//~ '3' => 'Child pages of given ID'
 	elseif($choice == 3){
 		$output['post_parent'] = $page_ids[0];
-		$output['post_type'] = get_post_type($page_ids[0]);
+		// $output['post_type'] = get_post_type($page_ids[0]);
 	}
 
 	return $output;
