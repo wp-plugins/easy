@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin name: Easy
- * Plugin URI: http://wordpress.org/extend/plugins/2046s-widget-loops/
+ * Plugin URI: http://wordpress.org/extend/plugins/easy/
  * Description: Easy, but complex GUI website builder.
  * Version: 0.9.1
  * Author: 2046
