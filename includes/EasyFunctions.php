@@ -236,12 +236,13 @@ function b2046_order($tmp_query, $values){
 function b2046_post_title($easy_query, $values){
 	$link = $values[0];
 	$scafold = $values[1];
-	if(!empty($values[2])){
-		$customlink = get_post_meta($easy_query->post->ID, $values[2], true);
+	$target = ($values[2] == 'blank') ? ' target="_blank"' : '';
+	if(!empty($values[3])){
+		$customlink = get_post_meta($easy_query->post->ID, $values[3], true);
 	}else{
 		$customlink = '';
 	}
-	$class = $values[3]; 
+	$class = $values[4]; 
 	$out = '';
 
 	if($scafold != '0'){
@@ -251,9 +252,9 @@ function b2046_post_title($easy_query, $values){
 	if($link == 0){
 		$out .= get_the_title($easy_query->post->ID);
 	}elseif(!empty($customlink)){
-		$out .= '<a href="'.$customlink.'">'.get_the_title($easy_query->post->ID).'</a>';
+		$out .= '<a href="'.$customlink.'" '.$target.'>'.get_the_title($easy_query->post->ID).'</a>';
 	}else{
-		$out .= '<a href="'.get_permalink($easy_query->post->ID).'">'.get_the_title($easy_query->post->ID).'</a>';
+		$out .= '<a href="'.get_permalink($easy_query->post->ID).'" '.$target.'>'.get_the_title($easy_query->post->ID).'</a>';
 	}
 	
 	if($scafold !='0'){
@@ -405,12 +406,13 @@ function b2046_edit_link($easy_query, $values){
 function b2046_post_image($easy_query, $values){
 	$image = $values[0];
 	$link = $values[1];
-	if(!empty($values[2])){
-		$customlink = get_post_meta($easy_query->post->ID, $values[2], true);
+	$target = ($values[2] == 'blank') ? ' target="_blank"' : '';
+	if(!empty($values[3])){
+		$customlink = get_post_meta($easy_query->post->ID, $values[3], true);
 	}else{
 		$customlink = '';
 	}
-	$class = $values[3];
+	$class = $values[4];
 	$out = '';
 
 	$att_id = get_post_thumbnail_id($easy_query->post->ID);
@@ -419,25 +421,31 @@ function b2046_post_image($easy_query, $values){
 		$url = get_permalink($easy_query->post->ID);
 	}elseif($link == 'customlink'){
 		$url = $customlink;
-	}elseif($link != 'objectlink' || $link != 'nolink'){
+	}elseif($link != 'nolink'){
 		$img_obj = wp_get_attachment_image_src( $att_id, $link);
 		$url = $img_obj[0];
-	}
-	
+	}	
 	if(!empty($att_id)){
 		$image_url = wp_get_attachment_image_src( $att_id, $image);
 		if(!empty($class)){
 			$out .= '<div class="'.$class.'">';
 		}
-		if($link != 'nolink'){
-			$out .= '<a href="'.$url.'">';
-		}
+		//  create link if any
 		
+		if(!empty($url)){
+			if($link == 'objectlink' || $link == 'customlink'){
+				$out .= '<a href="'.$url.'" '.$target.'>';
+			}
+		}
+		// render out the picture
 		$out .= '<img src="'.$image_url[0].'" alt="'.get_the_title($easy_query->post->ID).'" />';
-		
-		if($link != 'nolink'){
-			$out .= '</a>';
+		// close the link
+		if(!empty($url)){
+			if($link == 'objectlink' || $link == 'customlink'){
+				$out .= '</a>';
+			}
 		}
+
 		if(!empty($class)){
 			$out .= '</div>';
 		}

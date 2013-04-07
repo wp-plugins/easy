@@ -694,6 +694,16 @@ $EasyItems = array(
 				'value' => $object_title_extension_choices['h1']
 			),
 			array(
+				'ui_note' => __('Link taget','p_2046s_easy_widget'),
+				'ui_type' => 'select_box', 
+				'esc' => 'filter_attribute_characters',
+				'choices' => array(
+						'parent' => 'same window',
+						'blank' => 'new window', 
+					),
+				'value' => ''
+			),
+			array(
 				'ui_note' => __('custom meta value', 'p_2046s_easy_widget'),
 				'ui_type' => 'input', 
 				'esc' => 'filter_attribute_characters',
@@ -900,9 +910,19 @@ $EasyItems = array(
 				'value' => ''
 			),
 			array(
+				'ui_note' => __('Link taget','p_2046s_easy_widget'),
+				'ui_type' => 'select_box', 
+				'esc' => 'filter_attribute_characters',
+				'choices' => array(
+						'parent' => 'same window',
+						'blank' => 'new window', 
+					),
+				'value' => ''
+			),
+			array(
 				'ui_note' => __('custom field name','p_2046s_easy_widget'),
 				'ui_type' => 'input', 
-				'esc' => 'esc_attr',
+				'esc' => 'filter_attribute_characters',
 				'choices' => '',
 				'value' => ''
 			),

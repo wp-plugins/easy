@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/easy/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.9.2
+ * Version: 0.9.2.1
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -919,7 +919,7 @@ function filter_number_space_dash($string){
 	return $output;
 }
 
-//  cleaning filter - // letters, space, dash
+//  cleaning filter - // letters
 function filter_letter($string){
 	$output = '';
 	$output = preg_replace("/[^A-Za-z]/", "", $string );
@@ -940,7 +940,7 @@ function filter_attribute_characters($string){
 	return $output;
 }
 
-//  cleaning filter - / alphabet numbers, spaces, dashes, dash, comma
+//  cleaning filter - / alphabet numbers, spaces, dashes, comma
 function filter_save_characters($string){
 	$output = '';
 	$output = preg_replace("/[^A-Za-z0-9\s-\_,]/", "", $string );
