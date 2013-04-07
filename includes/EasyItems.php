@@ -38,7 +38,8 @@ $args_types=array(
 // object title choices
 $object_title_choices =array(
 	'0' => __('no link'),
-	'1' => __('Link to "post"')
+	'1' => __('Link to "post"'),
+	'2' => __('Link to "custom meta"')
 );
 // Object title extrension choices
 $object_title_extension_choices = array(
@@ -80,6 +81,7 @@ $list_of_image_sizes = list_of_image_sizes();
 $image_links = array(
 	'nolink' => 'no link',
 	'objectlink' => 'object link',
+	'customlink' => 'custom meta value'
 );
 $image_links = array_merge($image_links, $list_of_image_sizes);
 
@@ -692,6 +694,13 @@ $EasyItems = array(
 				'value' => $object_title_extension_choices['h1']
 			),
 			array(
+				'ui_note' => __('custom meta value', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', 
+				'esc' => 'filter_attribute_characters',
+				'choices' => '',
+				'value' => ''
+			),
+			array(
 				'ui_note' => __('custom class', 'p_2046s_easy_widget'),
 				'ui_type' => 'input', 
 				'esc' => 'filter_attribute_characters',
@@ -888,6 +897,13 @@ $EasyItems = array(
 				'ui_type' => 'select_box', 
 				'esc' => 'esc_attr',
 				'choices' => $image_links,
+				'value' => ''
+			),
+			array(
+				'ui_note' => __('custom field name','p_2046s_easy_widget'),
+				'ui_type' => 'input', 
+				'esc' => 'esc_attr',
+				'choices' => '',
 				'value' => ''
 			),
 			array(

@@ -236,7 +236,12 @@ function b2046_order($tmp_query, $values){
 function b2046_post_title($easy_query, $values){
 	$link = $values[0];
 	$scafold = $values[1];
-	$class = $values[2]; 
+	if(!empty($values[2])){
+		$customlink = get_post_meta($easy_query->post->ID, $values[2], true);
+	}else{
+		$customlink = '';
+	}
+	$class = $values[3]; 
 	$out = '';
 
 	if($scafold != '0'){
@@ -245,6 +250,8 @@ function b2046_post_title($easy_query, $values){
 	
 	if($link == 0){
 		$out .= get_the_title($easy_query->post->ID);
+	}elseif(!empty($customlink)){
+		$out .= '<a href="'.$customlink.'">'.get_the_title($easy_query->post->ID).'</a>';
 	}else{
 		$out .= '<a href="'.get_permalink($easy_query->post->ID).'">'.get_the_title($easy_query->post->ID).'</a>';
 	}
@@ -398,13 +405,20 @@ function b2046_edit_link($easy_query, $values){
 function b2046_post_image($easy_query, $values){
 	$image = $values[0];
 	$link = $values[1];
-	$class = $values[2];
+	if(!empty($values[2])){
+		$customlink = get_post_meta($easy_query->post->ID, $values[2], true);
+	}else{
+		$customlink = '';
+	}
+	$class = $values[3];
 	$out = '';
 
-	$att_id =get_post_thumbnail_id($easy_query->post->ID);
+	$att_id = get_post_thumbnail_id($easy_query->post->ID);
 	
 	if($link == 'objectlink'){
 		$url = get_permalink($easy_query->post->ID);
+	}elseif($link == 'customlink'){
+		$url = $customlink;
 	}elseif($link != 'objectlink' || $link != 'nolink'){
 		$img_obj = wp_get_attachment_image_src( $att_id, $link);
 		$url = $img_obj[0];

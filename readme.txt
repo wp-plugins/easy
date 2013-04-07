@@ -5,8 +5,8 @@ Plugin URI: http://wordpress.org/extend/easy
 Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
-Tested up to: 3.5.1
-Stable tag: 0.9.1
+Tested up to: 3.6-beta1
+Stable tag: 0.9.2
 
 Easy, but complex widget website builder.
 
@@ -110,6 +110,11 @@ Always back up your widgets, do not let the sky fall. Use the <a href="http://wo
 1. Screenshot of the version 0.5
 
 == Change log ==
+= 0.9.2 =
+ * NEW - VIEW - "Title" brick can be a link to custom field value
+ * NEW - VIEW - "Featured image" brick can be a link to custom field value
+ {If you have not used Featured image bricks and title bricks class fields, you can stay cool, otherwise You have to reset all your Featured image bricks and title bricks (after the update - the class values will shift to a custom field values..)}
+
 = 0.9.1 =
  * the Hierarchical CONTROL no longer forces to the query "page" type. The type have to be set explicitly!
  * FIX - show-hide on ID - there was a bug when multipple IDs where defined.
