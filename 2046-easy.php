@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/easy/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.9.2.1
+ * Version: 0.9.3
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -516,7 +516,7 @@ Easy_2046_builder::$EasyQuery = array(
 				</div>
 			</div>
 		</div>
-		<h3 class="control_h3">'.__('Controls').'</h3>
+		<h3 class="control_h3">'.__('Controls (<span class="res">R</span><i>esistors</i>)').'</h3>
 		<div class="control_holder">
 			<div class="control_bank">
 				<ul>';
@@ -685,6 +685,9 @@ Easy_2046_builder::$EasyQuery = array(
 				
 				$output .= '<li class="li_'.$li_class.' ui-draggable" '.$rel_repeatable.'>';
 				if(!empty($item['item_title'])){
+					if($item['block'] == 'resistor'){
+						$output .= '<span class="res">R</span>';	
+					}
 					$output .='<strong>'.$item['item_title'].'</strong> <b class="rem">x</b><br />';
 				}	
 				$each_gui_i = 0;

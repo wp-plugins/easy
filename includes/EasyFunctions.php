@@ -803,6 +803,37 @@ function b2046_on_p_ID($tmp_query, $values){
 	return $output;
 }
 
+function b2046_on_taxonomy($tmp_query, $values){
+	$taxonomy = !empty($values[1]) ? $values[1] : 'category';
+	$terms = Easy_2046_builder::f2046_id_cleaner_to_array($values[0]);
+	$showhide = $values[2];
+	if($showhide == 'show'){
+		$a = true; 
+		$b = false;
+	}else{
+		$a = false; 
+		$b = true;
+	}
+	// get the terms form actual post
+	global $post;
+	$term_list = wp_get_post_terms($post->ID, $taxonomy, array("fields" => "ids"));
+	
+	if(!empty($terms)){
+		foreach($term_list as $term){
+			if(in_array($term, $terms)){
+				$output = $a;
+				break;
+			}else{
+				$output = $b;
+			}
+		}
+		
+	}else{
+		$output = true;
+	}
+	return $output;
+}
+
 //~ 
 //~ restrict based on hierarchy
 //~ 

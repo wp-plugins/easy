@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.6-beta1
-Stable tag: 0.9.2.1
+Stable tag: 0.9.3
 
 Easy, but complex widget website builder.
 
@@ -110,7 +110,10 @@ Always back up your widgets, do not let the sky fall. Use the <a href="http://wo
 1. Screenshot of the version 0.5
 
 == Change log ==
-
+= 0.9.3 = 
+ * NEW - CONTROL - you can control on what taxonomy (category) the result will be shown
+ * NEW - CONTROL - the controllers that act as resistors have a "R" mark
+ 
 = 0.9.2.1 = 
  * NEW - VIEW - new "target" option for links "Featured image" brick and "Title" brick
 

@@ -514,6 +514,38 @@ $EasyItems = array(
 			)
 		)
 	),
+	'b2046_on_taxonomy' => array(
+		'block' => 'resistor',  
+		'repeatable' => true,
+		'item_title' => __('On Taxonomy (Category)','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => 'only one taxonomy (name)',
+				'ui_type' => 'input', 
+				'esc' => 'filter_attribute_characters',
+				'choices' => '',
+				'value' => 'category'
+			),
+			array(
+				'ui_note' => 'terms IDs, separated by comma',
+				'ui_type' => 'input', 
+				'esc' => 'filter_number_space_dash',
+				'choices' => '',
+				'value' => ''
+			),
+			array(
+				'ui_note' => '',
+				'ui_type' => 'radio_group', 
+				'esc' => 'filter_attribute_characters',
+				'choices' => array(
+					'show' => 'show',
+					'hide' => 'hide',
+				),
+				'value' => 'show'
+			)
+		)
+	),
 	'b2046_meta' => array(
 		'block' => 'control',  
 		'repeatable' => true,
