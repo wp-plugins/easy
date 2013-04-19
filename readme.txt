@@ -110,7 +110,11 @@ Always back up your widgets, do not let the sky fall. Use the <a href="http://wo
 1. Screenshot of the version 0.5
 
 == Change log ==
-= 0.9.3 = 
+ = 0.9.4 = 
+ * FIX - resitors have wrong user input sorting, it mismatched the values
+ * NEW - CONTROL - Resistor - Show/hide based on hierarchical structure
+ 
+ = 0.9.3 =
  * NEW - CONTROL - you can control on what taxonomy (category) the result will be shown
  * NEW - CONTROL - the controllers that act as resistors have a "R" mark
  

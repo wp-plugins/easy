@@ -546,6 +546,58 @@ $EasyItems = array(
 			)
 		)
 	),
+	'b2046_on_hierarchy' => array(
+		'block' => 'resistor',  
+		'repeatable' => true,
+		'item_title' => __('Show/hide based on hierarchy','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => 'show or hide',
+				'ui_type' => 'radio_group', 
+				'esc' => 'filter_attribute_characters',
+				'choices' => array(
+					'show' => 'show',
+					'hide' => 'hide',
+				),
+				'value' => 'show'
+			),
+			array(
+				'ui_note' => 'Show on',
+				'ui_type' => 'radio_group', 
+				'esc' => 'filter_attribute_characters',
+				'choices' => array(
+						'child' => 'On child pages of defined IDs',
+						'parent' => 'On parent page of defined IDs',
+					),
+				'value' => 'child'
+			),
+			array(
+				'ui_note' => 'Page IDs, separated by comma',
+				'ui_type' => 'input', 
+				'esc' => 'filter_number_space_dash',
+				'choices' => '',
+				'value' => ''
+			),
+			array(
+				'ui_note' => 'Depth (default 1 level)',
+				'ui_type' => 'input', 
+				'esc' => 'filter_attribute_characters',
+				'choices' => '',
+				'value' => ''
+			),
+			array(
+				'ui_note' => 'including/excluding given IDs',
+				'ui_type' => 'radio_group', 
+				'esc' => 'filter_attribute_characters',
+				'choices' => array(
+					'exclude' => 'omit',
+					'include' => 'include',
+				),
+				'value' => 'exclude'
+			)
+		)
+	),
 	'b2046_meta' => array(
 		'block' => 'control',  
 		'repeatable' => true,
@@ -898,7 +950,7 @@ $EasyItems = array(
 				'ui_type' => 'select_box', 
 				'esc' => 'esc_attr',
 				'choices' => $show_post_categories,
-				'value' => 0
+				'value' => '0'
 			),
 			array(
 				'ui_note' => __('taxonomy name', 'p_2046s_easy_widget'),
@@ -911,7 +963,7 @@ $EasyItems = array(
 				'ui_type' => 'radio_group', 
 				'esc' => 'esc_attr',
 				'choices' => array(0 => __('Do not show count'), 1 => __('Show count')),
-				'value' => 0
+				'value' => '0'
 			),
 			array(
 				'ui_note' => __('class', 'p_2046s_easy_widget'),

@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/easy/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.9.3
+ * Version: 0.9.4
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -153,7 +153,6 @@ Easy_2046_builder::$EasyQuery = array(
 		//~ check if it makes sense to process anything
 		//~ the resistor ids a filter that returns true if all the conditions are meet, flase if not.. if not then skip the next process
 		$resistor = $this->f2046_output_resistor($default_query,$instance);
-		//~ mydump($resistor);
 		if ($resistor == true){
 			//~ if the user used some query controls
 			$user_query = $this->f2046_output_control($default_query,$instance);
@@ -163,10 +162,8 @@ Easy_2046_builder::$EasyQuery = array(
 			}
 			//~ merge the default query by the user query, (If the input arrays have the same string keys, then the later value for that key will overwrite the previous one.)
 			else{
-				//~ mydump($user_query);
 				$query_args = array_merge($default_query, $user_query);
 			}
-			//~ mydump($query_args);
 			// The Query
 			$easy_query = new WP_Query( $query_args );
 			//~ General restrictions
@@ -301,10 +298,8 @@ Easy_2046_builder::$EasyQuery = array(
 	function f2046_output_control($default_query, $instance){
 		$output = array();
 		$data_to_process = Easy_2046_builder::f2046_matcher($instance, 'control');
-		//~ mydump($data_to_process);
 		$output = $data_to_process;
 		$tmp_result = $default_query;
-		//~ mydump($data_to_process);
 		//~ echo '--------- data<br />----------------<br />';
 		$values = array();
 		$i = 0;
@@ -331,7 +326,6 @@ Easy_2046_builder::$EasyQuery = array(
 			$tmp_result = array_merge($tmp_result, $function_result);
 			$i++;
 		 }
-		//~ mydump($output);
 		$output = $tmp_result;
 		return $output;
 	}
@@ -344,7 +338,6 @@ Easy_2046_builder::$EasyQuery = array(
 	function f2046_output_resistor($default_query, $instance){
 		$output = true;
 		$data_to_process = $this->f2046_matcher($instance, 'resistor');
-		//~ mydump($data_to_process);
 		//~ echo '--------- data<br />----------------<br />';
 		$values = array();
 		$i = 0;
@@ -353,7 +346,7 @@ Easy_2046_builder::$EasyQuery = array(
 			//~  
 			//~ check if the array value under given key is defined
 			//~ in the case of checkboxed values, some might be empty, and then it trigers errors, obviously.
-			sort($val['gui']);
+			// sort($val['gui']); // seams like that this was bogus.. it actually resorts some thing inproperly.. come controls might be wrong now!
 			if(is_array($val['gui']) && count($val['gui']) > 1){
 				$values = array();
 				foreach($val['gui'] as $key => $v){
@@ -392,24 +385,18 @@ Easy_2046_builder::$EasyQuery = array(
 		$defaults = Easy_2046_builder::$EasyItems;
 		//~ remove possible helper: bricks array
 		unset($defaults['b2046_bricks']);
-		//~ mydump($instance['b2046_bricks']);
 		//~ do it for all bricks
 		$i = 0;
 		if($wanted_type == 'general'){
 			unset($instance['b2046_bricks']);
-			//~ mydump('general');
-			//mydump($instance);
+
 			foreach($instance as $key => $val) {
-				//~ mydump($defaults[$key]['block']);
 				//~ key['type'] has only one value for now.. the resistor, or any
 				//~ resistors are processed in f2046_output_resistor function
 				
 				if($defaults[$key]['block'] == $wanted_type){
-					//~ mydump($defaults[$key]['gui'][0]['value']);
-					//~ mydump($val['gui']['value']);
 					$tmp = $defaults[$key];
 					$tmp['gui'][0]['value'] = $val['gui']['value'];
-					//~ mydump($tmp);
 					$tmp['tmp_title'] = $key;
 					$output[] =  $tmp;
 				}
@@ -432,9 +419,7 @@ Easy_2046_builder::$EasyQuery = array(
 					foreach($val as $each){
 						if(array_key_exists(key($val), $defaults) && $defaults[key($val)]['block'] == $wanted_type){ 
 							//echo '---wanted type';
-							//mydump($wanted_type);
 							$tmp = $defaults[key($val)];
-							//~ mydump(key($val));
 							$tmp['gui'] = $val[key($val)]['gui'];
 							$tmp['tmp_title'] = key($val);
 							$output[] =  $tmp;
@@ -455,7 +440,6 @@ Easy_2046_builder::$EasyQuery = array(
 	function f2046_widget_builder ($view, $instance){
 		// remove the briks for now
 		unset($view['b2046_bricks']);
-		//mydump($view);
 		// resort the array by position
 		// RESORTING WILL BE NEEDE WHEN WE WILL BUILD THE ACTUAL SETUPS !
 		
@@ -572,7 +556,6 @@ Easy_2046_builder::$EasyQuery = array(
 					
 					//~ write the item name in to the temporary value
 					$clone_brick['tmp_name'] = $key;
-					//~ mydump($clone_brick);
 					//~ write the block position in to the temporary value
 					array_push($output,$clone_brick);
 				}else{
@@ -656,7 +639,6 @@ Easy_2046_builder::$EasyQuery = array(
 		$each_brick_i = 0;
 		foreach($bricks as $loop){
 			//~ if($type == 'default'){
-				//~ mydump($loop);
 				//~ }
 			$i = 0;
 			foreach($loop as $item_name => $item)
@@ -670,7 +652,6 @@ Easy_2046_builder::$EasyQuery = array(
 				$li_class = '';
 				//~ if($type == 'control_user_data'){
 					//~ $li_class = $item['tmp_name'];
-					//~ mydump($item_name);
 				//~ }else{
 					$li_class = $item_name;
 				//~ }
@@ -707,7 +688,6 @@ Easy_2046_builder::$EasyQuery = array(
 						if(isset($val['ui_note'])){
 							$ui_note = $val['ui_note'];
 						}
-						//~ mydump($item);
 						$name = $splited[0].']['.$j_name.']['.$each_brick_i.']['.$item["tmp_name"].']';
 						//~ get the temporary name
 						$div_id = $item['tmp_name'];
@@ -734,8 +714,7 @@ Easy_2046_builder::$EasyQuery = array(
 						}else{
 							$name = $splited[0].']['.$item_name.']';
 						}
-						//~ mydump($gui);
-						//~ mydump($gui_value);
+
 						$div_id = $item_name;
 					}
 					
@@ -746,10 +725,6 @@ Easy_2046_builder::$EasyQuery = array(
 					//~ 
 					//~ simple inputs
 					//~ 
-					//mydump($val);
-					
-					
-					
 					if ($val['ui_type'] == 'input'){
 						if(isset($ui_note)){
 							$placeholder = 'placeholder="'.$ui_note.'"';
@@ -821,7 +796,7 @@ Easy_2046_builder::$EasyQuery = array(
 					//~ 
 					elseif ($val['ui_type'] == 'radio_group'){
 						$output .='<div class="radiogroup">';
-						foreach($val['choices'] as $keyx => $valx){
+						foreach($val['choices'] as $keyx => $valx){ 
 							if($keyx == $gui_value ){
 								$selected = ' checked="checked"';
 							}else{
@@ -885,6 +860,50 @@ Easy_2046_builder::$EasyQuery = array(
 			  $out[] = $post_type;
 		}
 		return $out;
+	}
+	// search child pages through X levels
+	function getChildren($id, $depth, $include_exclude){
+		$i = 0;
+		$pages = array($id);
+		// find children for each given page id
+		while ($depth != $i){
+			foreach ($pages as $p) {
+				$defaults = array( 
+				    'post_parent' => $p,
+				    'post_type'   => 'any', 
+				    'numberposts' => -1,
+				    'post_status' => 'any'
+				);
+				$kids = get_children($defaults);
+				foreach($kids as $kid){
+					$pages[] = $kid->ID;
+				}
+			}
+			$i++;
+		}
+		// clean the array
+		$pages = array_unique($pages);
+		// include exclude currnet
+		if($include_exclude == 'exclude'){
+			$pages = array_diff($pages, array($id));
+		}
+		return $pages;
+	}
+	// search parent pages through X levels
+	function getParents($ids, $depth, $include_exclude){
+		$i = 0;
+		$pages  = array();
+		foreach ($ids as $id) {	
+			$ancestors = get_post_ancestors( $id );
+			if(!empty($ancestors)){
+				$pages = $ancestors;
+			}
+		}
+		$pages = ($depth == 1) ? array($pages[0]) : array_slice($pages, 0, $depth);
+		if($include_exclude == 'include'){
+			$pages = array_merge($pages, $ids); 
+		}
+		return $pages;
 	}
 
 } // END of Widget class

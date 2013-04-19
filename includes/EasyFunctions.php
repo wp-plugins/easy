@@ -29,7 +29,6 @@ function b2046_scafolding($value, $custom_class){ // custom_class will come with
  //~ change number of posts to be seen 
 function b2046_post_number($tmp_query, $values){
 	$output = array();
-	//~ mydump($values);
 	$args = array(
 		'posts_per_page' => (int)$values
 		);
@@ -51,7 +50,6 @@ function b2046_post_offset($tmp_query, $values){
 
 function b2046_taxonomy_parameters($tmp_query, $values){
 	$output = array();
-	//~ mydump($values);
 	//~ 0 - taxonomy
 	//~ 1 - terms
 	//~ 2 - term operator
@@ -728,27 +726,22 @@ function b2046_general_visibility($tmp_query, $values){
 }
 
 //~ 
-//~ Hide on view type
+//~ Show/Hide on view type
 //~ 
 function b2046_on_condition($tmp_query, $values){
 	global $wp_query;
 	$output = true;
 	//~  do not show on conditions
 	if($values[0] == 0 && isset($values[1])){
-		//~ $i = 1;
 		//~ check if the values against the global query
 		unset($values[0]);
 		foreach($values as $val){
 			if($wp_query->$val == 1){
 				$output = false;
-				//~ echo $output.' (' .$i.')<br>';
 				break;
-				
 			}else{
 				$output = true;
-				//~ echo $output .' (' .$i.')<br>';
 			}
-			//~ $i++;
 		}
 	}
 	//~ show on conditions
@@ -757,14 +750,11 @@ function b2046_on_condition($tmp_query, $values){
 		foreach($values as $val){
 			if($wp_query->$val == 1){
 				$output = true;
-				//~ echo $output.' (' .$i.')<br>';
 				
 			}else{
 				$output = false;
-				//~ echo $output .' (' .$i.')<br>';
 				break;
 			}
-			//~ $i++;
 		}
 	}
 	return $output;
@@ -782,6 +772,7 @@ function b2046_on_p_ID($tmp_query, $values){
 		$a = false; 
 		$b = true;
 	}
+
 	// if the post id is defined
 	if(!empty($values[1])){
 		global $post;
@@ -804,9 +795,11 @@ function b2046_on_p_ID($tmp_query, $values){
 }
 
 function b2046_on_taxonomy($tmp_query, $values){
-	$taxonomy = !empty($values[1]) ? $values[1] : 'category';
-	$terms = Easy_2046_builder::f2046_id_cleaner_to_array($values[0]);
+	$output = false;
+	$taxonomy = !empty($values[0]) ? $values[0] : 'category';
+	$terms = Easy_2046_builder::f2046_id_cleaner_to_array($values[1]);
 	$showhide = $values[2];
+		
 	if($showhide == 'show'){
 		$a = true; 
 		$b = false;
@@ -827,9 +820,51 @@ function b2046_on_taxonomy($tmp_query, $values){
 				$output = $b;
 			}
 		}
-		
 	}else{
 		$output = true;
+	}
+	return $output;
+}
+function b2046_on_hierarchy($tmp_query, $values){
+	$output = true; // true, false
+	$showhide = $values[0]; // show, hide
+	$type = $values[1]; // child - On child pages of defined ID, parent - On parent page of defined ID/s 
+	$IDs = Easy_2046_builder::f2046_id_cleaner_to_array($values[2]); // page ids (coverted to array)
+	$depth = $values[3]; // default 1
+	$include_exclude = $values[4]; // 0 - exclude, 1 - include
+	
+	global $wp_query;
+	$actualID = $wp_query->queried_object->ID;
+	$closestParent = $wp_query->queried_object->post_parent;
+	if($showhide == 'show'){
+		$a = true; 
+		$b = false;
+	}else{
+		$a = false; 
+		$b = true;
+	}
+	
+	if(!empty($IDs)){
+		// search through on child pages
+		if($type == 'child'){
+			$onPages = Easy_2046_builder::getChildren($actualID, $depth, $include_exclude);
+			// if the actual page is in the the list of allowed pages
+			if(in_array($actualID,$onPages)){
+				$output = $a;
+			}else{
+				$output = $b;
+			}
+			
+		}
+		// search through parent pages
+		else{
+			$parents = Easy_2046_builder::getParents($IDs, $depth, $include_exclude);
+			if(in_array($actualID,$parents)){
+				$output = $a;
+			}else{
+				$output = $b;
+			}
+		}
 	}
 	return $output;
 }
