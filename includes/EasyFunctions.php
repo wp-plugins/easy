@@ -832,10 +832,9 @@ function b2046_on_hierarchy($tmp_query, $values){
 	$IDs = Easy_2046_builder::f2046_id_cleaner_to_array($values[2]); // page ids (coverted to array)
 	$depth = $values[3]; // default 1
 	$include_exclude = $values[4]; // 0 - exclude, 1 - include
-	
-	global $wp_query;
-	$actualID = $wp_query->queried_object->ID;
-	$closestParent = $wp_query->queried_object->post_parent;
+	global $post;
+	$actualID = $post->ID;
+	$closestParent = $post->post_parent;
 	if($showhide == 'show'){
 		$a = true; 
 		$b = false;
@@ -847,7 +846,8 @@ function b2046_on_hierarchy($tmp_query, $values){
 	if(!empty($IDs)){
 		// search through on child pages
 		if($type == 'child'){
-			$onPages = Easy_2046_builder::getChildren($actualID, $depth, $include_exclude);
+
+			$onPages = Easy_2046_builder::getChildren($IDs, $depth, $include_exclude);
 			// if the actual page is in the the list of allowed pages
 			if(in_array($actualID,$onPages)){
 				$output = $a;
