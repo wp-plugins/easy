@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.6-beta1
-Stable tag: 0.9.4.1
+Stable tag: 0.9.4.2
 
 Easy, but complex widget website builder.
 
@@ -110,6 +110,9 @@ Always back up your widgets, do not let the sky fall. Use the <a href="http://wo
 1. Screenshot of the version 0.5
 
 == Change log ==
+ = 0.9.4.2 = 
+ * FIX - .. guess what .. Show/hide based on hierarchical structure got mad on 404 page
+
  = 0.9.4.1 = 
  * FIX - Show/hide based on hierarchical structure got mad on home page
 

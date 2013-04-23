@@ -1,4 +1,4 @@
-<?php
+<div></div><?php
 
 //~ returns two scafolding classes
 function b2046_scafolding($value, $custom_class){ // custom_class will come with when will work the multi input
@@ -826,43 +826,45 @@ function b2046_on_taxonomy($tmp_query, $values){
 	return $output;
 }
 function b2046_on_hierarchy($tmp_query, $values){
-	$output = true; // true, false
+	$output = false; // true, false
 	$showhide = $values[0]; // show, hide
 	$type = $values[1]; // child - On child pages of defined ID, parent - On parent page of defined ID/s 
 	$IDs = Easy_2046_builder::f2046_id_cleaner_to_array($values[2]); // page ids (coverted to array)
 	$depth = $values[3]; // default 1
 	$include_exclude = $values[4]; // 0 - exclude, 1 - include
 	global $post;
-	$actualID = $post->ID;
-	$closestParent = $post->post_parent;
-	if($showhide == 'show'){
-		$a = true; 
-		$b = false;
-	}else{
-		$a = false; 
-		$b = true;
-	}
-	
-	if(!empty($IDs)){
-		// search through on child pages
-		if($type == 'child'){
-
-			$onPages = Easy_2046_builder::getChildren($IDs, $depth, $include_exclude);
-			// if the actual page is in the the list of allowed pages
-			if(in_array($actualID,$onPages)){
-				$output = $a;
-			}else{
-				$output = $b;
-			}
-			
+	$actualID = isset($post->ID) ? $post->ID : '';
+	if (!empty($actualID)){
+		$closestParent = $post->post_parent;
+		if($showhide == 'show'){
+			$a = true; 
+			$b = false;
+		}else{
+			$a = false; 
+			$b = true;
 		}
-		// search through parent pages
-		else{
-			$parents = Easy_2046_builder::getParents($IDs, $depth, $include_exclude);
-			if(in_array($actualID,$parents)){
-				$output = $a;
-			}else{
-				$output = $b;
+		
+		if(!empty($IDs)){
+			// search through on child pages
+			if($type == 'child'){
+
+				$onPages = Easy_2046_builder::getChildren($IDs, $depth, $include_exclude);
+				// if the actual page is in the the list of allowed pages
+				if(in_array($actualID,$onPages)){
+					$output = $a;
+				}else{
+					$output = $b;
+				}
+				
+			}
+			// search through parent pages
+			else{
+				$parents = Easy_2046_builder::getParents($IDs, $depth, $include_exclude);
+				if(in_array($actualID,$parents)){
+					$output = $a;
+				}else{
+					$output = $b;
+				}
 			}
 		}
 	}
