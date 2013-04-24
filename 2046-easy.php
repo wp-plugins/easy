@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/easy/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.9.4.2
+ * Version: 0.9.4.3
  * Author: 2046
  * Author URI: http://2046.cz
  *

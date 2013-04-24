@@ -1,4 +1,4 @@
-<div></div><?php
+<?php
 
 //~ returns two scafolding classes
 function b2046_scafolding($value, $custom_class){ // custom_class will come with when will work the multi input
