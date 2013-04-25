@@ -71,6 +71,9 @@ The aim of this plugin is to speed up common programming work, so we do not have
 Imagine a website made out of "sidebars" filled with widgets representing the list of last posts, menu, the image gallery, any content that is actually the website.
 All built out of widgets that you can re-arrange anyway you or your client like right out of the admin area. That is the main purpose of the widgets anyway, Easy makes it real.
 
+= Notice =
+In order to have the website fast as light even with the Easy plugin heavily in charge use the W3TC caching plugin [[1](http://wordpress.org/extend/plugins/w3-total-cache/)]
+
 = Documentation =
 
  * <a href="http://2046.cz/easy/">Easy</a>
