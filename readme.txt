@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.6-beta1
-Stable tag: 0.9.4.3
+Stable tag: 0.9.4.4
 
 Easy, but complex widget website builder.
 
@@ -113,6 +113,10 @@ Always back up your widgets, do not let the sky fall. Use the <a href="http://wo
 1. Screenshot of the version 0.5
 
 == Change log ==
+
+= 0.9.4.4 = 
+ * FIX - calls for undefined values in process of "On templeta type" brick
+ * FIX - Hierarchical brick - the depth no loger goes too deep.. in other words the depth can be set up to 9999... and it wont consume more time than the actual hierarchy structure needs for the process. The page will simply go faster, the hoster stops to hate you,.. if you over exaggerated.
 
 = 0.9.4.3 = 
  * FIX - a typo causes the media library disapear, sorry for that. 

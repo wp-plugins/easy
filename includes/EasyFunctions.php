@@ -736,11 +736,13 @@ function b2046_on_condition($tmp_query, $values){
 		//~ check if the values against the global query
 		unset($values[0]);
 		foreach($values as $val){
-			if($wp_query->$val == 1){
-				$output = false;
-				break;
-			}else{
-				$output = true;
+			if(isset($wp_query->$val)){
+				if($wp_query->$val == 1){
+					$output = false;
+					break;
+				}else{
+					$output = true;
+				}
 			}
 		}
 	}

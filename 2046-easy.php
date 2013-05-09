@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/easy/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.9.4.3
+ * Version: 0.9.4.4
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -865,24 +865,41 @@ Easy_2046_builder::$EasyQuery = array(
 	function getChildren($id, $depth, $include_exclude){
 		$i = 0;
 		$pages = $id;
+		// create empty tmp array,
+		$tmp_pages = array();
 		// find children for each given page id
+		//  if the new iteration won't bring any new pages stop the while process
 		while ($depth != $i){
-			foreach ($pages as $p) {
-				$defaults = array( 
-				    'post_parent' => $p,
-				    'post_type'   => 'any', 
-				    'numberposts' => -1,
-				    'post_status' => 'any'
-				);
-				$kids = get_children($defaults);
-				foreach($kids as $kid){
-					$pages[] = $kid->ID;
+			$diff = array_diff($pages, $tmp_pages);
+			//  if the last iteration did not bring new page ids (child pages)
+			//  brake the while cycle.. there is no neeed to provess it further
+			if(empty($diff)){
+				break;
+			// if the last iteration bought some new page ids go further
+			}else{
+				// put the actual array to tmp
+				// if the pages array wont change aftere this foreach the while wont process
+				// meaning, there are no new siblings and has no reason to go run this process
+				$tmp_pages = $pages;
+
+				foreach ($pages as $p) {
+					$defaults = array( 
+					    'post_parent' => $p,
+					    'post_type'   => 'any', 
+					    'numberposts' => -1,
+					    'post_status' => 'any'
+					);
+					$kids = get_pages($defaults);
+					foreach($kids as $kid){
+						$pages[] = $kid->ID;
+					}
+					$pages = array_unique($pages);
 				}
+				$i++;
 			}
-			$i++;
 		}
 		// clean the array
-		$pages = array_unique($pages);
+		
 		// include exclude currnet
 		if($include_exclude == 'exclude'){
 			$pages = array_diff($pages, $id);
