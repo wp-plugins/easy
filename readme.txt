@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.6-beta1
-Stable tag: 0.9.4.4
+Stable tag: 0.9.4.5
 
 Easy, but complex widget website builder.
 
@@ -104,15 +104,19 @@ It is possible and even more, it's easy. Check out the documentation <a href="ht
 
 == Upgrade Notice ==
 
-Please if you encounter any misbehavior, let my know on the forum. I'll be happy to fix it!
-
-Always back up your widgets, do not let the sky fall. Use the <a href="http://wordpress.org/extend/plugins/widget-saver/">Widget saver</a> plugin.
+* Please if you encounter any misbehavior, let my know on the forum. I'll be happy to fix it!
+* If the widget behaves differently after the upgrade check out the particullar brick, if it hasn't have some new feature(s), which did not exist before. If so, correct values and re-save the widget.
+* Always back up your widgets, do not let the sky fall. Use the <a href="http://wordpress.org/extend/plugins/widget-saver/">Widget saver</a> plugin.
 
 == Screenshots ==
  
 1. Screenshot of the version 0.5
 
 == Change log ==
+
+= 0.9.4.5 = 
+ * NEW - VIEW - Content brick has input filed wherre you can set the "Read more" text wich run through localization filter for the possible localizations.
+ * NEW - CONTROL - filter posts made by an author xyz.
 
 = 0.9.4.4 = 
  * FIX - calls for undefined values in process of "On templeta type" brick
