@@ -394,10 +394,12 @@ function b2046_edit_link($easy_query, $values){
 	$class = $values[1];
 	$out = '';
 	$link =  get_edit_post_link($easy_query->post->ID);
-	if($value == 0){
-		$out = '<a class="edit_link '.$class.'" href="'.$link.'">'.__('Edit').'</a>';
-	}else{
-		$out = '<span class="edit_link '.$class.'"><a href="'.$link.'">'.__('Edit').'</a> '.$easy_query->post->ID.'</span>';
+	if(is_user_logged_in()){
+		if($value == 0){
+			$out = '<a class="edit_link '.$class.'" href="'.$link.'">'.__('Edit').'</a>';
+		}else{
+			$out = '<span class="edit_link '.$class.'"><a href="'.$link.'">'.__('Edit').'</a> '.$easy_query->post->ID.'</span>';
+		}
 	}
 	return $out;
 }

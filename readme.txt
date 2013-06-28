@@ -117,6 +117,7 @@ It is possible and even more, it's easy. Check out the documentation <a href="ht
 = 0.9.4.6 = 
  * FIX a small fix on line 893, nothing cruicial
  * FIX - GLOBAL - class "one per row" has been multiplied
+ * FIX - the edit link has been visible to non-logged in users (the edit did not point to admin area, but the html has been visible)
 
 = 0.9.4.5 = 
  * NEW - VIEW - Content brick has input filed wherre you can set the "Read more" text wich run through localization filter for the possible localizations.
