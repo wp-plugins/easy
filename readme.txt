@@ -83,6 +83,9 @@ In order to have the website fast as light even with the Easy plugin heavily in 
  * <a href="http://2046.cz/easy/control">Control description</a>
  * <a href="http://2046.cz/easy/extend">Extend</a>
 
+ = Compatible with: =
+ <a href="http://wpml.org/">WPML</a>, <a href="http://wordpress.org/plugins/qtranslate/">qTranslate</a>, <a href="https://www.google.com/url?q=http://wordpress.org/plugins/custom-content-type-manager/&sa=U&ei=R-DNUcKJIM2B4AT7xoGwDQ&ved=0CAcQFjAA&client=internal-uds-cse&usg=AFQjCNE2SU-CT1WLx80VKYlh4e1w6ZIcbg">CCTM</a>, <a href="http://wordpress.org/plugins/wp-pagenavi/">WP-pagenavi</a>, <a href="http://wordpress.org/plugins/w3-total-cache/">W3TC</a>, <a href="http://wordpress.org/plugins/fancybox-for-wordpress/">fancybox</a> and others.
+
 == Installation ==
 
 As usual. If you don't know how, check out the <a href="http://codex.wordpress.org/Managing_Plugins">official how-to</a>.
