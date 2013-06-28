@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.6-beta1
-Stable tag: 0.9.4.5
+Stable tag: 0.9.4.6
 
 Easy, but complex widget website builder.
 
@@ -113,6 +113,10 @@ It is possible and even more, it's easy. Check out the documentation <a href="ht
 1. Screenshot of the version 0.5
 
 == Change log ==
+
+= 0.9.4.6 = 
+ * FIX a small fix on line 893, nothing cruicial
+ * FIX - GLOBAL - class "one per row" has been multiplied
 
 = 0.9.4.5 = 
  * NEW - VIEW - Content brick has input filed wherre you can set the "Read more" text wich run through localization filter for the possible localizations.
