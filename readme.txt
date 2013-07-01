@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.6-beta1
-Stable tag: 0.9.4.6
+Stable tag: 0.9.4.7
 
 Easy, but complex widget website builder.
 
@@ -83,7 +83,7 @@ In order to have the website fast as light even with the Easy plugin heavily in 
  * <a href="http://2046.cz/easy/control">Control description</a>
  * <a href="http://2046.cz/easy/extend">Extend</a>
 
-= Easy theme framework =
+ = Easy theme framework =
 A pure theme with slots (sidebars) for tons of your widgets.
  * <a href="http://2046.cz/easy-framework">Easy framework</a>
 
@@ -121,6 +121,8 @@ It is possible and even more, it's easy. Check out the documentation <a href="ht
 
 == Change log ==
 
+= 0.9.4.7 =
+	NEW - the brick caling excerpt (VIEW>Content>Excerpt) does not work as expected so i made a small hack so that the more link is present.
 = 0.9.4.6 = 
  * FIX a small fix on line 893, nothing cruicial
  * FIX - GLOBAL - class "one per row" has been multiplied
