@@ -310,7 +310,6 @@ function b2046_post_content($easy_query, $values){
 	$readmore = $values[1];
 	$class = $values[2];
 	$morestring = '<!--more-->';
-	var_dump($content_type);
 	$out = '<div class="entry-content '.$class.'">';
 	if($content_type == 'content'){
 		$out .= (!empty($readmore)) ? apply_filters('the_content',get_the_content(__($readmore))) : apply_filters('the_content',get_the_content());
