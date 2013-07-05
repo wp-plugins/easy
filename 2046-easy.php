@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/easy/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.9.4.7
+ * Version: 0.9.4.8
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -864,7 +864,7 @@ Easy_2046_builder::$EasyQuery = array(
 		return $out;
 	}
 	// search child pages through X levels
-	function getChildren($id, $depth, $include_exclude){
+	function getChildren($id, $depth, $include_exclude, $exclude_top_level_pages){
 		$i = 0;
 		$pages = $id;
 		// create empty tmp array,
@@ -925,6 +925,28 @@ Easy_2046_builder::$EasyQuery = array(
 			$pages = array_merge($pages, $ids); 
 		}
 		return $pages;
+	}
+	// get all top level pages
+	function getTopLevelPages($post_type, $post_status){
+		$args = array(
+			'parent' => 0,
+			'post_type' => $post_type,
+			'post_status' => $post_status,
+			'posts_per_page'=> -1
+		); 
+		$top_level_ids = array();
+
+		$query = new WP_Query($args);
+		if ( $query->have_posts() ) {
+			while ( $query->have_posts() ) {
+				$query->the_post();
+				$top_level_ids[] = $query->post->ID;
+			}
+		} 
+		/* Restore original Post Data */
+		wp_reset_postdata();
+
+		return $top_level_ids;
 	}
 
 } // END of Widget class

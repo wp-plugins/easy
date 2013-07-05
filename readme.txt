@@ -121,6 +121,9 @@ It is possible and even more, it's easy. Check out the documentation <a href="ht
 
 == Change log ==
 
+= 0.9.4.8 =
+	NEW - CONTROL - Hierarchy based; has new choice "Do not list up top level pages"
+	
 = 0.9.4.7 =
 	NEW - the brick caling excerpt (VIEW>Content>Excerpt) does not work as expected so i made a small hack so that the more link is present.
 = 0.9.4.6 = 

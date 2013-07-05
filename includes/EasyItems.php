@@ -1256,8 +1256,21 @@ $EasyItems = array(
 			),
 			array(
 				'ui_note' => __('(in case of: ..from same level)', 'p_2046s_easy_widget'),
-				'ui_type' => 'check_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
-				'choices' => array( 1 => 'Exclude current'),
+				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+				'choices' => array( 
+					0 => 'Include current',
+					1 => 'Exclude current'
+					),
+				'value' => '',
+				'esc' => 'filter_attribute_characters'
+			),
+			array(
+				// 'ui_note' => __('(Sometimes in general use listing of top level pages is not desired.)', 'p_2046s_easy_widget'),
+				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+				'choices' => array( 
+					0 => 'List top level pages',
+					1 => 'Do not list top level pages'
+					),
 				'value' => '',
 				'esc' => 'filter_attribute_characters'
 			)

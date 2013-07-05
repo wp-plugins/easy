@@ -918,9 +918,11 @@ function b2046_hierarchy_based($tmp_query, $values){
 	}else{
 		$xclude = '';
 	}
+	$exclude_top_level_pages = (isset($values[3])) ? $values[3] : 0;
+
 	$args_parent = array();
 	global $post;
-	
+
 	
 	//~ '0' => 'Pages from the same level as current page',
 	if($choice == 0){
@@ -930,11 +932,19 @@ function b2046_hierarchy_based($tmp_query, $values){
 				$output['post__not_in'] = array($post->ID); 
 			}
 		}else{
-			//~  if there are no parent, we are in the top level and so will return only top level pages with zero parent
-			$output['post_parent'] = '0';
 			if($xclude == '1'){
-				$output['post__not_in'] = array($post->ID);
+				$output['post__not_in'] = (isset($tmp_query['post__not_in'])) ? array_merge(array($post->ID),$tmp_query['post__not_in'] ) : array($post->ID);
 			}
+			// if they do wish include top level pages
+			if($exclude_top_level_pages != 1){
+				//~  if there are no parent, we are in the top level and so will return only top level pages with zero parent
+				$output['post_parent'] = '0';
+			}else{
+				// get top level pages
+				$top_level_page_ids = Easy_2046_builder::getTopLevelPages($tmp_query['post_type'], $tmp_query['post_status']);
+				// merge if needed, and set top level pages for exclusion
+				$output['post__not_in'] = (isset($tmp_query['post__not_in'])) ? array_merge($top_level_page_ids,$tmp_query['post__not_in'] ) : $top_level_page_ids;
+			}	
 		}
 		//~ force the post type to be the same as the current page, or the given page ID
 		// $output['post_type'] = $post->post_type;
@@ -948,11 +958,20 @@ function b2046_hierarchy_based($tmp_query, $values){
 		if (!empty(get_post($page_ids[0])->post_parent)){
 			$output['post_parent'] = get_post($page_ids[0])->post_parent;
 		}else{
-			$output['post_parent'] = '0';
+			// if they do not wish not to show top level pages
+			if($exclude_top_level_pages != 1){
+				$output['post_parent'] = '0';
+			}
+			else{
+				// get top level pages
+				$top_level_page_ids = Easy_2046_builder::getTopLevelPages($tmp_query['post_type'], $tmp_query['post_status']);
+				// merge if needed, and set top level pages for exclusion
+				$output['post__not_in'] = (isset($tmp_query['post__not_in'])) ? array_merge($top_level_page_ids,$tmp_query['post__not_in'] ) : $top_level_page_ids;
+			}
 		}
 		//  $output['post_type'] = get_post_type($page_ids[0]);
 		if($xclude == 1){
-			$output['post__not_in'] = array($page_ids[0]); 
+			$output['post__not_in'] = (isset($tmp_query['post__not_in'])) ? array_merge(array($page_ids[0]),$tmp_query['post__not_in'] ) : array($page_ids[0]);
 		}
 	}
 	//~ '3' => 'Child pages of given ID'
