@@ -342,6 +342,31 @@ $EasyItems = array(
 		// gui
 		'gui' => $conditional_tags_array
 	),
+	'b2046_on_post_type' => array( 
+		// general
+		'block' => 'resistor',  
+		'repeatable' => true,
+		'item_title' => __('On Post types: show/hide','p_2046s_easy_widget'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => __('post, page, etc.','p_2046s_easy_widget'),
+				'ui_type' => 'input', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea. 6 hidden
+				'choices' => '',
+				'value' => '',
+				'esc' => 'filter_attribute_characters'
+			),
+			array(
+				'ui_type' => 'select_box', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea. 6 hidden
+				'choices' => array(
+					'true' => 'show',
+					'false' => 'hide'
+					),
+				'value' => '',
+				'esc' => 'filter_attribute_characters'
+			)
+		),
+	),
 	'b2046_on_p_ID' => array( 
 		// general
 		'block' => 'resistor',  

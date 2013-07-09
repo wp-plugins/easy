@@ -851,7 +851,13 @@ Easy_2046_builder::$EasyQuery = array(
 	function f2046_id_cleaner_to_string($val){
 		if(!empty($val)){
 			$post_id_string = ereg_replace(" ", "", $val);
-			return $post_ids_string;
+			return $post_id_string;
+		}
+	}
+	function f2046_string_to_array($val){
+		if(!empty($val)){
+			$val = explode(' ', $val);
+			return $val;
 		}
 	}
 	//~  helper  for listing all the 

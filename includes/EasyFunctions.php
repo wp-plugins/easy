@@ -801,7 +801,37 @@ function b2046_on_p_ID($tmp_query, $values){
 	}
 	return $output;
 }
+//~ 
+//~ Show/hide on post type
+//~ 
+function b2046_on_post_type($tmp_query, $values){
+	$post_type = $values[0];
+	// set decision
+	if($values[1] == 'true'){
+		$a = true; 
+		$b = false;
+	}else{
+		$a = false; 
+		$b = true;
+	}
 
+	// if the post type is set
+	if(!empty($values[0])){
+		global $post;
+		$output = true;
+		$given_types = Easy_2046_builder::f2046_string_to_array($values[0]);
+		$current = $post->post_type;
+		if(in_array($current, $given_types)){
+			$output = $a;
+		}else{
+			$output = $b;
+		}
+		
+	}else{
+		$output = true;
+	}
+	return $output;
+}
 //~ 
 //~ CONTROL - posts by author xyz
 //~ 
