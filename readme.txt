@@ -122,11 +122,12 @@ It is possible and even more, it's easy. Check out the documentation <a href="ht
 == Change log ==
 
 = 0.9.4.8 =
-	NEW - CONTROL - Hierarchy based; has new choice "Do not list up top level pages"
-	FIX - typo in "f2046_id_cleaner_to_string" function 
+ * NEW - CONTROL - Hierarchy based; has new choice "Do not list up top level pages"
+ * FIX - typo in "f2046_id_cleaner_to_string" function 
 	
 = 0.9.4.7 =
-	NEW - the brick caling excerpt (VIEW>Content>Excerpt) does not work as expected so i made a small hack so that the more link is present.
+ * NEW - the brick caling excerpt (VIEW>Content>Excerpt) does not work as expected so i made a small hack so that the more link is present.
+
 = 0.9.4.6 = 
  * FIX a small fix on line 893, nothing cruicial
  * FIX - GLOBAL - class "one per row" has been multiplied
