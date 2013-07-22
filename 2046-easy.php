@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/easy/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.9.4.8
+ * Version: 0.9.4.9
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -199,8 +199,6 @@ Easy_2046_builder::$EasyQuery = array(
 						$output .= $args['before_widget'];
 					}
 					
-					$WPpostClass = get_post_class();
-					$class = implode(' ',$WPpostClass) .' '. $class;
 					//~ widget title
 					if(!empty($widget_title)){
 						$output .='<h4 class="widget_title">'.$widget_title.'</h4>';
@@ -208,6 +206,9 @@ Easy_2046_builder::$EasyQuery = array(
 					
 					// The Loop
 					while ( $easy_query->have_posts() ) : $easy_query->the_post();
+						// build the proper class
+						$WPpostClass = get_post_class($class, $easy_query->post->ID);
+						$class = implode(' ',$WPpostClass);
 						//~ scafold check
 						if($b2046_scafold_type == 1){
 							$output .= '<div class="'.$b2046_scafold_row_class.'">';

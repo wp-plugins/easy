@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.6-beta1
-Stable tag: 0.9.4.7
+Stable tag: 0.9.4.9
 
 Easy, but complex widget website builder.
 
@@ -121,12 +121,16 @@ It is possible and even more, it's easy. Check out the documentation <a href="ht
 
 == Change log ==
 
+= 0.9.4.9 =
+ * FIX - classes for each post did not held proper post ID
+ * FIX - VIEW > link to archive. in the case where there were no more posts than actually shown the WP_error rised up and has not been held properly. 
+
 = 0.9.4.8 =
  * NEW - CONTROL - Hierarchy based; has new choice "Do not list up top level pages"
  * FIX - typo in "f2046_id_cleaner_to_string" function 
 	
 = 0.9.4.7 =
- * NEW - the brick caling excerpt (VIEW>Content>Excerpt) does not work as expected so i made a small hack so that the more link is present.
+ * NEW - the brick calling excerpt (VIEW>Content>Excerpt) does not work as expected. In order to make it work I made a small hack so that the more link is present.
 
 = 0.9.4.6 = 
  * FIX a small fix on line 893, nothing cruicial

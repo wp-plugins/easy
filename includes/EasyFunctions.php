@@ -608,7 +608,8 @@ function b2046_link_to_archive($tmp_query, $values){
 	$text = $values[3];
 	$class = $values[4];
 	if($type == 'taxonomy' && !empty($base_name) && !empty($sec_name)){
-		$out .= '<div class="'.$class.'"><a href="'.get_term_link( $base_name, $sec_name ).'">'.$text.'</a></div>';
+		$link = !is_wp_error(get_term_link( $base_name, $sec_name )) ? get_term_link( $base_name, $sec_name ) : '';
+		$out .= '<div class="'.$class.'"><a href="'.$link.'">'.$text.'</a></div>';
 	}elseif($type =='post_type'){
 		$out .= '<div class="'.$class.'"><a href="'.get_post_type_archive_link($base_name).'">'.$text.'</a></div>';
 	}
