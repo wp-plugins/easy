@@ -603,15 +603,17 @@ function b2046_query_debug($tmp_query, $values){
 function b2046_link_to_archive($tmp_query, $values){
 	$out = '';
 	$type = $values[0];
-	$base_name = $values[1];
-	$sec_name = $values[2];
+	$term_name = $values[1];
+	$term_id = (int)$values[2];
 	$text = $values[3];
 	$class = $values[4];
-	if($type == 'taxonomy' && !empty($base_name) && !empty($sec_name)){
-		$link = !is_wp_error(get_term_link( $base_name, $sec_name )) ? get_term_link( $base_name, $sec_name ) : '';
+	if($type == 'taxonomy' && !empty($term_name) && !empty($term_id)){
+		$term_link = get_term_link( intval($term_id), $term_name );
+		$link = !is_wp_error($term_link) ? $term_link : '';
+
 		$out .= '<div class="'.$class.'"><a href="'.$link.'">'.$text.'</a></div>';
 	}elseif($type =='post_type'){
-		$out .= '<div class="'.$class.'"><a href="'.get_post_type_archive_link($base_name).'">'.$text.'</a></div>';
+		$out .= '<div class="'.$class.'"><a href="'.get_post_type_archive_link($term_name).'">'.$text.'</a></div>';
 	}
 	
 	return $out;
