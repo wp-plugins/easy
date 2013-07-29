@@ -411,8 +411,10 @@ function b2046_post_image($easy_query, $values){
 	$image = $values[0];
 	$link = $values[1];
 	$target = ($values[2] == 'blank') ? ' target="_blank"' : '';
-	if(!empty($values[3])){
+	if(!empty($values[3]) && $link != 'url'){
 		$customlink = get_post_meta($easy_query->post->ID, $values[3], true);
+	}elseif(!empty($values[3]) && $link == 'url'){
+		$customlink = $values[3];
 	}else{
 		$customlink = '';
 	}
@@ -423,7 +425,7 @@ function b2046_post_image($easy_query, $values){
 	
 	if($link == 'objectlink'){
 		$url = get_permalink($easy_query->post->ID);
-	}elseif($link == 'customlink'){
+	}elseif($link == 'customlink' || $link == 'url'){
 		$url = $customlink;
 	}elseif($link != 'nolink'){
 		$img_obj = wp_get_attachment_image_src( $att_id, $link);
@@ -437,7 +439,7 @@ function b2046_post_image($easy_query, $values){
 		//  create link if any
 		
 		if(!empty($url)){
-			if($link == 'objectlink' || $link == 'customlink'){
+			if($link == 'objectlink' || $link == 'customlink' || $link == 'url' ){
 				$out .= '<a href="'.$url.'" '.$target.'>';
 			}
 		}
@@ -445,7 +447,7 @@ function b2046_post_image($easy_query, $values){
 		$out .= '<img src="'.$image_url[0].'" alt="'.get_the_title($easy_query->post->ID).'" />';
 		// close the link
 		if(!empty($url)){
-			if($link == 'objectlink' || $link == 'customlink'){
+			if($link == 'objectlink' || $link == 'customlink' || $link == 'url'){
 				$out .= '</a>';
 			}
 		}

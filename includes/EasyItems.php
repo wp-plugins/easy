@@ -81,7 +81,8 @@ $list_of_image_sizes = list_of_image_sizes();
 $image_links = array(
 	'nolink' => 'no link',
 	'objectlink' => 'object link',
-	'customlink' => 'custom meta value'
+	'customlink' => 'custom meta value',
+	'url' => 'url'
 );
 $image_links = array_merge($image_links, $list_of_image_sizes);
 
@@ -1059,9 +1060,9 @@ $EasyItems = array(
 				'value' => ''
 			),
 			array(
-				'ui_note' => __('custom field name','p_2046s_easy_widget'),
+				'ui_note' => __('custom field name OR url','p_2046s_easy_widget'),
 				'ui_type' => 'input', 
-				'esc' => 'filter_attribute_characters',
+				'esc' => 'esc_url',
 				'choices' => '',
 				'value' => ''
 			),
