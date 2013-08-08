@@ -1062,7 +1062,7 @@ $EasyItems = array(
 			array(
 				'ui_note' => __('custom field name OR url','p_2046s_easy_widget'),
 				'ui_type' => 'input', 
-				'esc' => 'esc_url',
+				'esc' => 'esc_attr',
 				'choices' => '',
 				'value' => ''
 			),
