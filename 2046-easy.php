@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/easy/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.9.5.1
+ * Version: 0.9.5.2
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -178,6 +178,7 @@ Easy_2046_builder::$EasyQuery = array(
 			$b2046_scafolding_column_class = $instance['b2046_scafolding_column_class']['gui']['0']['value'];
 			$widget_title = $instance["b2046_widget_title"]["gui"]['0']["value"];
 			$output = '';
+			$content= '';
 			$class= '';
 			
 			
@@ -209,20 +210,24 @@ Easy_2046_builder::$EasyQuery = array(
 						// build the proper class
 						$WPpostClass = get_post_class($class, $easy_query->post->ID);
 						$class = implode(' ',$WPpostClass);
-						//~ scafold check
-						if($b2046_scafold_type == 1){
-							$output .= '<div class="'.$b2046_scafold_row_class.'">';
-						}
-						
-						$output .= '<div id="post-'.get_the_ID().'" class="'.$class.'"'; 
-						$output .= '>';
-						$output .= $this->f2046_front_end_builder($instance, $easy_query);
-						$output .= '</div>';
-						
-						//~ scafold - one per row - row
-						if($b2046_scafold_type == 1){
+
+						// get the content in the variable 
+						// so we later can check if anything is present and wrap it by the scafold, if not no scafold is necesary
+						$content = $this->f2046_front_end_builder($instance, $easy_query);
+							//~ scafold check
+							if($b2046_scafold_type == 1){
+								$output .= '<div class="'.$b2046_scafold_row_class.'">';
+							}
+							
+							$output .= '<div id="post-'.get_the_ID().'" class="'.$class.'"'; 
+							$output .= '>';
+							$output .= $content;
 							$output .= '</div>';
-						}
+							
+							//~ scafold - one per row - row
+							if($b2046_scafold_type == 1){
+								$output .= '</div>';
+							}
 					endwhile;
 					
 					//~ many per row || one per row
@@ -241,7 +246,9 @@ Easy_2046_builder::$EasyQuery = array(
 			//~ }
 			
 			//~ serve it out :)
-			echo $output;
+			if(!empty($content)){
+				echo $output;
+			}
 		}
 	}
 	//~ END OF WORDPRESS DEFAULT WIDGET GAME

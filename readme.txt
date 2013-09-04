@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.4.1
 Tested up to: 3.6
-Stable tag: 0.9.5.1
+Stable tag: 0.9.5.2
 
 Easy, but complex widget website builder.
 
@@ -120,8 +120,13 @@ It is possible and even more, it's easy. Check out the documentation <a href="ht
 1. Screenshot of the version 0.5
 
 == Change log ==
-= 0.9.5 =
+
+= 0.9.5.2 =
+ * FIX - If the Easy widget gets no content it will not output any surrounding scafold (div) whatsoever. In other words the empty result will produce no HTML, nothing.
+
+= 0.9.5.1 =
  * FIX - VIEW > Feautured image box had wrong input validation which adds the http:// string into the value.
+
 = 0.9.5 =
  * NEW - the featured image brick has new link type "url". The featured image can be link to ither image sizes, linked to post/page, custum field value or one defined url.
 
