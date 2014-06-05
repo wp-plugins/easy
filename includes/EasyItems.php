@@ -994,6 +994,12 @@ $EasyItems = array(
 				'esc' => 'esc_attr',
 				'choices' => $sorting_choices,
 				'value' => 'none'
+			),array(
+				'ui_note' => __('meta key', 'p_2046s_easy_widget'),
+				'ui_type' => 'input', 
+				'esc' => 'esc_attr',
+				'choices' => '',
+				'value' => ''
 			)
 		)
 	),

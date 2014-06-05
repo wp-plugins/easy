@@ -215,11 +215,14 @@ function b2046_category_controls($tmp_query, $values){
 function b2046_order($tmp_query, $values){
 	$order = $values[0];
 	$order_by = $values[1];
-
+	$meta_key = $values[2];
 	$args = array(
 		'order' => $order,
 		'orderby' => $order_by
-		);
+	);
+	if(!empty($meta_key)){
+		$args['meta_key'] = $meta_key;
+	}
 	return $args;
 }
 
