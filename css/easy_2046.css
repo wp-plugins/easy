@@ -42,7 +42,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', end
 .ui-draggable-dragging{position:absolute;z-index:200;float:none;display:block;width:280px;height:35px;padding:0.5em;list-style:none;opacity: .5;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";filter: alpha(opacity=50);cursor:move}/*fix width while dragging*/
 .ui-draggable-dragging *{display: none}
 .ui-draggable-dragging strong{display: block}
-.easy_2046_lw .general_bank{float:left;margin-bottom:1em;margin-top:1em;width:100%;}
+.easy_2046_lw .general_bank{float:left;margin-bottom:1em;width:100%;}
 .easy_2046_lw .general_bank li, .easy_2046_lw .control_bank li{width: 49%;float: left;}
 .easy_2046_lw ol{margin-left:0.6em;}
 .easy_2046_lw ol li{list-style:none;width:95%}
@@ -77,7 +77,7 @@ textarea:-moz-placeholder, input:-moz-placeholder {color:rgb(118, 157, 165);}
 textarea:-ms-input-placeholder, input:-ms-input-placeholder {color:rgb(118, 157, 165);}
 li.li_5 {margin-top:-1em}
 /* Firefox fixes*/
-.easy_2046_lw .general_bank li{width: 48%;float: left;margin-right:1em}
+.easy_2046_lw .general_bank li{width: 47%;float: left;margin-right:1em}
 
 @media screen and (-webkit-min-device-pixel-ratio:0) { 
 	.easy_2046_lw .general_bank li{width: 47%;float: left;}

@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/easy/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.9.5.3
+ * Version: 0.9.5.4
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -485,7 +485,7 @@ Easy_2046_builder::$EasyQuery = array(
 			}
 		}
 		// output the inputs to the widget
-		$output .= '<div class="general_bank"><h3>General</h3><ul>';
+		$output .= '<div class="general_bank"><h3>'.__('General', 'builder_2046'). '</h3><ul>';
 		//~ $post_types = get_post_types($args_types,'names'); 
 		//~ foreach ($post_types as $post_type ) {
 		  //~ echo '<p>'. $post_type. '</p>';
@@ -493,7 +493,7 @@ Easy_2046_builder::$EasyQuery = array(
 			//~ $output .= $this->f2046_inputbuilder($global_view_items, $instance, 'default');
 			$output .= $this->f2046_widget_brick_collector($global_view_items, $instance, 'general');
 		$output .= '</ul></div>
-		<h3>'.__('Views').'</h3>
+		<h3>'.__('Views', 'builder_2046').'</h3>
 		<div class="view_holder">
 			<div class="view_bank">
 				<ul>';
@@ -510,7 +510,7 @@ Easy_2046_builder::$EasyQuery = array(
 				</div>
 			</div>
 		</div>
-		<h3 class="control_h3">'.__('Controls (<span class="res">R</span><i>esistors</i>)').'</h3>
+		<h3 class="control_h3">'.__('Controls (<span class="res">R</span><i>esistors</i>)', 'builder_2046').'</h3>
 		<div class="control_holder">
 			<div class="control_bank">
 				<ul>';
@@ -528,7 +528,7 @@ Easy_2046_builder::$EasyQuery = array(
 				</div>
 			</div>
 		</div>
-		<div style="float:left;clear:both;width:100%"><a target="_blank" href="http://2046.cz/easy">Documentation</a></div>
+		<div style="float:left;clear:both;width:100%"><a target="_blank" href="http://2046.cz/easy">'.__('Documentation', 'builder_2046').'</a></div>
 		';
 		// get the gold
 		return $output;
@@ -679,7 +679,7 @@ Easy_2046_builder::$EasyQuery = array(
 					if($item['block'] == 'resistor'){
 						$output .= '<span class="res">R</span>';	
 					}
-					$output .='<strong>'.$item['item_title'].'</strong> <b class="rem">x</b><br />';
+					$output .='<strong>'.__($item['item_title'], 'builder_2046').'</strong> <b class="rem">x</b><br />';
 				}	
 				$each_gui_i = 0;
 				$gui_value = '';
@@ -737,7 +737,7 @@ Easy_2046_builder::$EasyQuery = array(
 					//~ 
 					if ($val['ui_type'] == 'input'){
 						if(isset($ui_note)){
-							$placeholder = 'placeholder="'.$ui_note.'"';
+							$placeholder = 'placeholder="'.__($ui_note , 'builder_2046').'"';
 						}else{
 							$placeholder = '';
 						}
@@ -747,7 +747,7 @@ Easy_2046_builder::$EasyQuery = array(
 					// textarea
 					elseif ($val['ui_type'] == 'textarea'){
 						if(isset($ui_note)){
-							$placeholder = 'placeholder="'.$ui_note.'"';
+							$placeholder = 'placeholder="'.__($ui_note, 'builder_2046').'"';
 						}else{
 							$placeholder = '';
 						}
@@ -759,7 +759,7 @@ Easy_2046_builder::$EasyQuery = array(
 					elseif ($val['ui_type'] == 'select_box'){
 						$output .= '<select name="'. $name .'[gui]['.$each_gui_i.'][value]">';
 						if(isset($ui_note)){
-							$output .='<option>-- '.$ui_note.' --</option>';
+							$output .='<option>-- '.__($ui_note, 'builder_2046').' --</option>';
 						}
 						foreach($val['choices'] as $keyx => $valx){
 							if($keyx == $gui_value){
@@ -767,7 +767,7 @@ Easy_2046_builder::$EasyQuery = array(
 							}else{
 								$selected = '';
 							}
-							$output .= '<option'.$selected.' value="'.$keyx.'">'.$valx.'</option>';
+							$output .= '<option'.$selected.' value="'.$keyx.'">'.__($valx, 'builder_2046').'</option>';
 						}
 						$output .= '</select>';
 					}
@@ -782,9 +782,9 @@ Easy_2046_builder::$EasyQuery = array(
 							}else{
 								$selected = '';
 							}
-							$output .= '<div class="ew2046_check_box"><input name="'. $name .'[gui]['.$each_gui_i.'][value]" type="checkbox"'.$selected.' value="'.$keys.'" />'.$vals.'<br />';
+							$output .= '<div class="ew2046_check_box"><input name="'. $name .'[gui]['.$each_gui_i.'][value]" type="checkbox"'.$selected.' value="'.$keys.'" />'.__($vals, 'builder_2046').'<br />';
 							if(isset($ui_note)){
-								$output .= '<em>'.$ui_note.'</em>';
+								$output .= '<em>'.__($ui_note, 'builder_2046').'</em>';
 							}
 							$output .= '</div>';
 						}
@@ -794,7 +794,7 @@ Easy_2046_builder::$EasyQuery = array(
 					//~ 
 					elseif ($val['ui_type'] == 'hidden'){
 						if(isset($ui_note)){
-							$placeholder = $ui_note;
+							$placeholder = __($ui_note, 'builder_2046');
 						}else{
 							$placeholder = '';
 						}
@@ -812,10 +812,10 @@ Easy_2046_builder::$EasyQuery = array(
 							}else{
 								$selected = '';
 							}
-							$output .= '<input'.$selected.' type="radio" name="'. $name .'[gui]['.$each_gui_i.'][value]" value="'.$keyx.'" /><label>'.$valx.'</label><br />';
+							$output .= '<input'.$selected.' type="radio" name="'. $name .'[gui]['.$each_gui_i.'][value]" value="'.$keyx.'" /><label>'.__($valx, 'builder_2046').'</label><br />';
 						}
 						if(isset($ui_note)){
-							$output .='<em>'.$ui_note.'</em>';
+							$output .='<em>'.__($ui_note, 'builder_2046').'</em>';
 						}
 						$output .= '</div>';
 					}
@@ -824,7 +824,7 @@ Easy_2046_builder::$EasyQuery = array(
 					//~ 
 					elseif ($val['ui_type'] == 'plain'){
 						if(isset($ui_note)){
-							$placeholder = $ui_note;
+							$placeholder = __($ui_note, 'builder_2046');
 						}else{
 							$placeholder = '';
 						}
