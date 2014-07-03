@@ -47,6 +47,26 @@ function b2046_post_offset($tmp_query, $values){
 	$output = $args;
 	return $output;
 }
+//~ offset posts
+function b2046_show_by_date($tmp_query, $values){
+	$output = array();
+	$year = $values[0];
+	$month = $values[1];
+	$week = $values[2];
+	$day = $values[3];
+	$before = $values[4];
+	$after = $values[5];
+
+	if (!empty($year)){$args = array('date_query' => array(array('year'  => $year)));};
+	if (!empty($month)){$args = array('date_query' => array(array('month'  => $month)));};
+	if (!empty($week)){$args = array('date_query' => array(array('week'  => $week)));};
+	if (!empty($day)){$args = array('date_query' => array(array('day'  => $day)));};
+	if (!empty($before)){$args = array('date_query' => array(array('year'  => $before)));};
+	if (!empty($after)){$args = array('date_query' => array(array('after'  => $after)));};
+
+	$output = $args;
+	return $output;
+}
 
 function b2046_taxonomy_parameters($tmp_query, $values){
 	$output = array();

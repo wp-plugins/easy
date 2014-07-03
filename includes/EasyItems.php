@@ -444,6 +444,57 @@ $EasyItems = array(
 		)
 	),
 	// post_types
+	'b2046_show_by_date' => array(
+		'block' => 'control',  
+		'repeatable' => false,
+		'item_title' => __('By date', 'builder_2046'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => __('4 digit year', 'builder_2046'),
+				'ui_type' => 'input', 
+				'esc' => 'filter_number',
+				'choices' => '',
+				'value' => ''
+			),
+			array(
+				'ui_note' => __('Month number (from 1 to 12)' , 'builder_2046'),
+				'ui_type' => 'input', 
+				'esc' => 'filter_number',
+				'choices' => '',
+				'value' => ''
+			),
+			array(
+				'ui_note' => __('Week of the year (from 0 to 53)', 'builder_2046'),
+				'ui_type' => 'input', 
+				'esc' => 'filter_number',
+				'choices' => '',
+				'value' => ''
+			),
+			array(
+				'ui_note' => __('Day of the month (from 1 to 31)', 'builder_2046'),
+				'ui_type' => 'input', 
+				'esc' => 'filter_number',
+				'choices' => '',
+				'value' => ''
+			),
+			array(
+				'ui_note' => __('before (2 month ago)', 'builder_2046'),
+				'ui_type' => 'input', 
+				'esc' => 'filter_attribute_characters',
+				'choices' => '',
+				'value' => ''
+			),
+			array(
+				'ui_note' => __('after (1 month ago)', 'builder_2046'),
+				'ui_type' => 'input', 
+				'esc' => 'filter_attribute_characters',
+				'choices' => '',
+				'value' => ''
+			),
+		)
+	),
+	// post_types
 	'b2046_exclude_actual' => array(
 		'block' => 'control',  
 		'repeatable' => false,
