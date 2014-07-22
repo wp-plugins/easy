@@ -6,7 +6,7 @@ Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.7
 Tested up to: 3.9.1
-Stable tag: 0.9.5.5
+Stable tag: 0.9.5.6
 
 Easy, but complex widget website builder.
 
@@ -120,6 +120,9 @@ It is possible and even more, it's easy. Check out the documentation <a href="ht
 1. Screenshot of the version 0.5
 
 == Change log ==
+
+= 0.9.5.6 =
+ * NEW - Spanish translation (Translated by <a href="http://www.webhostinghub.com/" target="_blank">WebHostingHub</a> )
 
 = 0.9.5.5 =
  * NEW - date control brick (compatible for wp 3.7+)
