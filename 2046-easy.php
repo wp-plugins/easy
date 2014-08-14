@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/easy/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.9.5.6
+ * Version: 0.9.5.7
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -27,16 +27,6 @@ function builder_2046_main_loop_load_widget() {
 	// localization
 	load_plugin_textdomain( 'builder_2046', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/'); 
 }
-
-// make class instance
-//~ $EasyClassClone = new Easy_2046_builder();
-// trespass data to the widget class val
-Easy_2046_builder::$EasyItems = $EasyItems;
-Easy_2046_builder::$EasyQuery = array(
-	'post_type' => 'post',
-	'posts_per_page' => 1,
-	'post_status' => 'publish'
-);
 
 //builder_2046_main_loop::EasyItems('oop');
 /**
@@ -964,6 +954,18 @@ Easy_2046_builder::$EasyQuery = array(
 	}
 
 } // END of Widget class
+
+
+// make class instance
+//~ $EasyClassClone = new Easy_2046_builder();
+// trespass data to the widget class val
+Easy_2046_builder::$EasyItems = $EasyItems;
+Easy_2046_builder::$EasyQuery = array(
+	'post_type' => 'post',
+	'posts_per_page' => 1,
+	'post_status' => 'publish'
+);
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //~ some extra functions
