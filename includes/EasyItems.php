@@ -907,6 +907,34 @@ $EasyItems = array(
 			)
 		)
 	),
+	'b2046_bootstrap_menu' => array(
+		'block' => 'view',  
+		'item_title' => __('Bootstrap3 menu', 'builder_2046'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_type' => 'input', 
+				'ui_note' => __('Menu location', 'builder_2046'),
+				'esc' => 'filter_attribute_characters',
+				'choices' => '',
+				'value' => ''
+			),
+			array(
+				'ui_type' => 'input', 
+				'ui_note' => __('Menu name, ID', 'builder_2046'),
+				'esc' => 'filter_attribute_characters',
+				'choices' => '',
+				'value' => ''
+			),
+			array(
+				'ui_note' => __('class', 'builder_2046'),
+				'ui_type' => 'input', 
+				'esc' => 'filter_attribute_characters',
+				'choices' => '',
+				'value' => ''
+			)
+		)
+	),
 	'b2046_sidebar' => array(
 		'block' => 'view',  
 		'item_title' => __('Sidebar', 'builder_2046'),

@@ -1129,6 +1129,23 @@ function b2046_exclude_actual($tmp_query, $values){
 		);
 	return $args;
 }
+function b2046_bootstrap_menu($easy_query, $values){
+	$location = (!empty($values[0]) ? $values[0] : 'primary');
+	$name = $values[1];
+	$class = $values[2];
 
-
-
+ $output = wp_nav_menu( array(
+ 		'echo' => 0,
+        'menu'              => $name,
+        'theme_location'    => $location,
+        'depth'             => 2,
+        'container'         => 'div',
+        'container_class'   => $class.' collapse navbar-collapse',
+		'container_id'      => 'bs-example-navbar-collapse-1',
+        'menu_class'        => 'nav navbar-nav',
+        'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
+        'walker'            => new Easy_bootstrap_navwalker()
+        )
+    );
+ return $output;
+}
