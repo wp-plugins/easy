@@ -5,7 +5,7 @@ Plugin URI: http://wordpress.org/extend/easy
 Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.7
-Tested up to: 3.9.1
+Tested up to: 4.0-beta1
 Stable tag: 0.9.5.8
 
 Easy, but complex widget website builder.
