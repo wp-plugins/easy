@@ -5,8 +5,8 @@ Plugin URI: http://wordpress.org/extend/easy
 Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.7
-Tested up to: 4.0-beta1
-Stable tag: 0.9.5.8
+Tested up to: 4.0
+Stable tag: 0.9.5.9
 
 Easy, but complex widget website builder.
 
@@ -120,6 +120,9 @@ It is possible and even more, it's easy. Check out the documentation <a href="ht
 1. Screenshot of the version 0.5
 
 == Change log ==
+
+= 0.9.5.9 =
+* error outputs in WP_DEBUG mode on(true) cleaned up.
 
 = 0.9.5.8 =
 * NEW - Bootstrap3 menu (walker) generates "proper" Bootstrap 3 menu HTML element structure.. You have to have the Boostrap base theme or load Bootstrap css, js your self! (Walker credits goes to: Edward McIntyre)

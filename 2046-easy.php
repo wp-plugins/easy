@@ -3,7 +3,7 @@
  * Plugin name: Easy
  * Plugin URI: http://wordpress.org/extend/plugins/easy/
  * Description: Easy, but complex GUI website builder.
- * Version: 0.9.5.8
+ * Version: 0.9.5.9
  * Author: 2046
  * Author URI: http://2046.cz
  *
@@ -839,27 +839,27 @@ function builder_2046_main_loop_load_widget() {
 	
 	//~ id cleaner
 	
-	function f2046_id_cleaner_to_array($val){
+	public static function f2046_id_cleaner_to_array($val){
 		if(!empty($val)){
-			$post_id_clean = ereg_replace(" ", "", $val);
+			$post_id_clean = str_replace(" ", "", $val);
 			$post_ids_array = explode(',', $post_id_clean);
 			return $post_ids_array;
 		}
 	}
-	function f2046_id_cleaner_to_string($val){
+	public static function f2046_id_cleaner_to_string($val){
 		if(!empty($val)){
-			$post_id_string = ereg_replace(" ", "", $val);
+			$post_id_string = str_replace(" ", "", $val);
 			return $post_id_string;
 		}
 	}
-	function f2046_string_to_array($val){
+	public static function f2046_string_to_array($val){
 		if(!empty($val)){
 			$val = explode(' ', $val);
 			return $val;
 		}
 	}
 	//~  helper  for listing all the 
-	function f2046_get_post_types(){
+	public static function f2046_get_post_types(){
 		$out = array();
 		$post_types = get_post_types($args_types,'names'); 
 			foreach ($post_types as $post_type ) {
@@ -868,7 +868,7 @@ function builder_2046_main_loop_load_widget() {
 		return $out;
 	}
 	// search child pages through X levels
-	function getChildren($id, $depth, $include_exclude, $exclude_top_level_pages){
+	public static function getChildren($id, $depth, $include_exclude, $exclude_top_level_pages){
 		$i = 0;
 		$pages = $id;
 		// create empty tmp array,
@@ -915,7 +915,7 @@ function builder_2046_main_loop_load_widget() {
 		return $pages;
 	}
 	// search parent pages through X levels
-	function getParents($ids, $depth, $include_exclude){
+	public static function getParents($ids, $depth, $include_exclude){
 		$i = 0;
 		$pages  = array();
 		foreach ($ids as $id) {	
@@ -931,7 +931,7 @@ function builder_2046_main_loop_load_widget() {
 		return $pages;
 	}
 	// get all top level pages
-	function getTopLevelPages($post_type, $post_status){
+	public static function getTopLevelPages($post_type, $post_status){
 		$args = array(
 			'parent' => 0,
 			'post_type' => $post_type,
