@@ -407,15 +407,6 @@ $EasyItems = array(
 				'choices' => '',
 				'value' => 'post'
 			),
-			//~ array(
-				//~ 'ui_type' => 'radio_group', 
-				//~ 'esc' => 'esc_attr',
-				//~ 'choices' => array(
-					//~ '1' => 'ON paging',
-					//~ '0' => 'OFF paging'
-				//~ ),
-				//~ 'value' => '1'
-			//~ ),
 			array(
 				'ui_type' => 'radio_group', 
 				'esc' => 'filter_number',
@@ -424,6 +415,12 @@ $EasyItems = array(
 					'0' => __('not affected', 'builder_2046')
 				),
 				'value' => '1'
+			),array(
+				'ui_note' => __('note: default number of posts/pages is 1. Set your number via "Number" brick.', 'builder_2046'),
+				'ui_type' => 'hidden', 
+				'esc' => 'filter_number_space_dash',
+				'choices' => '',
+				'value' => ''
 			)
 		)
 	),
@@ -993,7 +990,7 @@ $EasyItems = array(
 		// gui
 		'gui' => array(
 			array(
-				'ui_note' => __('Number of objects.', 'builder_2046'),
+				'ui_note' => __('Number of objects. Default 1.', 'builder_2046'),
 				'ui_type' => 'input', 
 				'esc' => 'filter_number',
 				'choices' => '',
@@ -1487,6 +1484,27 @@ $EasyItems = array(
 				'choices' => '',
 				'value' => 1,
 				'esc' => 'filter_number'
+			)
+		)
+	),
+	'b2046_post2post' => array(
+		'block' => 'control',  
+		'item_title' => __('Post2Post', 'builder_2046'),
+		// gui
+		'gui' => array(
+			array(
+				'ui_note' => __('Show connected post/pages based on Post2Post connection. If <a href="https://wordpress.org/plugins/posts-to-posts/">Post2Post</a> plugin is installed and active.<br />', 'builder_2046'),
+				'ui_type' => 'hidden', // 0 input, 1 select box, 2 multiple select box, 3 check box, 4 radio button, 5 textarea
+				'choices' => '',
+				'value' => 1,
+				'esc' => 'filter_number'
+			),
+			array(
+				'ui_note' => __('Connection type name', 'builder_2046'),
+				'ui_type' => 'input', 
+				'choices' => '',
+				'value' => '',
+				'esc' => 'filter_attribute_characters'
 			)
 		)
 	),

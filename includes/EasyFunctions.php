@@ -1149,3 +1149,15 @@ function b2046_bootstrap_menu($easy_query, $values){
     );
  return $output;
 }
+//~  post status
+function b2046_post2post($tmp_query, $values){
+	$connection_type = $values[1];
+	$output = array();
+	$args = array(
+		'connected_type' => $connection_type,
+  		'connected_items' => get_queried_object(),
+		);
+		//~ rewrite the default data with our own
+	$output =  $args;
+	return $output;
+}
