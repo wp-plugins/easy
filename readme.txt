@@ -88,7 +88,7 @@ A pure theme with slots (sidebars) for tons of your widgets.
  * <a href="http://2046.cz/easy-framework">Easy framework</a>
 
  = Compatible with: =
- <a href="http://wpml.org/">WPML</a>, <a href="http://wordpress.org/plugins/qtranslate/">qTranslate</a>, <a href="https://www.google.com/url?q=http://wordpress.org/plugins/custom-content-type-manager/&sa=U&ei=R-DNUcKJIM2B4AT7xoGwDQ&ved=0CAcQFjAA&client=internal-uds-cse&usg=AFQjCNE2SU-CT1WLx80VKYlh4e1w6ZIcbg">CCTM</a>, <a href="http://wordpress.org/plugins/wp-pagenavi/">WP-pagenavi</a>, <a href="http://wordpress.org/plugins/w3-total-cache/">W3TC</a>, <a href="http://wordpress.org/plugins/fancybox-for-wordpress/">fancybox</a> and others.
+ <a href="http://wpml.org/">WPML</a>, <a href="http://wordpress.org/plugins/qtranslate/">qTranslate</a>, <a href="https://www.google.com/url?q=http://wordpress.org/plugins/custom-content-type-manager/&sa=U&ei=R-DNUcKJIM2B4AT7xoGwDQ&ved=0CAcQFjAA&client=internal-uds-cse&usg=AFQjCNE2SU-CT1WLx80VKYlh4e1w6ZIcbg">CCTM</a>, <a href="http://wordpress.org/plugins/wp-pagenavi/">WP-pagenavi</a>, <a href="http://wordpress.org/plugins/w3-total-cache/">W3TC</a>, <a href="http://wordpress.org/plugins/fancybox-for-wordpress/">fancybox</a>, <a href="https://wordpress.org/plugins/posts-to-posts/">Post2Post</a> and others.
 
 == Installation ==
 
