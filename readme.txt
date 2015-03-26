@@ -5,8 +5,8 @@ Plugin URI: http://wordpress.org/extend/easy
 Donate Link: http://2046.cz/
 Tags: admin, widget, loop, page, post, custom, type, taxonomy, tag, category, comments, content, drag, drop, gallery, image
 Requires at least: 3.7
-Tested up to: 4.0.1
-Stable tag: 0.9.6
+Tested up to: 4.1.1
+Stable tag: 0.9.7
 
 Easy, but complex widget website builder.
 
@@ -120,6 +120,9 @@ It is possible and even more, it's easy. Check out the documentation <a href="ht
 1. Screenshot of the version 0.5
 
 == Change log ==
+
+= 0.9.7 =
+* NEW Serbian translation (translated by: Ogi Djuraskovic from <a href="http://firstsiteguide.com">Firstsiteguide</a>)
 
 = 0.9.6 =
 * NEW - added the Post2Post controller. Now you can get connected post/pages/whatever you have connected via <a href="https://wordpress.org/plugins/posts-to-posts/">Post2Post</a> plugin.

@@ -1,0 +1,917 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Easy\n"
+"POT-Creation-Date: 2014-11-26 16:35+0100\n"
+"PO-Revision-Date: 2015-03-26 12:18+0100\n"
+"Last-Translator: \n"
+"Language-Team: 2046.cz <2046@2046.cz>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.4\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: /Library/WebServer/www/wp-content/plugins/easy\n"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/2046-easy.php:60
+msgid "Easy content builder."
+msgstr "Easy content builder"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/2046-easy.php:72
+msgid "Easy"
+msgstr "Lak"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/2046-easy.php:478
+msgid "General"
+msgstr "Opšti"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/2046-easy.php:486
+msgid "Views"
+msgstr "Pregledi"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/2046-easy.php:503
+msgid "Controls (<span class=\"res\">R</span><i>esistors</i>)"
+msgstr "Kontrole (<span class=\"res\">R</span><i>esistors</i>)"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/2046-easy.php:521
+msgid "Documentation"
+msgstr "Dokumentacija"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyFunctions.php:423
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyFunctions.php:425
+msgid "Edit"
+msgstr "Uredi"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyFunctions.php:1103
+msgid "&laquo; Previous Page"
+msgstr "Uredi"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyFunctions.php:1104
+msgid "Next Page &raquo;"
+msgstr "Sledeća strana &raquo;"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:23
+msgid "Anyone"
+msgstr "Bilo ko"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:24
+msgid "Subcriber"
+msgstr "Pretplatnik"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:25
+msgid "Contributor"
+msgstr "Saradnik"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:26
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:951
+msgid "Author"
+msgstr "Autor"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:27
+msgid "Editor"
+msgstr "Urednik"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:28
+msgid "Administrator"
+msgstr "Administrator"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:40
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:82
+msgid "no link"
+msgstr "nema linka"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:41
+msgid "Link to \"post\""
+msgstr "Link za \"post\""
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:42
+msgid "Link to \"custom meta\""
+msgstr "Link za \"prilagođeni meta\""
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:46
+msgid "raw text"
+msgstr "sirov tekst"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:56
+msgid "Default scaffolding"
+msgstr "Podrazumevano građenje"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:57
+msgid "One per row"
+msgstr "Po jedan u svakom redu"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:58
+msgid "Many per row"
+msgstr "Po nekoliko u redu"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:62
+msgid "content"
+msgstr "sadržaj"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:63
+msgid "excerpt"
+msgstr "odlomak"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:64
+msgid "above more tag"
+msgstr "iznad oznake ‘više’"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:65
+msgid "below more tag"
+msgstr "ispod oznake ‘više’"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:72
+msgid "links"
+msgstr "linkovi"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:73
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:94
+msgid "list"
+msgstr "lista"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:83
+msgid "object link"
+msgstr "link objekta"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:84
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:865
+msgid "custom meta value"
+msgstr "prilagođena meta vrednost"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:93
+msgid "text"
+msgstr "tekst"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:97
+msgid "publish"
+msgstr "objavi"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:98
+msgid "pending"
+msgstr "na čekanju"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:99
+msgid "draft"
+msgstr "skica"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:100
+msgid "auto-draft"
+msgstr "auto-skica"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:101
+msgid "future"
+msgstr "budući"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:102
+msgid "private"
+msgstr "privatni"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:103
+msgid "inherit"
+msgstr "nasleđeni"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:104
+msgid "trash"
+msgstr "korpa za otpatke"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:105
+msgid "any"
+msgstr "bilo koji"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:119
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:381
+msgid "show when"
+msgstr "prikaži kad"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:120
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:382
+msgid "hide when"
+msgstr "sakrij kad"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:126
+msgid "home"
+msgstr "početna"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:131
+msgid "front page"
+msgstr "prva stranica"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:136
+msgid "single"
+msgstr "pojedinačna"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:141
+msgid "page"
+msgstr "stranica"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:146
+msgid "sticky"
+msgstr "sticky"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:151
+msgid "category"
+msgstr "kategorija"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:156
+msgid "taxonomy archive"
+msgstr "taksonomija arhive"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:161
+msgid "archive"
+msgstr "arhiva"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:166
+msgid "search result"
+msgstr "pretraži rezultat "
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:171
+msgid "404 error"
+msgstr "greška 404"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:176
+msgid "attachment page"
+msgstr "stranica priloga"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:183
+msgid "Sort by"
+msgstr "sortiraj po"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:184
+msgid "ID"
+msgstr "ID"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:185
+msgid "title"
+msgstr "naslov"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:186
+msgid "date"
+msgstr "datum"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:187
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1448
+msgid "modified"
+msgstr "izmenjen"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:188
+msgid "rand"
+msgstr "nasumičan"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:189
+msgid "comment_count"
+msgstr "broj_komentara"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:190
+msgid "menu_order"
+msgstr "redosled_menija"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:191
+msgid "parent"
+msgstr "nadređeni"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:192
+msgid "meta_value"
+msgstr "meta_vrednost"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:193
+msgid "meta_value_num"
+msgstr "broj_meta_vrednosti"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:204
+msgid "Category"
+msgstr "Kategorija"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:208
+msgid "Control by"
+msgstr "Kontroliši prema"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:215
+msgid "cat IDs (separate by coma)"
+msgstr "cat ID (odvojeni zarezima)"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:228
+msgid "Widget admin title"
+msgstr "Widget admin naslov"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:232
+msgid "Admin widget title"
+msgstr "Admin naziv widget-a"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:245
+msgid "Surrounding widget scafold type"
+msgstr "Vrsta skela oko widget-a"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:249
+msgid "Select type"
+msgstr "Odaberite vrstu"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:260
+msgid "Widget frontend title"
+msgstr "Naziv čeonog programa widget-a"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:264
+msgid "Rendered before the loop"
+msgstr "Prikazan pre petlje"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:280
+msgid "row class"
+msgstr "sirova klasa"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:292
+msgid "Widget description"
+msgstr "opis widget-a"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:296
+msgid "Widget intention. Used for administrative purposes."
+msgstr "Namena widget-a. Koristi se u administrativne svrhe."
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:312
+msgid "each (column) class"
+msgstr "svaka (kolina) klasa"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:326
+msgid "Permissions"
+msgstr "Dozvole"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:330
+msgid "Who will be able to see the widget result."
+msgstr "Ko će moći da vidi rezultat widget-a"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:342
+msgid "On template types: show / hide"
+msgstr "Na vrstama šablona: prikaži/sakrij"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:350
+msgid "On Post types: show/hide"
+msgstr "Na vrstama posta: prikaži/sakrij"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:354
+msgid "post, page, etc."
+msgstr "post, stranica, itd."
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:363
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:616
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:634
+msgid "show"
+msgstr "prikaži"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:364
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:617
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:635
+msgid "hide"
+msgstr "sakrij"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:375
+msgid "On ID: show / hide"
+msgstr "na ID-ju: prikaži/sakrij"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:388
+msgid "IDs. Separed by comma"
+msgstr "ID odvojeni zarezima"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:400
+msgid "Post type"
+msgstr "Vrsta posta"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:404
+msgid "post, page, attachment,.."
+msgstr "post, stranica, prilog..."
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:414
+msgid "affected by page number"
+msgstr "na koji utiče broj stranice"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:415
+msgid "not affected"
+msgstr "ne utiče"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:419
+msgid ""
+"note: default number of posts/pages is 1. Set your number via \"Number\" "
+"brick."
+msgstr ""
+"napomena: podrazumevani broj postova/stranica je 1. Podesite svoj broj uz "
+"pomoć cigle \"Broj\"."
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:431
+msgid "Show only (by ID)"
+msgstr "Prikaži samo (prema ID-ju)"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:435
+msgid "post / page / custom IDs (separate by coma)"
+msgstr "prilagođeni ID posta/stranice (odvojeni zarezima)"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:447
+msgid "By date"
+msgstr "po datumu"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:451
+msgid "4 digit year"
+msgstr "godina od 4 cifre"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:458
+msgid "Month number (from 1 to 12)"
+msgstr "Broj meseca (od 1 d 12)"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:465
+msgid "Week of the year (from 0 to 53)"
+msgstr "Nedelja u godini (od 0 do 53)"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:472
+msgid "Day of the month (from 1 to 31)"
+msgstr "Dan u mesecu (od 1 do 31)"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:479
+msgid "before (2 month ago)"
+msgstr "Pre (2 meseca)"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:486
+msgid "after (1 month ago)"
+msgstr "pre (mesec dana)"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:498
+msgid "Exclude actual post/page"
+msgstr "Izuzmi trenutni post/stranicu"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:502
+msgid "Exclude currently displayed post/page from this Easy loop"
+msgstr "Izuzmi trenutno prikazani post/stranicu iz ove Easy petlje"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:513
+msgid "Taxonomy"
+msgstr "Taksonomija"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:517
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:561
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:598
+msgid "only one taxonomy (name)"
+msgstr "samo jedna taksonomija (naziv)"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:524
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:605
+msgid "terms IDs, separated by comma"
+msgstr "ID termina, odvojeni zarezima"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:532
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:568
+msgid "terms operator"
+msgstr "operator termina"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:536
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:572
+msgid "(operator)"
+msgstr "(operator)"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:544
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:580
+msgid ""
+"Taxonomy relation. If you use multiple taxonomy bricks, the later relation "
+"beats previous ones."
+msgstr ""
+"Odnos taksonomije. Ako koristite višestruke cigle taksonomije, noviji odnos "
+"ima prednost nad starijim."
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:548
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:584
+msgid "(relation)"
+msgstr "(odnos)"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:557
+msgid "Taxonomy match"
+msgstr "Podudaranje taksonomije"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:594
+msgid "On Taxonomy (Category)"
+msgstr "O taksonomiji (Kategorija)"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:626
+msgid "Show/hide based on hierarchy"
+msgstr "Prikaži/sakrij na osnovu hijerarhije"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:640
+msgid "Show on"
+msgstr "Prikaži na"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:644
+msgid "On child pages of defined IDs"
+msgstr "Na podređenim stranama određenih ID-ja"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:645
+msgid "On parent page of defined IDs"
+msgstr "Na nadređenooj stranici određenih ID-ja"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:650
+msgid "Page IDs, separated by comma"
+msgstr "ID stranice, odvojeni zarezima"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:657
+msgid "Depth (default 1 level)"
+msgstr "Dubina (podrazumevana 1 nivo)"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:668
+msgid "omit"
+msgstr "preskoči"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:669
+msgid "include"
+msgstr "obuhvati"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:678
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1249
+msgid "Meta"
+msgstr "Meta"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:682
+msgid "Meta key"
+msgstr "Meta ključ"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:689
+msgid "Meta value"
+msgstr "Meta vrednost"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:793
+msgid "Link to archive"
+msgstr "Link za arhivu"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:806
+msgid "Taxonomy or Post type name"
+msgstr "Taksonomija naziva vrste posta"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:813
+msgid "term ID (in case of Taxonomy)"
+msgstr "ID termina (u slučaju taksonomije)"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:820
+msgid "Link text"
+msgstr "Tekst linka"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:827
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:872
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:978
+msgid "custom class"
+msgstr "prilagođena klasa"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:838
+msgid "Title"
+msgstr "Naziv"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:848
+msgid "Scafolding"
+msgstr "Scaffolding"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:855
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1136
+msgid "Link taget"
+msgstr "Ciljni link"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:859
+msgid "same window"
+msgstr "isti prozor"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:860
+msgid "new window"
+msgstr "novi prozor"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:882
+msgid "Content"
+msgstr "Sadržaj"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:893
+msgid "Read more text"
+msgstr "Pročitajte više teksta"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:899
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:927
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1108
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1153
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1216
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1239
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1281
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1302
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1402
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1416
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1430
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1468
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1524
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1546
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1581
+msgid "class"
+msgstr "klasa"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:909
+msgid "Bootstrap3 menu"
+msgstr "Bootstrap3 meni"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:914
+msgid "Menu location"
+msgstr "Lokacija menija"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:921
+msgid "Menu name, ID"
+msgstr "Naziv menija, ID"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:937
+msgid "Sidebar"
+msgstr "Bočni meni"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:941
+msgid "Sidebar ID"
+msgstr "ID bočnog menija"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:958
+msgid "plain text"
+msgstr "samo tekst"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:959
+msgid "link to authors posts"
+msgstr "link za postove autora"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:960
+msgid "link to authors url"
+msgstr "link za url autora"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:989
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1008
+msgid "Number"
+msgstr "Broj"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:993
+msgid "Number of objects. Default 1."
+msgstr "Broj objekata. Podrazumevani 1."
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1004
+msgid "Offset"
+msgstr "Offset"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1019
+msgid "Status"
+msgstr "Status"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1033
+msgid "By author"
+msgstr "Prema autoru"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1040
+msgid "by ID(only one)"
+msgstr "Prema ID-ju (samo jednom)"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1041
+msgid "author of current post content"
+msgstr "autor trenutnog sadržaja posta"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1057
+msgid "Order"
+msgstr "Redosled"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1075
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1260
+msgid "meta key"
+msgstr "meta ključ"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1085
+msgid "Taxonomies (Categories)"
+msgstr "Taksonomije (Kategorije)"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1095
+msgid "taxonomy name"
+msgstr "naziv taksonomije"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1104
+msgid "Do not show count"
+msgstr "Ne prikazuj brojač"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1104
+msgid "Show count"
+msgstr "Prikaži brojač"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1118
+msgid "Featured image"
+msgstr "Uobličena slika"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1122
+msgid "Get featured image."
+msgstr "Obezbedi uobličenu sliku"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1129
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1175
+msgid "Link image to"
+msgstr "Poveži sliku sa"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1146
+msgid "custom field name OR url"
+msgstr "naziv prilagođenog polja ILI url"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1164
+msgid "Post gallery"
+msgstr "Galerija posta"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1168
+msgid "Image size"
+msgstr "Veličina slike"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1185
+msgid "Ascendingly"
+msgstr "Rastući"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1186
+msgid "Descendingly"
+msgstr "Opadajući"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1200
+msgid "empty title attribute"
+msgstr "isprazni atribut naslova"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1201
+msgid "image as image title attribute"
+msgstr "slika kao atribut naslova slike  "
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1202
+msgid "caption as image title attribute"
+msgstr "opis kao atribut naslova slike "
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1210
+msgid "include featured image"
+msgstr "obuhvati uobličenu sliku"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1211
+msgid "exclude featured image"
+msgstr "izuzmi uobličenu sliku"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1226
+msgid "Edit link"
+msgstr "Uredi link"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1253
+msgid "Show as"
+msgstr "Prikaži kao"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1274
+msgid "separator"
+msgstr "separator"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1291
+msgid "Text"
+msgstr "Tekst"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1295
+msgid "Some text"
+msgstr "Neki tekst"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1313
+msgid "Debug controls"
+msgstr "Kontrole za otklanjanje grešaka"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1317
+msgid ""
+"Debug will output the Query made by control bricks ABOVE this debug brick!</"
+"br></br>See the out put on frontend."
+msgstr ""
+"Otklanjanje grešaka će prikazati upit koji su napravile kontrolne cigle "
+"IZNAD ove cigle za otklanjanje grešaka! </br></br> Vidite izlaz na čeonom "
+"programu."
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1329
+msgid "For actual post/page"
+msgstr "Za stvarni post/stranicu"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1333
+msgid "It will \"guess\" the actual post and show the VIEW content for it"
+msgstr " \"Pogodiće\" koji je tekući post i prikazaće VIDI sadržaj za njega "
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1345
+msgid "Hierarchy based"
+msgstr "Na osnovu hijerarhije"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1351
+msgid "Pages from the same level as current page"
+msgstr "Stranice sa istog nivoa kao tekuća stranica"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1352
+msgid "Pages from the same level as given ID"
+msgstr "Stranice sa istog nivoa kao dati ID"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1353
+msgid "Child pages of current page"
+msgstr "Podređene stranice tekuće stranice"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1354
+msgid "Child pages of given ID"
+msgstr "Podređene stranice datog ID-ja"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1360
+msgid "given ID, only one"
+msgstr "dati ID, samo jedan"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1367
+msgid "(in case of: ..from same level)"
+msgstr "(u slučaju… sa istog nivoa)"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1370
+msgid "Include current"
+msgstr "Obuhvati tekući"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1371
+msgid "Exclude current"
+msgstr "Izuzmi tekući"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1380
+msgid "List top level pages"
+msgstr "Lista stranica najvišeg nivoa"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1381
+msgid "Do not list top level pages"
+msgstr "Ne prikazuj stranice najvišeg nivoa"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1391
+msgid "Shortcode"
+msgstr "Shortcode"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1395
+msgid "[shortcode]"
+msgstr "[shortcode]"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1412
+msgid "Comments number"
+msgstr "Broj komentara"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1426
+msgid "Comments"
+msgstr "Komentari"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1440
+msgid "Date"
+msgstr "Datum"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1447
+msgid "published"
+msgstr "objavljen"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1461
+msgid "PHP date format"
+msgstr "PHP format datuma"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1478
+msgid "WP-Pagenavi"
+msgstr "WP-Pagenavi"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1482
+msgid ""
+"<a href=\"http://wordpress.org/extend/plugins/wp-pagenavi/\">WP-Pagenavi</a> "
+"works when the plugin is installed and active.<br />The navigation will be "
+"placed automatically after the View content."
+msgstr ""
+"<a href=\"http://wordpress.org/extend/plugins/wp-pagenavi/\">WP-Pagenavi</a> "
+"radi kada je plugin instaliran i aktivan.<br /> Navigacija će automatski "
+"biti smeštena posle opcije ‘Vidi sadržaj’."
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1492
+msgid "Post2Post"
+msgstr "Post2Post"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1496
+msgid ""
+"Show connected post/pages based on Post2Post connection. If <a href="
+"\"https://wordpress.org/plugins/posts-to-posts/\">Post2Post</a> plugin is "
+"installed and active.<br />"
+msgstr ""
+"Prikaži povezane postove/stranice na osnovu veze Post2Post ako je <a href="
+"\"https://wordpress.org/plugins/posts-to-posts/\">Post2Post</a> plugin "
+"instaliran i aktivan.<br />"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1503
+msgid "Connection type name"
+msgstr "Naziv vrste povezivanja "
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1513
+msgid "Link to previous post"
+msgstr "Link za prethodni post"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1517
+msgid "Previous text - Post name if empty"
+msgstr "Prethodni tekst - Naziv posta ako je prazan"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1535
+msgid "Link to next post"
+msgstr "Link za sledeći post"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1539
+msgid "Next text - Post name if empty"
+msgstr "Sledeći tekst - Naziv posta ako je prazan"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1556
+msgid "Navigation (Prev/Next links)"
+msgstr "Navigacija (Prethodni/Sledeći linkovi)"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1560
+msgid "Separator"
+msgstr "Separator"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1567
+msgid "Prev label"
+msgstr "Prethodna oznaka"
+
+#: /Library/WebServer/www/wp-content/plugins/easy/includes/EasyItems.php:1574
+msgid "Next label"
+msgstr "Sledeća oznaka"
